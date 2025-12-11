@@ -1,8 +1,8 @@
 //--------------------------------------------------------------------------------- location
-// lib/models/model_instrument.dart
+// lib/models/model_strategy_item.dart
 
 //--------------------------------------------------------------------------------- Description
-// This is model for instrument
+// This is model for strategy_item
 
 //--------------------------------------------------------------------------------- Import
 import 'dart:convert';
@@ -12,37 +12,34 @@ import 'package:mkpanel_gui/consts/model.dart';
 import 'package:mkpanel_gui/tools/api.dart';
 
 //--------------------------------------------------------------------------------- Global
-typedef modelType = model_instrument;
-String api_route = models_api.instrument;
+typedef modelType = model_strategy_item;
+String api_route = models_api.strategy_item;
 
 //--------------------------------------------------------------------------------- Model
-class model_instrument {
+class model_strategy_item {
   //--------------------------------[Field]
   int id;
+  int strategy_id;
   String name;
-  String instrument;
-  int category;
-  int priority;
+  String params;
   String? description;
   bool enable;
   late Map<String, dynamic> controllers;
 
   //--------------------------------[Contractor]
-  model_instrument({
+  model_strategy_item({
     this.id = 0,
+    this.strategy_id = 0,
     this.name = '',
-    this.instrument = '',
-    this.category = 0,
-    this.priority = 0,
+    this.params = '',
     this.description = '',
     this.enable = true,
   }) {
     controllers = {
       'id': TextEditingController(text: id.toString()),
+      'strategy_id': ValueNotifier<int>(strategy_id),
       'name': TextEditingController(text: name),
-      'instrument': TextEditingController(text: instrument),
-      'category': TextEditingController(text: category.toString()),
-      'priority': TextEditingController(text: priority.toString()),
+      'params': TextEditingController(text: params),
       'description': TextEditingController(text: description),
       'enable': ValueNotifier<bool>(enable),
     };
@@ -51,23 +48,21 @@ class model_instrument {
   //--------------------------------[getValueByKeys]
   dynamic getValueByKey(String key) => switch (key) {
         'id' => id,
+        'strategy_id' => strategy_id,
         'name' => name,
-        'instrument' => instrument,
-        'category' => category,
-        'priority' => priority,
+        'params' => params,
         'description' => description,
         'enable' => enable,
         _ => null,
       };
 
   //--------------------------------[toModel]
-  factory model_instrument.toModel(Map<String, dynamic> json) {
+  factory model_strategy_item.toModel(Map<String, dynamic> json) {
     return modelType(
       id: json['id'] as int,
+      strategy_id: json['strategy_id'] as int,
       name: json['name'] as String,
-      instrument: json['instrument'] as String,
-      category: json['category'] as int,
-      priority: json['priority'] as int,
+      params: json['params'] as String? ?? '',
       description: json['description'] as String?,
       enable: json['enable'] as bool,
     );
@@ -77,10 +72,9 @@ class model_instrument {
   Map<String, dynamic> toJson() {
     return {
       'id': id,
+      'strategy_id': strategy_id,
       'name': name,
-      'instrument': instrument,
-      'category': category,
-      'priority': priority,
+      'params': params,
       'description': description,
       'enable': enable,
     };
@@ -90,22 +84,19 @@ class model_instrument {
   modelType get_model() {
     return modelType(
       id: int.tryParse(controllers['id']?.text ?? '0') ?? 0,
+      strategy_id: (controllers['strategy_id'] as ValueNotifier<int>).value,
       name: controllers['name']?.text ?? '',
-      instrument: controllers['instrument']?.text ?? '',
-      category: int.tryParse(controllers['category']?.text ?? '0') ?? 0,
-      priority: int.tryParse(controllers['priority']?.text ?? '0') ?? 0,
+      params: controllers['params']?.text ?? '',
       description: controllers['description']?.text ?? '',
       enable: (controllers['enable'] as ValueNotifier<bool>).value,
     );
-  }
+  } //--------------------------------[controller_clear]
 
-  //--------------------------------[controller_clear]
   void controller_clear() {
     controllers['id'] = TextEditingController(text: id.toString());
+    controllers['strategy_id'] = ValueNotifier<int>(strategy_id);
     controllers['name'] = TextEditingController(text: name);
-    controllers['instrument'] = TextEditingController(text: instrument);
-    controllers['category'] = TextEditingController(text: category.toString());
-    controllers['priority'] = TextEditingController(text: priority.toString());
+    controllers['params'] = TextEditingController(text: params);
     controllers['description'] = TextEditingController(text: description);
     controllers['enable'] = ValueNotifier<bool>(enable);
   }

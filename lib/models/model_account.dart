@@ -122,16 +122,16 @@ class model_account {
 
   //--------------------------------[controller_clear]
   void controller_clear() {
-    controllers['id']?.clear();
-    controllers['name']?.clear();
-    controllers['broker']?.clear();
-    controllers['type']?.clear();
-    controllers['currency']?.clear();
-    controllers['server']?.clear();
-    controllers['username']?.clear();
-    controllers['password']?.clear();
-    controllers['description']?.clear();
-    controllers['enable']?.value = true;
+    controllers['id'] = TextEditingController(text: id.toString());
+    controllers['name'] = TextEditingController(text: name);
+    controllers['broker'] = TextEditingController(text: broker);
+    controllers['type'] = TextEditingController(text: type);
+    controllers['currency'] = TextEditingController(text: currency);
+    controllers['server'] = TextEditingController(text: server);
+    controllers['username'] = TextEditingController(text: username);
+    controllers['password'] = TextEditingController(text: password);
+    controllers['description'] = TextEditingController(text: description);
+    controllers['enable'] = ValueNotifier<bool>(enable);
   }
 
   //--------------------------------[model_list]
@@ -141,7 +141,8 @@ class model_account {
   dynamic controller_get(String name) => controllers[name];
 
   //--------------------------------[Api]
-  api(type) async {
+  api(type, [var value]) async {
+    value = value ?? '';
     MyApi api_mdl = new MyApi();
     switch (type) {
       case 'add':
@@ -149,20 +150,14 @@ class model_account {
       case 'update':
         return json.decode(await api_mdl.put('${const_api_url}/${api_route}', get_model().toJson()));
       case 'items':
-        var data1 = json.decode(await api_mdl.get('${const_api_url}/${api_route}/items'));
+        var data1 = json.decode(await api_mdl.get('${const_api_url}/${api_route}/items${value}'));
         List<dynamic> data2 = data1['data'];
         List<modelType> data3 = modelType.model_list(data2);
         return data3;
       case 'delete':
         return json.decode(await api_mdl.del('${const_api_url}/${api_route}/${get_model().id}'));
-      case 'enable':
-        return json.decode(await api_mdl.get('${const_api_url}/${api_route}/enable/${get_model().id}'));
-      case 'disable':
-        return json.decode(await api_mdl.get('${const_api_url}/${api_route}/disable/${get_model().id}'));
-      case 'status':
-        return json.decode(await api_mdl.get('${const_api_url}/${api_route}/status/${get_model().id}'));
-      case 'dead':
-        return json.decode(await api_mdl.get('${const_api_url}/${api_route}/dead/${get_model().id}'));
+      default:
+        return json.decode(await api_mdl.get('${const_api_url}/${api_route}/${type}/${get_model().id}'));
     }
   }
 }

@@ -1,7 +1,9 @@
 look at on lib/models/model_account.dart
 
-i need to regenerate with this items for model_strategy.dart:
+i need to regenerate with this items for model_strategy_item.dart:
     id : int = 0
+    strategy_id : int = 0
     name : str = ''
+    params : dict = {}
     description : Optional[str] = ''
     enable : bool = True

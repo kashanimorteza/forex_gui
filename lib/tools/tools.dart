@@ -357,7 +357,7 @@ Widget build_Row_3(String label, dynamic controller) {
           },
         ),
       TextEditingController() => TextField(controller: controller, decoration: InputDecoration(labelText: label)),
-      _ => const SizedBox(), // Default case for unhandled controller types
+      _ => const SizedBox(),
     },
   );
 }
@@ -599,22 +599,22 @@ Widget build_action_1({required onUpdate(value), required onDelete(value), requi
   );
 }
 
-//--------------------------------------------------------------------------------- [DropDown:ist]
-//--------------------------------[bul_drp_list]
-//Good for reload list
-Widget bul_drp_list<T>({
+//--------------------------------------------------------------------------------- [DropDownlist]
+//--------------------------------[build_dropdownlist_Const_Function]
+Widget build_dropdownlist_Const_Function<T>({
   required String lable,
   required List<T> data,
-  required Function(int) onChange,
-  int? selected_id = 1,
+  required T selected,
+  required Function(T) onChange,
+  double? width_size = 100,
+  double? height_size = 40,
 }) {
-  return DropdownButtonFormField<int>(
-    initialValue: selected_id,
-    items: data.map<DropdownMenuItem<int>>((T item) {
-      item = (item as dynamic);
-      return DropdownMenuItem<int>(value: (item as dynamic).id ?? 0, child: Text((item as dynamic).name, style: TextStyle(fontSize: 14)));
+  return DropdownButtonFormField<T>(
+    value: (selected as dynamic),
+    items: data.map<DropdownMenuItem<T>>((T item) {
+      return DropdownMenuItem<T>(value: item, child: Text(item.toString().split('.').last));
     }).toList(),
-    onChanged: (int? newValue) => newValue != null ? onChange(newValue) : null,
+    onChanged: (T? newValue) => newValue != null ? onChange(newValue) : null,
     decoration: InputDecoration(
       labelText: lable,
       contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
@@ -630,126 +630,48 @@ Widget bul_drp_list<T>({
 
 //--------------------------------[build_dropdownlist_1]
 Widget build_dropdownlist_1<T>({
-  required Function(int) onChange,
+  required String lable,
   required List<T> data,
-  required int selected_id,
-  required int Function(T) getId,
-  required String Function(T) getName,
-  double height = 30,
-  double width = 110,
+  required Function(int) onChange,
+  int? selected_id = 1,
+  double width_size = 5,
+  double height_size = 5,
 }) {
-  return Container(
-    height: height,
-    width: width,
-    child: FutureBuilder<List<T>>(
-      future: Future.value(data),
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          return DropdownButtonFormField<int>(
-            initialValue: selected_id,
-            items: data.map<DropdownMenuItem<int>>((T item) {
-              return DropdownMenuItem<int>(value: getId(item), child: Text(getName(item), style: TextStyle(fontSize: 14)));
-            }).toList(),
-            onChanged: (int? newValue) {
-              if (newValue != null) {
-                onChange(newValue);
-              }
-            },
-            decoration: InputDecoration(
-              contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-              border: OutlineInputBorder(borderRadius: BorderRadius.circular(5), borderSide: BorderSide(color: Colors.grey.shade300)),
-              enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(5), borderSide: BorderSide(color: Colors.grey.shade300)),
-              focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(5), borderSide: BorderSide(color: Colors.grey.shade400)),
-              filled: true,
-              fillColor: Colors.white,
-            ),
-            isExpanded: true,
-          );
-        } else if (snapshot.hasError) {
-          return Container(
-            height: 40,
-            decoration: BoxDecoration(border: Border.all(color: Colors.red.shade300), borderRadius: BorderRadius.circular(4)),
-            child: Center(child: Text('Error loading data', style: TextStyle(color: Colors.red))),
-          );
-        }
-        return Container(
-          height: 40,
-          decoration: BoxDecoration(border: Border.all(color: Colors.grey.shade300), borderRadius: BorderRadius.circular(4)),
-          child: Center(child: SizedBox(width: 20, height: 20, child: CircularProgressIndicator(strokeWidth: 2))),
-        );
-      },
+  return DropdownButtonFormField<int>(
+    value: selected_id,
+    items: data.map<DropdownMenuItem<int>>((T item) {
+      item = (item as dynamic);
+      return DropdownMenuItem<int>(value: (item as dynamic).id, child: Text(item.name, style: TextStyle(fontSize: 14)));
+    }).toList(),
+    onChanged: (int? newValue) => newValue != null ? onChange(newValue) : null,
+    decoration: InputDecoration(
+      labelText: lable,
+      contentPadding: EdgeInsets.symmetric(horizontal: width_size, vertical: height_size),
+      border: OutlineInputBorder(borderRadius: BorderRadius.circular(5), borderSide: BorderSide(color: Colors.grey.shade300)),
+      enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(5), borderSide: BorderSide(color: Colors.grey.shade300)),
+      focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(5), borderSide: BorderSide(color: Colors.grey.shade400)),
+      filled: true,
+      fillColor: Colors.white,
     ),
+    isExpanded: true,
   );
 }
 
-//--------------------------------[build_dropdownlist_2] : good for const and enum without id
+//--------------------------------[build_dropdownlist_2] : const
 Widget build_dropdownlist_2<T>({
+  required String lable,
   required List<T> data,
-  required Function(T) onChange,
+  required ValueNotifier controller,
   required T selected_type,
   double? width_size = 100,
   double? height_size = 40,
 }) {
-  return SizedBox(
-    height: height_size,
-    width: width_size,
-    child: FutureBuilder<List<T>>(
-      future: Future.value(data),
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          return DropdownButtonFormField<T>(
-            initialValue: (selected_type as dynamic),
-            items: data.map<DropdownMenuItem<T>>((T item) {
-              return DropdownMenuItem<T>(value: item, child: Text(item.toString().split('.').last));
-            }).toList(),
-            onChanged: (T? newValue) {
-              if (newValue != null) {
-                onChange(newValue);
-              }
-            },
-            decoration: InputDecoration(
-              contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-              border: OutlineInputBorder(borderRadius: BorderRadius.circular(5), borderSide: BorderSide(color: Colors.grey.shade300)),
-              enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(5), borderSide: BorderSide(color: Colors.grey.shade300)),
-              focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(5), borderSide: BorderSide(color: Colors.grey.shade400)),
-              filled: true,
-              fillColor: Colors.white,
-            ),
-            isExpanded: true,
-          );
-        } else if (snapshot.hasError) {
-          return Container(
-            height: 40,
-            decoration: BoxDecoration(border: Border.all(color: Colors.red.shade300), borderRadius: BorderRadius.circular(4)),
-            child: Center(child: Text('Error loading data', style: TextStyle(color: Colors.red))),
-          );
-        }
-        return Container(
-          height: 40,
-          decoration: BoxDecoration(border: Border.all(color: Colors.grey.shade300), borderRadius: BorderRadius.circular(4)),
-          child: Center(child: SizedBox(width: 20, height: 20, child: CircularProgressIndicator(strokeWidth: 2))),
-        );
-      },
-    ),
-  );
-}
-
-//--------------------------------[build_dropdownlist_1] : good for data that has name and id
-Widget build_dropdownlist_3<T>({
-  required String lable,
-  required List<T> data,
-  required ValueNotifier controller,
-  int? selected_id = 1,
-  Function(ValueNotifier)? onChange,
-}) {
-  controller.value = selected_id;
-  return DropdownButtonFormField<int>(
-    initialValue: selected_id,
-    items: data.map<DropdownMenuItem<int>>((T item) {
-      item = (item as dynamic);
-      return DropdownMenuItem<int>(value: (item as dynamic).id, child: Text((item as dynamic).name, style: TextStyle(fontSize: 14)));
+  return DropdownButtonFormField<T>(
+    value: (selected_type as dynamic),
+    items: data.map<DropdownMenuItem<T>>((T item) {
+      return DropdownMenuItem<T>(value: item, child: Text(item.toString().split('.').last));
     }).toList(),
-    onChanged: (int? newValue) => {controller.value = newValue, if (onChange != null) onChange(controller.value)},
+    onChanged: (T? newValue) => controller.value = newValue,
     decoration: InputDecoration(
       labelText: lable,
       contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
@@ -763,22 +685,28 @@ Widget build_dropdownlist_3<T>({
   );
 }
 
-//--------------------------------[build_dropdownlist_4] :
-//good for const and enum without id
-Widget build_dropdownlist_4<T>({
+//--------------------------------[build_dropdownlist_3] : id/name
+Widget build_dropdownlist_3<T>({
   required String lable,
   required List<T> data,
-  required ValueNotifier controller,
-  required T selected_type,
-  double? width_size = 100,
-  double? height_size = 40,
+  required ValueNotifier<int> controller,
+  int? selected_id = 1,
+  void Function(int)? onChange,
+  void Function(int)? onInit,
 }) {
-  return DropdownButtonFormField<T>(
-    initialValue: (selected_type as dynamic),
-    items: data.map<DropdownMenuItem<T>>((T item) {
-      return DropdownMenuItem<T>(value: item, child: Text(item.toString().split('.').last));
+  controller.value = selected_id!;
+  return DropdownButtonFormField<int>(
+    value: selected_id,
+    items: data.map<DropdownMenuItem<int>>((T item) {
+      item = (item as dynamic);
+      return DropdownMenuItem<int>(value: (item as dynamic).id, child: Text(item.name, style: TextStyle(fontSize: 14)));
     }).toList(),
-    onChanged: (T? newValue) => controller.value = newValue,
+    onChanged: (int? newValue) {
+      if (newValue != null) {
+        controller.value = newValue;
+        if (onChange != null) onChange(newValue);
+      }
+    },
     decoration: InputDecoration(
       labelText: lable,
       contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),

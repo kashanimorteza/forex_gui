@@ -9,19 +9,23 @@
 //--------------------------------------------------------------------------------- General
 enum const_model_mode { view, edit }
 
-enum const_model_list { dashboard, account, instrument, user, log, config, xray, service_v2ray, service_v2ray_server, service_v2ray_inbound, service_v2ray_service, service_v2ray_plan, service_v2ray_group, group, service, network, server, route, domain, alarm, display, certificate, telegram_instance }
+enum const_model_list { dashboard, account, instrument, strategy, strategy_item, user, log, config, xray, service_v2ray, service_v2ray_server, service_v2ray_inbound, service_v2ray_service, service_v2ray_plan, service_v2ray_group, group, service, network, server, route, domain, alarm, display, certificate, telegram_instance }
 
 class models_title {
   static const String base = 'Forex API';
   static const String dashboard = 'Dashboard';
   static const String account = 'Account';
   static const String instrument = 'Instrument';
+  static const String strategy = 'Strategy';
+  static const String strategy_item = 'Strategy Item';
 }
 
 class models_api {
   static const String dashboard = 'dashboard';
   static const String account = 'account';
   static const String instrument = 'instrument';
+  static const String strategy = 'strategy';
+  static const String strategy_item = 'strategy_item';
 }
 
 class models_fileds {
@@ -34,5 +38,15 @@ class models_fileds {
     'list': {'id': 'Id', 'name': 'Name', 'instrument': 'Instrument', 'category': 'Category', 'priority': 'Priority'},
     'add': {'name': 'Name', 'instrument': 'Instrument', 'category': 'Category', 'priority': 'Priority', 'description': 'Description'},
     'edit': {'name': 'Name', 'instrument': 'Instrument', 'category': 'Category', 'priority': 'Priority', 'description': 'Description'},
+  };
+  static Map<String, dynamic> strategy = {
+    'list': {'id': 'Id', 'name': 'Name'},
+    'add': {'name': 'Name', 'description': 'Description'},
+    'edit': {'name': 'Name', 'description': 'Description'},
+  };
+  static Map<String, dynamic> strategy_item = {
+    'list': {'id': 'Id', 'name': 'Name', 'params': 'Params'},
+    'add': {'name': 'Name', 'params': 'Params', 'description': 'Description'},
+    'edit': {'name': 'Name', 'params': 'Params', 'description': 'Description'},
   };
 }

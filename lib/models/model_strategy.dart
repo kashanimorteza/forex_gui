@@ -1,8 +1,8 @@
 //--------------------------------------------------------------------------------- location
-// lib/models/model_instrument.dart
+// lib/models/model_strategy.dart
 
 //--------------------------------------------------------------------------------- Description
-// This is model for instrument
+// This is model for strategy
 
 //--------------------------------------------------------------------------------- Import
 import 'dart:convert';
@@ -12,37 +12,28 @@ import 'package:mkpanel_gui/consts/model.dart';
 import 'package:mkpanel_gui/tools/api.dart';
 
 //--------------------------------------------------------------------------------- Global
-typedef modelType = model_instrument;
-String api_route = models_api.instrument;
+typedef modelType = model_strategy;
+String api_route = models_api.strategy;
 
 //--------------------------------------------------------------------------------- Model
-class model_instrument {
+class model_strategy {
   //--------------------------------[Field]
   int id;
   String name;
-  String instrument;
-  int category;
-  int priority;
   String? description;
   bool enable;
   late Map<String, dynamic> controllers;
 
   //--------------------------------[Contractor]
-  model_instrument({
+  model_strategy({
     this.id = 0,
     this.name = '',
-    this.instrument = '',
-    this.category = 0,
-    this.priority = 0,
     this.description = '',
     this.enable = true,
   }) {
     controllers = {
       'id': TextEditingController(text: id.toString()),
       'name': TextEditingController(text: name),
-      'instrument': TextEditingController(text: instrument),
-      'category': TextEditingController(text: category.toString()),
-      'priority': TextEditingController(text: priority.toString()),
       'description': TextEditingController(text: description),
       'enable': ValueNotifier<bool>(enable),
     };
@@ -52,22 +43,16 @@ class model_instrument {
   dynamic getValueByKey(String key) => switch (key) {
         'id' => id,
         'name' => name,
-        'instrument' => instrument,
-        'category' => category,
-        'priority' => priority,
         'description' => description,
         'enable' => enable,
         _ => null,
       };
 
   //--------------------------------[toModel]
-  factory model_instrument.toModel(Map<String, dynamic> json) {
+  factory model_strategy.toModel(Map<String, dynamic> json) {
     return modelType(
       id: json['id'] as int,
       name: json['name'] as String,
-      instrument: json['instrument'] as String,
-      category: json['category'] as int,
-      priority: json['priority'] as int,
       description: json['description'] as String?,
       enable: json['enable'] as bool,
     );
@@ -78,9 +63,6 @@ class model_instrument {
     return {
       'id': id,
       'name': name,
-      'instrument': instrument,
-      'category': category,
-      'priority': priority,
       'description': description,
       'enable': enable,
     };
@@ -91,9 +73,6 @@ class model_instrument {
     return modelType(
       id: int.tryParse(controllers['id']?.text ?? '0') ?? 0,
       name: controllers['name']?.text ?? '',
-      instrument: controllers['instrument']?.text ?? '',
-      category: int.tryParse(controllers['category']?.text ?? '0') ?? 0,
-      priority: int.tryParse(controllers['priority']?.text ?? '0') ?? 0,
       description: controllers['description']?.text ?? '',
       enable: (controllers['enable'] as ValueNotifier<bool>).value,
     );
@@ -103,9 +82,6 @@ class model_instrument {
   void controller_clear() {
     controllers['id'] = TextEditingController(text: id.toString());
     controllers['name'] = TextEditingController(text: name);
-    controllers['instrument'] = TextEditingController(text: instrument);
-    controllers['category'] = TextEditingController(text: category.toString());
-    controllers['priority'] = TextEditingController(text: priority.toString());
     controllers['description'] = TextEditingController(text: description);
     controllers['enable'] = ValueNotifier<bool>(enable);
   }
