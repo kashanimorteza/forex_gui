@@ -24,6 +24,7 @@ class DrawerDesktop extends StatelessWidget {
 
           // Dashboard
           ListTile(leading: Icon(Icons.dashboard), title: Text(models_title.dashboard), onTap: () => {prv_page.page = const_model_list.dashboard, Navigator.pop(context)}),
+          ListTile(leading: Icon(Icons.person), title: Text(models_title.instrument), onTap: () => {prv_page.page = const_model_list.instrument, Navigator.pop(context)}),
           ListTile(leading: Icon(Icons.person), title: Text(models_title.account), onTap: () => {prv_page.page = const_model_list.account, Navigator.pop(context)}),
           Divider(),
         ],

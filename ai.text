@@ -1,12 +1,7 @@
-look at on lib/models/model_way.dart
-i need to regenerate with this items:
+look at on lib/models/model_account.dart
+
+i need to regenerate with this items for model_strategy.dart:
     id : int = 0
     name : str = ''
-    broker : str = 'FXCM'
-    type : str = 'Demo'
-    currency : str = 'USD'
-    server : str = 'FXCM-GBPReal01'
-    username : str = ''
-    password : str = ''
     description : Optional[str] = ''
     enable : bool = True

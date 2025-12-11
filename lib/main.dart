@@ -13,6 +13,7 @@ import 'package:mkpanel_gui/providers/provider_drawer.dart';
 import 'package:mkpanel_gui/providers/provider_screen.dart';
 import 'package:mkpanel_gui/providers/provider_page.dart';
 import 'package:mkpanel_gui/providers/provider_account.dart';
+import 'package:mkpanel_gui/providers/provider_instrument.dart';
 
 //--------------------------------------------------------------------------------- Main
 void main() {
@@ -30,6 +31,7 @@ void main() {
         ChangeNotifierProvider(create: (context) => Provider_Screen()),
         ChangeNotifierProvider(create: (context) => Provider_Page()),
         ChangeNotifierProvider(create: (context) => provider_account()),
+        ChangeNotifierProvider(create: (context) => provider_instrument()),
       ],
       child: MyApp(),
     ),

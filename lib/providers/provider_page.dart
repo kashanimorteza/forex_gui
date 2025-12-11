@@ -13,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:mkpanel_gui/consts/model.dart';
 import 'package:mkpanel_gui/providers/provider_account.dart';
+import 'package:mkpanel_gui/providers/provider_instrument.dart';
 
 //--------------------------------------------------------------------------------- Provider
 class Provider_Page with ChangeNotifier {
@@ -54,6 +55,7 @@ class Provider_Page with ChangeNotifier {
     print('--- Provider : Page : set page');
     _page = value;
     if (_page == const_model_list.account) _prv = Provider.of<provider_account>(_context, listen: false);
+    if (_page == const_model_list.instrument) _prv = Provider.of<provider_instrument>(_context, listen: false);
     _prv.context = _context;
     _prv.drawer = _drawer;
     _prv.load();
