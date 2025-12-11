@@ -16,6 +16,7 @@ import 'package:mkpanel_gui/providers/provider_account.dart';
 import 'package:mkpanel_gui/providers/provider_instrument.dart';
 import 'package:mkpanel_gui/providers/provider_strategy.dart';
 import 'package:mkpanel_gui/providers/provider_strategy_item.dart';
+import 'package:mkpanel_gui/providers/provider_test_live.dart';
 
 //--------------------------------------------------------------------------------- Provider
 class Provider_Page with ChangeNotifier {
@@ -60,6 +61,7 @@ class Provider_Page with ChangeNotifier {
     if (_page == const_model_list.instrument) _prv = Provider.of<provider_instrument>(_context, listen: false);
     if (_page == const_model_list.strategy) _prv = Provider.of<provider_strategy>(_context, listen: false);
     if (_page == const_model_list.strategy_item) _prv = Provider.of<provider_strategy_item>(_context, listen: false);
+    if (_page == const_model_list.test_live) _prv = Provider.of<provider_test_live>(_context, listen: false);
     _prv.context = _context;
     _prv.drawer = _drawer;
     _prv.load();
