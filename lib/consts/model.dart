@@ -9,10 +9,11 @@
 //--------------------------------------------------------------------------------- General
 enum const_model_mode { view, edit }
 
-enum const_model_list { dashboard, user, log, config, xray, service_v2ray, service_v2ray_server, service_v2ray_inbound, service_v2ray_service, service_v2ray_plan, service_v2ray_group, group, service, network, way, server, route, domain, alarm, display, certificate, telegram_instance }
+enum const_model_list { dashboard, account, user, log, config, xray, service_v2ray, service_v2ray_server, service_v2ray_inbound, service_v2ray_service, service_v2ray_plan, service_v2ray_group, group, service, network, server, route, domain, alarm, display, certificate, telegram_instance }
 
 class models_title {
   static const String dashboard = 'Dashboard';
+  static const String account = 'Account';
   static const String user = 'User';
   static const String log = 'Log';
   static const String config = 'Config';
@@ -25,7 +26,6 @@ class models_title {
   static const String group = 'Group';
   static const String service = 'Service';
   static const String network = 'Networks';
-  static const String way = 'Ways';
   static const String server = 'Servers';
   static const String route = 'Routes';
   static const String domain = 'Domains';
@@ -40,6 +40,7 @@ class models_title {
 
 class models_api {
   static const String dashboard = 'dashboard';
+  static const String account = 'account';
   static const String user = 'user';
   static const String user_card = 'user_card';
   static const String user_payment = 'user_payment';
@@ -54,7 +55,6 @@ class models_api {
   static const String group = 'group';
   static const String service = 'service';
   static const String network = 'network';
-  static const String way = 'way';
   static const String server = 'server';
   static const String route = 'route_group';
   static const String domain = 'domain';
@@ -65,6 +65,11 @@ class models_api {
 }
 
 class models_fileds {
+  static Map<String, dynamic> account = {
+    'list': {'id': 'Id', 'name': 'Name', 'pre': 'Prefix', 'enable': 'Enable'},
+    'add': {'name': 'Name', 'pre': 'Prefix', 'description': 'Description', 'enable': 'Enable'},
+    'edit': {'name': 'Name', 'pre': 'Prefix', 'description': 'Description', 'enable': 'Enable'},
+  };
   static Map<String, dynamic> config = {
     'list': {},
     'add': {},
@@ -241,11 +246,6 @@ class models_fileds {
     'edit': {'name': 'Name', 'sub': 'Sub', 'description': 'Description', 'enable': 'Enable'},
   };
   static Map<String, dynamic> network = {
-    'list': {'id': 'Id', 'name': 'Name', 'pre': 'Prefix', 'enable': 'Enable'},
-    'add': {'name': 'Name', 'pre': 'Prefix', 'description': 'Description', 'enable': 'Enable'},
-    'edit': {'name': 'Name', 'pre': 'Prefix', 'description': 'Description', 'enable': 'Enable'},
-  };
-  static Map<String, dynamic> way = {
     'list': {'id': 'Id', 'name': 'Name', 'pre': 'Prefix', 'enable': 'Enable'},
     'add': {'name': 'Name', 'pre': 'Prefix', 'description': 'Description', 'enable': 'Enable'},
     'edit': {'name': 'Name', 'pre': 'Prefix', 'description': 'Description', 'enable': 'Enable'},

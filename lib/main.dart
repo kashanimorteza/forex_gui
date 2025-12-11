@@ -12,26 +12,7 @@ import 'package:mkpanel_gui/tools/tools.dart';
 import 'package:mkpanel_gui/providers/provider_drawer.dart';
 import 'package:mkpanel_gui/providers/provider_screen.dart';
 import 'package:mkpanel_gui/providers/provider_page.dart';
-import 'package:mkpanel_gui/providers/provider_start.dart';
-import 'package:mkpanel_gui/providers/provider_dashboard.dart';
-import 'package:mkpanel_gui/providers/provider_user.dart';
-import 'package:mkpanel_gui/providers/provider_log.dart';
-import 'package:mkpanel_gui/providers/provider_config.dart';
-import 'package:mkpanel_gui/providers/provider_service_v2ray_server.dart';
-import 'package:mkpanel_gui/providers/provider_service_v2ray_inbound.dart';
-import 'package:mkpanel_gui/providers/provider_xray_plan.dart';
-import 'package:mkpanel_gui/providers/provider_xray_group.dart';
-import 'package:mkpanel_gui/providers/provider_service.dart';
-import 'package:mkpanel_gui/providers/provider_group.dart';
-import 'package:mkpanel_gui/providers/provider_network.dart';
-import 'package:mkpanel_gui/providers/provider_way.dart';
-import 'package:mkpanel_gui/providers/provider_server.dart';
-import 'package:mkpanel_gui/providers/provider_domain.dart';
-import 'package:mkpanel_gui/providers/provider_certificate.dart';
-import 'package:mkpanel_gui/providers/provider_route.dart';
-import 'package:mkpanel_gui/providers/provider_alarm.dart';
-import 'package:mkpanel_gui/providers/provider_display.dart';
-import 'package:mkpanel_gui/providers/provider_telegram_instance.dart';
+import 'package:mkpanel_gui/providers/provider_account.dart';
 
 //--------------------------------------------------------------------------------- Main
 void main() {
@@ -48,27 +29,7 @@ void main() {
         ),
         ChangeNotifierProvider(create: (context) => Provider_Screen()),
         ChangeNotifierProvider(create: (context) => Provider_Page()),
-        ChangeNotifierProvider(create: (context) => provider_start()),
-        ChangeNotifierProvider(create: (context) => provider_dashboard()),
-        ChangeNotifierProvider(create: (context) => provider_user()),
-        ChangeNotifierProvider(create: (context) => provider_log()),
-        ChangeNotifierProvider(create: (context) => provider_config()),
-        ChangeNotifierProvider(create: (context) => provider_service_v2ray_server()),
-        ChangeNotifierProvider(create: (context) => provider_service_v2ray_inbound()),
-        ChangeNotifierProvider(create: (context) => provider_service_v2ray_plan()),
-        ChangeNotifierProvider(create: (context) => provider_xray_group()),
-        ChangeNotifierProvider(create: (context) => provider_service()),
-        ChangeNotifierProvider(create: (context) => provider_domain()),
-        ChangeNotifierProvider(create: (context) => provider_certificate()),
-        ChangeNotifierProvider(create: (context) => provider_network()),
-        ChangeNotifierProvider(create: (context) => provider_way()),
-        ChangeNotifierProvider(create: (context) => provider_route()),
-        ChangeNotifierProvider(create: (context) => provider_server()),
-        ChangeNotifierProvider(create: (context) => provider_route()),
-        ChangeNotifierProvider(create: (context) => provider_group()),
-        ChangeNotifierProvider(create: (context) => provider_alarm()),
-        ChangeNotifierProvider(create: (context) => provider_display()),
-        ChangeNotifierProvider(create: (context) => provider_telegram_instance()),
+        ChangeNotifierProvider(create: (context) => provider_account()),
       ],
       child: MyApp(),
     ),

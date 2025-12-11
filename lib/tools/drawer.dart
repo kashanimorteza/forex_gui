@@ -59,7 +59,6 @@ class DrawerDesktop extends StatelessWidget {
               title: Text(models_title.certificate),
               onTap: () => {prv_page.page = const_model_list.certificate, Navigator.pop(context)}),
           ListTile(leading: Icon(Icons.network_check), title: Text(models_title.network), onTap: () => {prv_page.page = const_model_list.network, Navigator.pop(context)}),
-          ListTile(leading: Icon(Icons.alt_route), title: Text(models_title.way), onTap: () => {prv_page.page = const_model_list.way, Navigator.pop(context)}),
           ListTile(leading: Icon(Icons.warning), title: Text(models_title.alarm), onTap: () => {prv_page.page = const_model_list.alarm, Navigator.pop(context)}),
           ListTile(leading: Icon(Icons.display_settings), title: Text(models_title.display), onTap: () => {prv_page.page = const_model_list.display, Navigator.pop(context)}),
           ListTile(leading: Icon(Icons.dns), title: Text(models_title.server), onTap: () => {prv_page.page = const_model_list.server, Navigator.pop(context)}),

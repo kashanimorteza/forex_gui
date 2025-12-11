@@ -1,8 +1,8 @@
 //--------------------------------------------------------------------------------- location
-// lib/providers/provider_service_v2ray_plan.dart
+// lib/providers/provider_account.dart
 
 //--------------------------------------------------------------------------------- Description
-// This is provider for service_v2ray_plan
+// This is provider for account
 
 //--------------------------------------------------------------------------------- Import
 import 'package:flutter/material.dart';
@@ -11,15 +11,14 @@ import 'package:mkpanel_gui/consts/general.dart';
 import 'package:mkpanel_gui/consts/model.dart';
 import 'package:mkpanel_gui/tools/tools.dart';
 import 'package:mkpanel_gui/providers/provider_page.dart';
-import 'package:mkpanel_gui/models/model_xray_plan.dart';
+import 'package:mkpanel_gui/models/model_account.dart';
 
 //--------------------------------------------------------------------------------- Global
-typedef modelType_base = model_xray_plan;
-String title_base = models_title.service_v2ray_plan;
-String appbar_title = models_title.service_v2ray;
+typedef modelType_base = model_account;
+String title_base = models_title.account;
 
 //--------------------------------------------------------------------------------- Provider
-class provider_service_v2ray_plan with ChangeNotifier {
+class provider_account with ChangeNotifier {
   //--------------------------------[Fields]
   var _context;
   var _drawer;
@@ -28,17 +27,29 @@ class provider_service_v2ray_plan with ChangeNotifier {
   late modelType_base _model_base;
 
   //--------------------------------[Contractor]
-  provider_service_v2ray_plan() {
+  provider_account() {
     _model_base = modelType();
   }
 
   //--------------------------------[Set]
-  set context(value) => {(_context = value, _prv = Provider.of<Provider_Page>(_context, listen: false))};
+  set context(value) {
+    _context = value;
+    _prv = Provider.of<Provider_Page>(_context, listen: false);
+  }
+
   set drawer(value) => _drawer = value;
 
-  //------------------------------[Logic]
+  //--------------------------------------------------------------------------------- Logic
   //----------[load]
-  load() async => {(_data_base = await _model_base.api('items'), reload())};
+  load([String model = 'all']) async {
+    switch (model) {
+      case 'base':
+        _data_base = await _model_base.api('items');
+      default:
+        _data_base = await _model_base.api('items');
+    }
+    reload();
+  }
 
   //----------[reload]
   reload() => _prv.ui = view();
@@ -47,33 +58,30 @@ class provider_service_v2ray_plan with ChangeNotifier {
   api(type, modelType_base model) async {
     var result = await model.api(type);
     build_notification_2(_context, result);
-    load();
+    load('base');
   }
 
-  //------------------------------[view]
+  //--------------------------------------------------------------------------------- UI
   view() {
-    //----------[ui]
-    var ui = bul_list_com<modelType_base>(
+    var view_1 = bul_list_com<modelType_base>(
       context: _context,
       title: title_base,
       data_base: _data_base,
-      fields: models_fileds.service_xray_plan,
+      fields: models_fileds.account,
       action: api,
     );
-    //----------[app_bar]
-    var app_bar = build_appbar_1(title: appbar_title);
-    //----------[body]
-    var body = SingleChildScrollView(
-      child: Center(
+    var app_bar = build_appbar_1(title: title_base);
+    var body = Center(
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
         child: Padding(
           padding: EdgeInsets.all(const_widget_padding),
           child: Column(
-            children: [ui],
+            children: [view_1],
           ),
         ),
       ),
     );
-    //----------[return]
     return Scaffold(appBar: app_bar, drawer: _drawer, body: body);
   }
 }

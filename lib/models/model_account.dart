@@ -2,141 +2,165 @@
 // lib/models/model_account.dart
 
 //--------------------------------------------------------------------------------- Description
-// This is model for model_account
+// This is model for account
 
 //--------------------------------------------------------------------------------- Import
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:mkpanel_gui/consts/general.dart';
+import 'package:mkpanel_gui/consts/model.dart';
+import 'package:mkpanel_gui/tools/api.dart';
 
 //--------------------------------------------------------------------------------- Global
 typedef modelType = model_account;
+String api_route = models_api.account;
 
 //--------------------------------------------------------------------------------- Model
 class model_account {
   //--------------------------------[Field]
-  int group_id;
-  int father_id;
-  String username;
+  int id;
   String name;
-  String email;
-  String phone;
+  String broker;
+  String type;
+  String currency;
+  String server;
+  String username;
+  String password;
+  String? description;
   bool enable;
-  bool delete;
-  bool display;
-  bool trusted;
-  String register_date;
   late Map<String, dynamic> controllers;
 
   //--------------------------------[Contractor]
   model_account({
-    this.group_id = 1,
-    this.father_id = 1,
-    this.username = '',
+    this.id = 0,
     this.name = '',
-    this.email = '',
-    this.phone = '',
+    this.broker = 'FXCM',
+    this.type = 'Demo',
+    this.currency = 'USD',
+    this.server = 'FXCM-GBPReal01',
+    this.username = '',
+    this.password = '',
+    this.description = '',
     this.enable = true,
-    this.delete = false,
-    this.display = true,
-    this.trusted = false,
-    this.register_date = '',
   }) {
     controllers = {
-      'group_id': ValueNotifier<int>(group_id),
-      'father_id': TextEditingController(text: father_id.toString()),
-      'username': TextEditingController(text: username),
+      'id': TextEditingController(text: id.toString()),
       'name': TextEditingController(text: name),
-      'email': TextEditingController(text: email),
-      'phone': TextEditingController(text: phone),
+      'broker': TextEditingController(text: broker),
+      'type': TextEditingController(text: type),
+      'currency': TextEditingController(text: currency),
+      'server': TextEditingController(text: server),
+      'username': TextEditingController(text: username),
+      'password': TextEditingController(text: password),
+      'description': TextEditingController(text: description),
       'enable': ValueNotifier<bool>(enable),
-      'delete': ValueNotifier<bool>(delete),
-      'display': ValueNotifier<bool>(display),
-      'trusted': ValueNotifier<bool>(trusted),
-      'register_date': TextEditingController(text: register_date),
     };
   }
 
   //--------------------------------[getValueByKeys]
   dynamic getValueByKey(String key) => switch (key) {
-        'group_id' => group_id,
-        'father_id' => father_id,
-        'username' => username,
+        'id' => id,
         'name' => name,
-        'email' => email,
-        'phone' => phone,
+        'broker' => broker,
+        'type' => type,
+        'currency' => currency,
+        'server' => server,
+        'username' => username,
+        'password' => password,
+        'description' => description,
         'enable' => enable,
-        'delete' => delete,
-        'display' => display,
-        'trusted' => trusted,
-        'register_date' => register_date,
         _ => null,
       };
 
   //--------------------------------[toModel]
   factory model_account.toModel(Map<String, dynamic> json) {
     return modelType(
-      group_id: json['group_id'] as int,
-      father_id: json['father_id'] as int,
-      username: json['username'] as String,
+      id: json['id'] as int,
       name: json['name'] as String,
-      email: json['email'] as String,
-      phone: json['phone'] as String,
+      broker: json['broker'] as String,
+      type: json['type'] as String,
+      currency: json['currency'] as String,
+      server: json['server'] as String,
+      username: json['username'] as String,
+      password: json['password'] as String,
+      description: json['description'] as String?,
       enable: json['enable'] as bool,
-      delete: json['delete'] as bool,
-      display: json['display'] as bool,
-      trusted: json['trusted'] as bool,
-      register_date: json['register_date'] as String,
     );
   }
 
   //--------------------------------[toJson]
   Map<String, dynamic> toJson() {
     return {
-      'group_id': group_id,
-      'father_id': father_id,
-      'username': username,
+      'id': id,
       'name': name,
-      'email': email,
-      'phone': phone,
+      'broker': broker,
+      'type': type,
+      'currency': currency,
+      'server': server,
+      'username': username,
+      'password': password,
+      'description': description,
       'enable': enable,
-      'delete': delete,
-      'display': display,
-      'trusted': trusted,
-      'register_date': register_date,
     };
   }
 
   //--------------------------------[get_model]
   modelType get_model() {
     return modelType(
-      group_id: (controllers['group_id'] as ValueNotifier<int>).value,
-      father_id: int.parse(controllers['father_id'].text),
-      username: controllers['username'].text,
-      name: controllers['name'].text,
-      email: controllers['email'].text,
-      phone: controllers['phone'].text,
+      id: int.tryParse(controllers['id']?.text ?? '0') ?? 0,
+      name: controllers['name']?.text ?? '',
+      broker: controllers['broker']?.text ?? 'FXCM',
+      type: controllers['type']?.text ?? 'Demo',
+      currency: controllers['currency']?.text ?? 'USD',
+      server: controllers['server']?.text ?? 'FXCM-GBPReal01',
+      username: controllers['username']?.text ?? '',
+      password: controllers['password']?.text ?? '',
+      description: controllers['description']?.text ?? '',
       enable: (controllers['enable'] as ValueNotifier<bool>).value,
-      delete: (controllers['delete'] as ValueNotifier<bool>).value,
-      display: (controllers['display'] as ValueNotifier<bool>).value,
-      trusted: (controllers['trusted'] as ValueNotifier<bool>).value,
-      register_date: controllers['register_date'].text,
     );
   }
 
   //--------------------------------[controller_clear]
   void controller_clear() {
-    controllers['group_id'].value = 1;
-    controllers['father_id'].value = 1;
-    controllers['username'].clear();
-    controllers['name'].clear();
-    controllers['email'].clear();
-    controllers['phone'].clear();
-    controllers['enable'].value = true;
-    controllers['delete'].value = false;
-    controllers['display'].value = true;
-    controllers['trusted'].value = false;
-    controllers['register_date'].clear();
+    controllers['id']?.clear();
+    controllers['name']?.clear();
+    controllers['broker']?.clear();
+    controllers['type']?.clear();
+    controllers['currency']?.clear();
+    controllers['server']?.clear();
+    controllers['username']?.clear();
+    controllers['password']?.clear();
+    controllers['description']?.clear();
+    controllers['enable']?.value = false;
   }
+
+  //--------------------------------[model_list]
+  static List<modelType> model_list(List<dynamic> data) => data.map((item) => modelType.toModel(item as Map<String, dynamic>)).toList();
 
   //--------------------------------[controller_get]
   dynamic controller_get(String name) => controllers[name];
+
+  //--------------------------------[Api]
+  api(type) async {
+    MyApi api_mdl = new MyApi();
+    switch (type) {
+      case 'add':
+        return json.decode(await api_mdl.post('${const_api_url}/${api_route}/add', get_model().toJson()));
+      case 'update':
+        modelType mdl = get_model();
+        return json.decode(await api_mdl.put('${const_api_url}/${api_route}/update', mdl.toJson()));
+      case 'delete':
+        return json.decode(await api_mdl.del('${const_api_url}/${api_route}/delete/${get_model().id}'));
+      case 'item':
+        var data1 = json.decode(await api_mdl.get('${const_api_url}/${api_route}/item/${id}'));
+        List<dynamic> data2 = data1['data'];
+        List<modelType> data3 = modelType.model_list(data2);
+        return data3;
+      case 'items':
+        var data1 = json.decode(await api_mdl.get('${const_api_url}/${api_route}/items'));
+        List<dynamic> data2 = data1['data'];
+        List<modelType> data3 = modelType.model_list(data2);
+        return data3;
+    }
+  }
 }
