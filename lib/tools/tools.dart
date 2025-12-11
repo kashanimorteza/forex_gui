@@ -265,7 +265,7 @@ void bul_not_1(BuildContext context, String message, {bool isError = false}) {
 
 //--------------------------------[build_notification_2]
 void build_notification_2(BuildContext context, data) {
-  data['status'] ? bul_not_1(context, data['data'].toString(), isError: false) : bul_not_1(context, data['data'].toString(), isError: true);
+  data['status'] ? bul_not_1(context, data['message'].toString(), isError: false) : bul_not_1(context, data['message'].toString(), isError: true);
 }
 
 //--------------------------------------------------------------------------------- [UI]

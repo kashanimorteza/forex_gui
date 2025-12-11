@@ -131,7 +131,7 @@ class model_account {
     controllers['username']?.clear();
     controllers['password']?.clear();
     controllers['description']?.clear();
-    controllers['enable']?.value = false;
+    controllers['enable']?.value = true;
   }
 
   //--------------------------------[model_list]
@@ -147,20 +147,22 @@ class model_account {
       case 'add':
         return json.decode(await api_mdl.post('${const_api_url}/${api_route}/add', get_model().toJson()));
       case 'update':
-        modelType mdl = get_model();
-        return json.decode(await api_mdl.put('${const_api_url}/${api_route}/update', mdl.toJson()));
-      case 'delete':
-        return json.decode(await api_mdl.del('${const_api_url}/${api_route}/delete/${get_model().id}'));
-      case 'item':
-        var data1 = json.decode(await api_mdl.get('${const_api_url}/${api_route}/item/${id}'));
-        List<dynamic> data2 = data1['data'];
-        List<modelType> data3 = modelType.model_list(data2);
-        return data3;
+        return json.decode(await api_mdl.put('${const_api_url}/${api_route}', get_model().toJson()));
       case 'items':
         var data1 = json.decode(await api_mdl.get('${const_api_url}/${api_route}/items'));
         List<dynamic> data2 = data1['data'];
         List<modelType> data3 = modelType.model_list(data2);
         return data3;
+      case 'delete':
+        return json.decode(await api_mdl.del('${const_api_url}/${api_route}/${get_model().id}'));
+      case 'enable':
+        return json.decode(await api_mdl.get('${const_api_url}/${api_route}/enable/${get_model().id}'));
+      case 'disable':
+        return json.decode(await api_mdl.get('${const_api_url}/${api_route}/disable/${get_model().id}'));
+      case 'status':
+        return json.decode(await api_mdl.get('${const_api_url}/${api_route}/status/${get_model().id}'));
+      case 'dead':
+        return json.decode(await api_mdl.get('${const_api_url}/${api_route}/dead/${get_model().id}'));
     }
   }
 }
