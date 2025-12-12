@@ -1,8 +1,8 @@
 //--------------------------------------------------------------------------------- location
-// lib/models/model_test_live.dart
+// lib/models/model_live_execute.dart
 
 //--------------------------------------------------------------------------------- Description
-// This is model for test_live
+// This is model for live_execute
 
 //--------------------------------------------------------------------------------- Import
 import 'dart:convert';
@@ -12,11 +12,11 @@ import 'package:mkpanel_gui/consts/model.dart';
 import 'package:mkpanel_gui/tools/api.dart';
 
 //--------------------------------------------------------------------------------- Global
-typedef modelType = model_test_live;
-String api_route = models_api.test_live;
+typedef modelType = model_live_execute;
+String api_route = models_api.live_execute;
 
 //--------------------------------------------------------------------------------- Model
-class model_test_live {
+class model_live_execute {
   //--------------------------------[Field]
   int id;
   String date;
@@ -29,7 +29,7 @@ class model_test_live {
   late Map<String, dynamic> controllers;
 
   //--------------------------------[Contractor]
-  model_test_live({
+  model_live_execute({
     this.id = 0,
     this.date = '',
     this.name = '',
@@ -65,7 +65,7 @@ class model_test_live {
       };
 
   //--------------------------------[toModel]
-  factory model_test_live.toModel(Map<String, dynamic> json) {
+  factory model_live_execute.toModel(Map<String, dynamic> json) {
     return modelType(
       id: json['id'] as int,
       date: json['date'] as String,

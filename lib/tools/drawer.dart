@@ -41,9 +41,9 @@ class DrawerDesktop extends StatelessWidget {
 
           // Test
           Divider(),
-          ListTile(leading: Icon(Icons.vpn_lock), title: Text("Test"), enabled: false),
+          ListTile(leading: Icon(Icons.vpn_lock), title: Text("Execute"), enabled: false),
           Divider(),
-          ListTile(leading: Icon(Icons.person), title: Text(models_title.test_live), onTap: () => {prv_page.page = const_model_list.test_live, Navigator.pop(context)}),
+          ListTile(leading: Icon(Icons.person), title: Text(models_title.live_execute), onTap: () => {prv_page.page = const_model_list.live_execute, Navigator.pop(context)}),
         ],
       ),
     );

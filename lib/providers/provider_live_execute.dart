@@ -1,8 +1,8 @@
 //--------------------------------------------------------------------------------- Location
-// lib/providers/provider_test_live.dart
+// lib/providers/provider_live_execute.dart
 
 //--------------------------------------------------------------------------------- Description
-// This is provider for test_live
+// This is provider for live_execute
 
 //--------------------------------------------------------------------------------- Import
 import 'package:flutter/material.dart';
@@ -11,7 +11,7 @@ import 'package:mkpanel_gui/consts/general.dart';
 import 'package:mkpanel_gui/consts/model.dart';
 import 'package:mkpanel_gui/tools/tools.dart';
 import 'package:mkpanel_gui/providers/provider_page.dart';
-import 'package:mkpanel_gui/models/model_test_live.dart';
+import 'package:mkpanel_gui/models/model_live_execute.dart';
 import 'package:mkpanel_gui/models/model_account.dart';
 import 'package:mkpanel_gui/models/model_strategy.dart';
 import 'package:mkpanel_gui/models/model_strategy_item.dart';
@@ -20,12 +20,12 @@ import 'package:mkpanel_gui/models/model_strategy_item.dart';
 typedef modelType_account = model_account;
 typedef modelType_strategy = model_strategy;
 typedef modelType_strategy_item = model_strategy_item;
-typedef modelType_base = model_test_live;
-String title_base = models_title.test_live;
+typedef modelType_base = model_live_execute;
+String title_base = models_title.live_execute;
 String title_appbar = models_title.base;
 
 //--------------------------------------------------------------------------------- Provider
-class provider_test_live with ChangeNotifier {
+class provider_live_execute with ChangeNotifier {
   //--------------------------------[Fields]
   var _context;
   var _drawer;
@@ -42,7 +42,7 @@ class provider_test_live with ChangeNotifier {
   late modelType_strategy_item _model_strategy_item;
 
   //--------------------------------[Contractor]
-  provider_test_live() {
+  provider_live_execute() {
     _model_base = modelType_base();
     _model_account = modelType_account();
     _model_strategy = modelType_strategy();
@@ -115,7 +115,7 @@ class provider_test_live with ChangeNotifier {
       title: title_base,
       data_base: _data_base,
       api: api,
-      fields: models_fileds.test_live,
+      fields: models_fileds.live_execute,
       selected_strategy_item_id: _selected_strategy_item_id,
       data_account: _data_account,
     );

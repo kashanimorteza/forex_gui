@@ -9,7 +9,7 @@
 //--------------------------------------------------------------------------------- General
 enum const_model_mode { view, edit }
 
-enum const_model_list { dashboard, account, instrument, strategy, strategy_item, test_live, user, log, config, xray, service_v2ray, service_v2ray_server, service_v2ray_inbound, service_v2ray_service, service_v2ray_plan, service_v2ray_group, group, service, network, server, route, domain, alarm, display, certificate, telegram_instance }
+enum const_model_list { dashboard, account, instrument, strategy, strategy_item, live_execute, live_order }
 
 class models_title {
   static const String base = 'Forex API';
@@ -18,7 +18,8 @@ class models_title {
   static const String instrument = 'Instrument';
   static const String strategy = 'Strategy';
   static const String strategy_item = 'Strategy Item';
-  static const String test_live = 'Test Live';
+  static const String live_execute = 'Live Execute';
+  static const String live_order = 'Live Order';
 }
 
 class models_api {
@@ -27,7 +28,8 @@ class models_api {
   static const String instrument = 'instrument';
   static const String strategy = 'strategy';
   static const String strategy_item = 'strategy_item';
-  static const String test_live = 'test_live';
+  static const String live_execute = 'live_execute';
+  static const String live_order = 'live_order';
 }
 
 class models_fileds {
@@ -51,7 +53,7 @@ class models_fileds {
     'add': {'name': 'Name', 'params': 'Params', 'description': 'Description'},
     'edit': {'name': 'Name', 'params': 'Params', 'description': 'Description'},
   };
-  static Map<String, dynamic> test_live = {
+  static Map<String, dynamic> live_execute = {
     'list': {'id': 'Id', 'date': 'Date', 'name': 'Name', 'status': 'Status'},
     'add': {'name': 'Name', 'description': 'Description'},
     'edit': {'name': 'Name', 'description': 'Description'},

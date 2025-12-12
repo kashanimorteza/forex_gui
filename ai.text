@@ -1,5 +1,1 @@
-look at on lib/models/provider_strategy_item.dart that related to strategy_id
-and 
-on provider_test_live.dart
-model model_test_live.dart releated to account_id and strategy_item_id
-i need to check provider_test_live again
+i need change lib/models/model_test_live.dart to model_live_execute.dart
