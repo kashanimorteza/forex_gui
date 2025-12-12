@@ -1,11 +1,5 @@
-look at on lib/models/model_account.dart
-
-i need to regenerate with this items for model_test_live.dart:
-    id : int = 0
-    date : str = ''
-    name : str = ''
-    strategy_item_id : int = 0
-    account_id : int = 0
-    status : str = ''
-    description : Optional[str] = ''
-    enable : bool = True
+look at on lib/models/provider_strategy_item.dart that related to strategy_id
+and 
+on provider_test_live.dart
+model model_test_live.dart releated to account_id and strategy_item_id
+i need to check provider_test_live again

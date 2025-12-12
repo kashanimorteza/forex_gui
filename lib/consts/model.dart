@@ -52,8 +52,8 @@ class models_fileds {
     'edit': {'name': 'Name', 'params': 'Params', 'description': 'Description'},
   };
   static Map<String, dynamic> test_live = {
-    'list': {'id': 'Id', 'date': 'Date', 'name': 'Name', 'strategy_item_id': 'Strategy Item ID', 'account_id': 'Account ID', 'status': 'Status'},
-    'add': {'date': 'Date', 'name': 'Name', 'strategy_item_id': 'Strategy Item ID', 'account_id': 'Account ID', 'status': 'Status', 'description': 'Description'},
-    'edit': {'date': 'Date', 'name': 'Name', 'strategy_item_id': 'Strategy Item ID', 'account_id': 'Account ID', 'status': 'Status', 'description': 'Description'},
+    'list': {'id': 'Id', 'date': 'Date', 'name': 'Name', 'status': 'Status'},
+    'add': {'name': 'Name', 'description': 'Description'},
+    'edit': {'name': 'Name', 'description': 'Description'},
   };
 }
