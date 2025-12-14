@@ -19,7 +19,6 @@ String api_route = models_api.live_execute;
 class model_live_execute {
   //--------------------------------[Field]
   int id;
-  String date;
   String name;
   int strategy_item_id;
   int account_id;
@@ -31,7 +30,6 @@ class model_live_execute {
   //--------------------------------[Contractor]
   model_live_execute({
     this.id = 0,
-    this.date = '',
     this.name = '',
     this.strategy_item_id = 0,
     this.account_id = 0,
@@ -41,7 +39,6 @@ class model_live_execute {
   }) {
     controllers = {
       'id': TextEditingController(text: id.toString()),
-      'date': TextEditingController(text: date),
       'name': TextEditingController(text: name),
       'strategy_item_id': ValueNotifier<int>(strategy_item_id),
       'account_id': ValueNotifier<int>(account_id),
@@ -54,7 +51,6 @@ class model_live_execute {
   //--------------------------------[getValueByKeys]
   dynamic getValueByKey(String key) => switch (key) {
         'id' => id,
-        'date' => date,
         'name' => name,
         'strategy_item_id' => strategy_item_id,
         'account_id' => account_id,
@@ -68,7 +64,6 @@ class model_live_execute {
   factory model_live_execute.toModel(Map<String, dynamic> json) {
     return modelType(
       id: json['id'] as int,
-      date: json['date'] as String,
       name: json['name'] as String,
       strategy_item_id: json['strategy_item_id'] as int,
       account_id: json['account_id'] as int,
@@ -82,7 +77,6 @@ class model_live_execute {
   Map<String, dynamic> toJson() {
     return {
       'id': id,
-      'date': date,
       'name': name,
       'strategy_item_id': strategy_item_id,
       'account_id': account_id,
@@ -96,7 +90,6 @@ class model_live_execute {
   modelType get_model() {
     return modelType(
       id: int.tryParse(controllers['id']?.text ?? '0') ?? 0,
-      date: controllers['date']?.text ?? '',
       name: controllers['name']?.text ?? '',
       strategy_item_id: (controllers['strategy_item_id'] as ValueNotifier<int>).value,
       account_id: (controllers['account_id'] as ValueNotifier<int>).value,
@@ -109,7 +102,6 @@ class model_live_execute {
   //--------------------------------[controller_clear]
   void controller_clear() {
     controllers['id']?.clear();
-    controllers['date']?.clear();
     controllers['name']?.clear();
     (controllers['strategy_item_id'] as ValueNotifier<int>).value = 0;
     (controllers['account_id'] as ValueNotifier<int>).value = 0;

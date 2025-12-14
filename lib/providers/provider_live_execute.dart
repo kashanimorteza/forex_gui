@@ -261,6 +261,9 @@ Widget widget_ui<T_base, T_related_1>({
                   return DataColumn(label: build_text_1(title: items?[key] ?? key));
                 }).toList(),
                 DataColumn(label: build_text_1(title: 'Account')),
+                DataColumn(label: build_text_1(title: 'Start')),
+                DataColumn(label: build_text_1(title: 'Stop')),
+                DataColumn(label: build_text_1(title: 'Enable')),
                 DataColumn(label: build_text_1(title: 'Enable')),
                 DataColumn(label: build_text_1(title: 'Action')),
               ],
@@ -277,7 +280,10 @@ Widget widget_ui<T_base, T_related_1>({
                       return build_datacell_1(value: value.getValueByKey(key).toString());
                     }).toList(),
                     build_datacell_1(value: account_name),
+                    DataCell(IconButton(icon: const Icon(Icons.play_arrow), onPressed: () => api("start", value))),
+                    DataCell(IconButton(icon: const Icon(Icons.stop), onPressed: () => api("stop", value))),
                     DataCell(build_icon_1(isAccepted: value.enable), onTap: () => api("status", value)),
+                    DataCell(build_action_2(status: (val) => api("status", value), edit: (val) => edit(value), delete: (val) => delete(value), value: value)),
                     DataCell(build_action_1(onUpdate: (val) => edit(value), onDelete: (val) => delete(value), value: value)),
                   ],
                 );

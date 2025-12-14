@@ -54,7 +54,7 @@ class models_fileds {
     'edit': {'name': 'Name', 'params': 'Params', 'description': 'Description'},
   };
   static Map<String, dynamic> live_execute = {
-    'list': {'id': 'Id', 'date': 'Date', 'name': 'Name', 'status': 'Status'},
+    'list': {'id': 'Id', 'name': 'Name', 'status': 'Status'},
     'add': {'name': 'Name', 'description': 'Description'},
     'edit': {'name': 'Name', 'description': 'Description'},
   };

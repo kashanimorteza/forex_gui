@@ -1,1 +1,6 @@
-i need change lib/models/model_test_live.dart to model_live_execute.dart
+on build_action_2
+if value.enable is false :
+icon: const Icon(Icons.cancel)
+
+if value.enable is true :
+icon: const Icon(Icons.check_circle)

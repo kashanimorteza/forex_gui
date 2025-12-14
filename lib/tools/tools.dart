@@ -599,6 +599,26 @@ Widget build_action_1({required onUpdate(value), required onDelete(value), requi
   );
 }
 
+//--------------------------------[build_action_2]
+Widget build_action_2({required status(value), required edit(value), required delete(value), required var value}) {
+  return Row(
+    children: [
+      IconButton(
+        icon: const Icon(Icons.cancel),
+        onPressed: () => status(value),
+      ),
+      IconButton(
+        icon: const Icon(Icons.edit),
+        onPressed: () => edit(value),
+      ),
+      IconButton(
+        icon: const Icon(Icons.delete),
+        onPressed: () => delete(value),
+      ),
+    ],
+  );
+}
+
 //--------------------------------------------------------------------------------- [DropDownlist]
 //--------------------------------[build_dropdownlist_Const_Function]
 Widget build_dropdownlist_Const_Function<T>({
