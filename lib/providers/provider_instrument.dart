@@ -193,8 +193,7 @@ Widget widget_ui<T_base, T_related_1>({
                 ...model.controllers.keys.where((String key) => (items == null || items.isEmpty || items.containsKey(key))).map((String key) {
                   return DataColumn(label: build_text_1(title: items?[key] ?? key));
                 }).toList(),
-                DataColumn(label: build_text_1(title: 'Enable')),
-                DataColumn(label: build_text_1(title: 'Action')),
+                DataColumn(label: build_text_1(title: 'Edit')),
               ],
               //----------rows
               rows: data_base.map((value1) {
@@ -207,8 +206,7 @@ Widget widget_ui<T_base, T_related_1>({
                     }).map((String key) {
                       return build_datacell_1(value: value.getValueByKey(key).toString());
                     }).toList(),
-                    DataCell(build_icon_1(isAccepted: value.enable), onTap: () => api("status", value)),
-                    DataCell(build_action_1(onUpdate: (val) => edit(value), onDelete: (val) => delete(value), value: value)),
+                    DataCell(build_action_2(status: (val) => api("status", value), edit: (val) => edit(value), delete: (val) => delete(value), value: value)),
                   ],
                 );
               }).toList(),

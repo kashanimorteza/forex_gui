@@ -1,6 +1,5 @@
-on build_action_2
-if value.enable is false :
-icon: const Icon(Icons.cancel)
+if value.status is empty or stop i need display :
+    DataCell(IconButton(icon: const Icon(Icons.play_arrow), onPressed: () => api("start", value))),
 
-if value.enable is true :
-icon: const Icon(Icons.check_circle)
+if value.status is start :
+    DataCell(IconButton(icon: const Icon(Icons.stop), onPressed: () => api("stop", value))),

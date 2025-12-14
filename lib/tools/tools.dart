@@ -604,7 +604,7 @@ Widget build_action_2({required status(value), required edit(value), required de
   return Row(
     children: [
       IconButton(
-        icon: const Icon(Icons.cancel),
+        icon: value.enable ? const Icon(Icons.check_circle, color: Colors.green) : const Icon(Icons.cancel, color: Colors.red),
         onPressed: () => status(value),
       ),
       IconButton(
