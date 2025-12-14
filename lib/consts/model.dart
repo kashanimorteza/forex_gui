@@ -11,6 +11,16 @@ enum const_model_mode { view, edit }
 
 enum const_model_list { dashboard, account, instrument, strategy, strategy_item, live_execute, live_order }
 
+class models_api {
+  static const String dashboard = 'dashboard';
+  static const String account = 'account';
+  static const String instrument = 'instrument';
+  static const String strategy = 'strategy';
+  static const String strategy_item = 'strategy_item';
+  static const String live_execute = 'live_execute';
+  static const String live_order = 'live_order';
+}
+
 class models_title {
   static const String base = 'Forex API';
   static const String dashboard = 'Dashboard';
@@ -22,14 +32,15 @@ class models_title {
   static const String live_order = 'Live Order';
 }
 
-class models_api {
-  static const String dashboard = 'dashboard';
-  static const String account = 'account';
-  static const String instrument = 'instrument';
-  static const String strategy = 'strategy';
-  static const String strategy_item = 'strategy_item';
-  static const String live_execute = 'live_execute';
-  static const String live_order = 'live_order';
+class models_menu {
+  static const String base = 'Forex API';
+  static const String dashboard = 'Dashboard';
+  static const String account = 'Account';
+  static const String instrument = 'Instrument';
+  static const String strategy = 'Strategy';
+  static const String strategy_item = 'Item';
+  static const String live_execute = 'Live';
+  static const String live_order = 'Live Order';
 }
 
 class models_fileds {
