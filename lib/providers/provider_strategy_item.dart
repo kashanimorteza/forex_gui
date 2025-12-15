@@ -28,7 +28,7 @@ class provider_strategy_item with ChangeNotifier {
   var _prv;
   var _data_base;
   var _data_strategy;
-  var _selected_strategy_id;
+  var _selected_strategy_id = 0;
   late modelType_base _model_base;
   late modelType_strategy _model_strategy;
 
@@ -49,12 +49,9 @@ class provider_strategy_item with ChangeNotifier {
       case 'base':
         _data_base = await _model_base.api('items', "?strategy_id=${_selected_strategy_id}");
       default:
-        //Strategy
         _data_strategy = await _model_strategy.api('items');
-        _selected_strategy_id = _data_strategy.first.id;
-        //Base
+        if (_data_strategy.isNotEmpty) _selected_strategy_id = _data_strategy.first.id;
         _data_base = await _model_base.api('items', "?strategy_id=${_selected_strategy_id}");
-        //Reload
         reload();
     }
   }
@@ -65,6 +62,7 @@ class provider_strategy_item with ChangeNotifier {
   //----------[api]
   api(type, modelType_base model) async {
     var result = await model.api(type);
+
     build_notification_2(_context, result);
     await load('base');
     reload();
@@ -88,7 +86,7 @@ class provider_strategy_item with ChangeNotifier {
       data_base: _data_base,
       api: api,
       fields: models_fileds.strategy_item,
-      selected_strategy_id: _selected_strategy_id,
+      selected_strategy_id: _selected_strategy_id ?? 0,
     );
     //----------[app_bar]
     var app_bar = build_appbar_1(title: title_appbar);
@@ -211,6 +209,7 @@ Widget widget_ui<T_base, T_related_1>({
 
   //-----[List]
   if (fields != null) items = fields['list'];
+  if (selected_strategy_id == 0) return Center(child: Text('No data available'));
   return SingleChildScrollView(
     scrollDirection: Axis.horizontal,
     child: IntrinsicWidth(

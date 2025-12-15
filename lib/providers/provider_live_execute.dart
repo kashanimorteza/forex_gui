@@ -34,8 +34,8 @@ class provider_live_execute with ChangeNotifier {
   var _data_account;
   var _data_strategy;
   var _data_strategy_item;
-  var _selected_strategy_id;
-  var _selected_strategy_item_id;
+  var _selected_strategy_id = 0;
+  var _selected_strategy_item_id = 0;
   late modelType_base _model_base;
   late modelType_account _model_account;
   late modelType_strategy _model_strategy;
@@ -68,10 +68,10 @@ class provider_live_execute with ChangeNotifier {
         _data_account = await _model_account.api('items');
         //Strategy
         _data_strategy = await _model_strategy.api('items');
-        _selected_strategy_id = _data_strategy.first.id;
+        if (_data_strategy.isNotEmpty) _selected_strategy_id = _data_strategy.first.id;
         //Strategy Item
         _data_strategy_item = await _model_strategy_item.api('items', "?strategy_id=${_selected_strategy_id}");
-        _selected_strategy_item_id = _data_strategy_item.first.id;
+        if (_data_strategy_item.isNotEmpty) _selected_strategy_item_id = _data_strategy_item.first.id;
         //Base
         _data_base = await _model_base.api('items', "?strategy_item_id=${_selected_strategy_item_id}");
         reload();
@@ -106,9 +106,9 @@ class provider_live_execute with ChangeNotifier {
   //------------------------------[view]
   view() {
     //----------[drp_strategy]
-    var drp_strategy = IntrinsicWidth(child: SizedBox(child: build_dropdownlist_1<modelType_strategy>(lable: 'Strategy', data: _data_strategy, selected_id: _selected_strategy_id, onChange: strategy_select)));
+    var drp_strategy = IntrinsicWidth(child: SizedBox(child: build_dropdownlist_1<modelType_strategy>(lable: 'Strategy', data: _data_strategy, selected_id: _selected_strategy_id, onChange: strategy_select)), stepWidth: 100);
     //----------[drp_strategy_item]
-    var drp_strategy_item = IntrinsicWidth(child: SizedBox(child: build_dropdownlist_1<modelType_strategy_item>(lable: 'Strategy Item', data: _data_strategy_item, selected_id: _selected_strategy_item_id, onChange: strategy_item_select)));
+    var drp_strategy_item = IntrinsicWidth(child: SizedBox(child: build_dropdownlist_1<modelType_strategy_item>(lable: 'Item', data: _data_strategy_item, selected_id: _selected_strategy_item_id, onChange: strategy_item_select)), stepWidth: 100);
     //----------[ui]
     var ui = widget_ui(
       context: _context,
@@ -246,6 +246,8 @@ Widget widget_ui<T_base, T_related_1>({
 
   //-----[List]
   if (fields != null) items = fields['list'];
+  if (data_account.isEmpty) return Center(child: Text('Account : No data available'));
+  if (selected_strategy_item_id == 0) return Center(child: Text('Items : No data available'));
   return SingleChildScrollView(
     scrollDirection: Axis.horizontal,
     child: IntrinsicWidth(
