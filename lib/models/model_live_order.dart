@@ -24,7 +24,7 @@ class model_live_order {
   String order_id;
   String symbol;
   String action;
-  int amount;
+  double amount;
   double bid;
   double ask;
   double tp;
@@ -101,7 +101,7 @@ class model_live_order {
       order_id: json['order_id'] as String,
       symbol: json['symbol'] as String,
       action: json['action'] as String,
-      amount: json['amount'] as int,
+      amount: (json['amount'] as num).toDouble(),
       bid: (json['bid'] as num).toDouble(),
       ask: (json['ask'] as num).toDouble(),
       tp: (json['tp'] as num).toDouble(),
@@ -143,7 +143,7 @@ class model_live_order {
       order_id: controllers['order_id']?.text ?? '',
       symbol: controllers['symbol']?.text ?? '',
       action: controllers['action']?.text ?? '',
-      amount: int.tryParse(controllers['amount']?.text ?? '0') ?? 0,
+      amount: double.tryParse(controllers['amount']?.text ?? '0') ?? 0,
       bid: double.tryParse(controllers['bid']?.text ?? '0') ?? 0,
       ask: double.tryParse(controllers['ask']?.text ?? '0') ?? 0,
       tp: double.tryParse(controllers['tp']?.text ?? '0') ?? 0,

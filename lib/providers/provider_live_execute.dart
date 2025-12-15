@@ -77,6 +77,7 @@ class provider_live_execute with ChangeNotifier {
         _selected_execute_id = _data_execute.isNotEmpty ? _data_execute.first.id : 0;
       case 'execute_change':
         _data_order = await _model_order.api('items', "?execute_id=${_selected_execute_id}");
+        _data_order_detaile = await _model_order.api('detaile', "?execute_id=${_selected_execute_id}");
       default:
         //---Account
         _data_account = await _model_account.api('items');
@@ -157,14 +158,12 @@ class provider_live_execute with ChangeNotifier {
       data_account: _data_account,
       createModel: () => modelType_execute(),
     );
-    var ui_2 = widget_ui_2<modelType_order>(
+    var ui_2 = widget_ui_2(
       context: _context,
       title: 'Details',
-      data_base: _data_order,
-      fields: models_fileds.live_order,
-      createModel: () => modelType_order(),
+      data_stats: _data_order_detaile,
     );
-    var ui_3 = widget_ui_2<modelType_order>(
+    var ui_3 = widget_ui_3<modelType_order>(
       context: _context,
       title: models_title.live_order,
       data_base: _data_order,
@@ -354,19 +353,13 @@ Widget widget_ui_1<T_base>({
 }
 
 //--------------------------------[widget_ui_2]
-Widget widget_ui_2<T_base>({
+Widget widget_ui_2({
   required BuildContext context,
   required String title,
-  required List<T_base> data_base,
-  Map<String, dynamic>? fields = const {},
-  required T_base Function() createModel,
+  required Map<String, dynamic> data_stats,
 }) {
-  //-----[Variable]
-  var items = null;
-  var model = (createModel() as dynamic);
+  if (data_stats.isEmpty) return Center(child: Text('No statistics available'));
 
-  //-----[List]
-  if (fields != null) items = fields['list'];
   return SingleChildScrollView(
     scrollDirection: Axis.horizontal,
     child: IntrinsicWidth(
@@ -378,15 +371,25 @@ Widget widget_ui_2<T_base>({
             //----------header
             DataTable(
               columns: [
-                ...model.controllers.keys.where((String key) => (items == null || items.isEmpty || items.containsKey(key))).map((String key) {
-                  return DataColumn(label: build_text_1(title: items?[key] ?? key));
-                }).toList(),
+                DataColumn(label: build_text_1(title: 'Type')),
+                DataColumn(label: build_text_1(title: 'Count')),
+                DataColumn(label: build_text_1(title: 'Amount')),
+                DataColumn(label: build_text_1(title: 'Profit')),
+                DataColumn(label: build_text_1(title: 'Buy')),
+                DataColumn(label: build_text_1(title: 'Sell')),
               ],
               //----------rows
-              rows: data_base.map((i) {
-                var item = (i as dynamic);
+              rows: data_stats.entries.map((entry) {
+                var stats = entry.value as Map<String, dynamic>;
                 return DataRow(
-                  cells: [...model.controllers.keys.where((String key) => items == null || items.isEmpty || items?.containsKey(key) == true).map((String key) => build_datacell_1(value: item.getValueByKey(key).toString())).toList()],
+                  cells: [
+                    build_datacell_1(value: entry.key.toUpperCase()),
+                    build_datacell_1(value: stats['count'].toString()),
+                    build_datacell_1(value: stats['amount'].toString()),
+                    build_datacell_1(value: stats['profit'].toString()),
+                    build_datacell_1(value: stats['buy'].toString()),
+                    build_datacell_1(value: stats['sell'].toString()),
+                  ],
                 );
               }).toList(),
             ),
