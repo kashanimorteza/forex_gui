@@ -194,6 +194,10 @@ class model_live_order {
         List<dynamic> data2 = data1['data'];
         List<modelType> data3 = modelType.model_list(data2);
         return data3;
+      case 'detaile':
+        var data1 = json.decode(await api_mdl.get('${const_api_url}/${api_route}/detaile${value}'));
+      var data2 = data1['data'];
+        return data2;
       case 'delete':
         return json.decode(await api_mdl.del('${const_api_url}/${api_route}/${get_model().id}'));
       default:

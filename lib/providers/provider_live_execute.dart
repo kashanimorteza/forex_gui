@@ -38,6 +38,7 @@ class provider_live_execute with ChangeNotifier {
   var _data_strategy_item;
   var _data_execute;
   var _data_order;
+  var _data_order_detaile;
   //----id
   var _selected_strategy_id;
   var _selected_strategy_item_id;
@@ -68,7 +69,6 @@ class provider_live_execute with ChangeNotifier {
     switch (model) {
       case 'base':
         _data_execute = await _model_execute.api('items', "?strategy_item_id=${_selected_strategy_item_id}");
-        _selected_execute_id = _data_execute.isNotEmpty ? _data_execute.first.id : 0;
       case 'strategy_change':
         _data_strategy_item = await _model_strategy_item.api('items', "?strategy_id=${_selected_strategy_id}");
         _selected_strategy_item_id = _data_strategy_item.isNotEmpty ? _data_strategy_item.first.id : 0;
@@ -91,6 +91,8 @@ class provider_live_execute with ChangeNotifier {
         _selected_execute_id = _data_execute.isNotEmpty ? _data_execute.first.id : 0;
         //---Orders
         _data_order = await _model_order.api('items', "?execute_id=${_selected_execute_id}");
+        //---Order
+        _data_order_detaile = await _model_order.api('detaile', "?execute_id=${_selected_execute_id}");
         //---Reload
         reload();
     }
@@ -103,7 +105,12 @@ class provider_live_execute with ChangeNotifier {
   api(type, modelType_execute model) async {
     var result = await model.api(type);
     build_notification_2(_context, result);
-    await load('base');
+    if (type == "start" || type == "stop") {
+      await load('base');
+      await load('execute_change');
+    } else {
+      await load('base');
+    }
     reload();
   }
 
@@ -152,6 +159,13 @@ class provider_live_execute with ChangeNotifier {
     );
     var ui_2 = widget_ui_2<modelType_order>(
       context: _context,
+      title: 'Details',
+      data_base: _data_order,
+      fields: models_fileds.live_order,
+      createModel: () => modelType_order(),
+    );
+    var ui_3 = widget_ui_2<modelType_order>(
+      context: _context,
       title: models_title.live_order,
       data_base: _data_order,
       fields: models_fileds.live_order,
@@ -182,6 +196,8 @@ class provider_live_execute with ChangeNotifier {
               SizedBox(child: Padding(padding: EdgeInsets.only(right: const_widget_padding), child: drp_execute)),
               SizedBox(height: const_widget_padding),
               SizedBox(child: Padding(padding: EdgeInsets.only(bottom: const_widget_padding), child: ui_2)),
+              SizedBox(height: const_widget_padding),
+              SizedBox(child: Padding(padding: EdgeInsets.only(bottom: const_widget_padding), child: ui_3)),
             ],
           ),
         ),
@@ -339,6 +355,50 @@ Widget widget_ui_1<T_base>({
 
 //--------------------------------[widget_ui_2]
 Widget widget_ui_2<T_base>({
+  required BuildContext context,
+  required String title,
+  required List<T_base> data_base,
+  Map<String, dynamic>? fields = const {},
+  required T_base Function() createModel,
+}) {
+  //-----[Variable]
+  var items = null;
+  var model = (createModel() as dynamic);
+
+  //-----[List]
+  if (fields != null) items = fields['list'];
+  return SingleChildScrollView(
+    scrollDirection: Axis.horizontal,
+    child: IntrinsicWidth(
+      child: Card(
+        child: Column(
+          children: [
+            //----------Title
+            build_header_3(title: title),
+            //----------header
+            DataTable(
+              columns: [
+                ...model.controllers.keys.where((String key) => (items == null || items.isEmpty || items.containsKey(key))).map((String key) {
+                  return DataColumn(label: build_text_1(title: items?[key] ?? key));
+                }).toList(),
+              ],
+              //----------rows
+              rows: data_base.map((i) {
+                var item = (i as dynamic);
+                return DataRow(
+                  cells: [...model.controllers.keys.where((String key) => items == null || items.isEmpty || items?.containsKey(key) == true).map((String key) => build_datacell_1(value: item.getValueByKey(key).toString())).toList()],
+                );
+              }).toList(),
+            ),
+          ],
+        ),
+      ),
+    ),
+  );
+}
+
+//--------------------------------[widget_ui_3]
+Widget widget_ui_3<T_base>({
   required BuildContext context,
   required String title,
   required List<T_base> data_base,

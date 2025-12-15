@@ -1,2 +1,26 @@
-on widget_ui_2 on provider_live_execute.dart
-i need to change  var model = modelType_order(); to  var model = T_base();
+value of a is _data_order_detaile:
+{
+    "all": {
+      "count": 6,
+      "amount": 0.42,
+      "profit": -5.1499999999999995,
+      "buy": 6,
+      "sell": 0
+    },
+    "close": {
+      "count": 6,
+      "amount": 0.42,
+      "profit": -5.1499999999999995,
+      "buy": 6,
+      "sell": 0
+    },
+    "open": {
+      "count": 0,
+      "amount": 0,
+      "profit": 0,
+      "buy": 0,
+      "sell": 0
+    }
+}
+
+i need change widget_ui_2 to display _data_order_detaile
