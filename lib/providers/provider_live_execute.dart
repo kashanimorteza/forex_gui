@@ -12,6 +12,7 @@ import 'package:mkpanel_gui/consts/model.dart';
 import 'package:mkpanel_gui/tools/tools.dart';
 import 'package:mkpanel_gui/providers/provider_page.dart';
 import 'package:mkpanel_gui/models/model_live_execute.dart';
+import 'package:mkpanel_gui/models/model_live_order.dart';
 import 'package:mkpanel_gui/models/model_account.dart';
 import 'package:mkpanel_gui/models/model_strategy.dart';
 import 'package:mkpanel_gui/models/model_strategy_item.dart';
@@ -21,7 +22,9 @@ typedef modelType_account = model_account;
 typedef modelType_strategy = model_strategy;
 typedef modelType_strategy_item = model_strategy_item;
 typedef modelType_base = model_live_execute;
+typedef modelType_order = model_live_order;
 String title_base = models_title.live_execute;
+String title_order = models_title.live_order;
 String title_appbar = models_title.base;
 
 //--------------------------------------------------------------------------------- Provider
@@ -34,12 +37,15 @@ class provider_live_execute with ChangeNotifier {
   var _data_account;
   var _data_strategy;
   var _data_strategy_item;
+  var _data_order;
   var _selected_strategy_id = 0;
   var _selected_strategy_item_id = 0;
+  var _selected_execute_id = 0;
   late modelType_base _model_base;
   late modelType_account _model_account;
   late modelType_strategy _model_strategy;
   late modelType_strategy_item _model_strategy_item;
+  late modelType_order _model_order;
 
   //--------------------------------[Contractor]
   provider_live_execute() {
@@ -47,6 +53,7 @@ class provider_live_execute with ChangeNotifier {
     _model_account = modelType_account();
     _model_strategy = modelType_strategy();
     _model_strategy_item = modelType_strategy_item();
+    _model_order = modelType_order();
   }
 
   //--------------------------------[Set]
@@ -81,6 +88,9 @@ class provider_live_execute with ChangeNotifier {
           _selected_strategy_item_id = 0;
         //Base
         _data_base = await _model_base.api('items', "?strategy_item_id=${_selected_strategy_item_id}");
+        //Orders
+        _selected_execute_id = _data_base.isNotEmpty ? _data_base.first.id : 0;
+        _data_order = await _model_order.api('items', "?execute_id=${_selected_execute_id}");
         reload();
     }
   }
@@ -116,8 +126,10 @@ class provider_live_execute with ChangeNotifier {
     var drp_strategy = IntrinsicWidth(child: SizedBox(child: build_dropdownlist_1<modelType_strategy>(lable: 'Strategy', data: _data_strategy, selected_id: _selected_strategy_id, onChange: strategy_select)), stepWidth: 100);
     //----------[drp_strategy_item]
     var drp_strategy_item = IntrinsicWidth(child: SizedBox(child: build_dropdownlist_1<modelType_strategy_item>(lable: 'Item', data: _data_strategy_item, selected_id: _selected_strategy_item_id, onChange: strategy_item_select)), stepWidth: 100);
+    //----------[drp_execute]
+    var drp_execute = IntrinsicWidth(child: SizedBox(child: build_dropdownlist_1<modelType_base>(lable: 'Execute', data: _data_base, selected_id: _selected_strategy_item_id, onChange: strategy_item_select)), stepWidth: 100);
     //----------[ui]
-    var ui = widget_ui(
+    var ui_1 = widget_ui_1(
       context: _context,
       title: title_base,
       data_base: _data_base,
@@ -125,6 +137,13 @@ class provider_live_execute with ChangeNotifier {
       fields: models_fileds.live_execute,
       selected_strategy_item_id: _selected_strategy_item_id,
       data_account: _data_account,
+    );
+    var ui_2 = widget_ui_2<modelType_order>(
+      context: _context,
+      title: models_title.live_order,
+      data_base: _data_order,
+      api: api,
+      fields: models_fileds.live_order,
     );
     //----------[app_bar]
     var app_bar = build_appbar_1(title: title_appbar);
@@ -144,7 +163,13 @@ class provider_live_execute with ChangeNotifier {
                 ],
               ),
               SizedBox(height: const_widget_padding),
-              SizedBox(child: Padding(padding: EdgeInsets.only(bottom: const_widget_padding), child: ui)),
+              SizedBox(child: Padding(padding: EdgeInsets.only(bottom: const_widget_padding), child: ui_1)),
+              SizedBox(height: const_widget_padding),
+              SizedBox(height: const_widget_padding),
+              SizedBox(height: const_widget_padding),
+              SizedBox(child: Padding(padding: EdgeInsets.only(right: const_widget_padding), child: drp_execute)),
+              SizedBox(height: const_widget_padding),
+              SizedBox(child: Padding(padding: EdgeInsets.only(bottom: const_widget_padding), child: ui_2)),
             ],
           ),
         ),
@@ -156,8 +181,8 @@ class provider_live_execute with ChangeNotifier {
 }
 
 //--------------------------------------------------------------------------------- UI
-//--------------------------------[widget_ui]
-Widget widget_ui<T_base, T_related_1>({
+//--------------------------------[widget_ui_1]
+Widget widget_ui_1<T_base, T_related_1>({
   required BuildContext context,
   required String title,
   required List<modelType_base> data_base,
@@ -290,6 +315,56 @@ Widget widget_ui<T_base, T_related_1>({
                       value.status == 'start' ? IconButton(icon: const Icon(Icons.stop), onPressed: () => api("stop", value)) : IconButton(icon: const Icon(Icons.play_arrow), onPressed: () => api("start", value)),
                     ),
                     DataCell(build_action_2(status: (val) => api("status", value), edit: (val) => edit(value), delete: (val) => delete(value), value: value)),
+                  ],
+                );
+              }).toList(),
+            ),
+          ],
+        ),
+      ),
+    ),
+  );
+}
+
+//--------------------------------[widget_ui_2]
+Widget widget_ui_2<T_base>({
+  required BuildContext context,
+  required String title,
+  required List<modelType_order> data_base,
+  required Function(String, modelType_base) api,
+  Map<String, dynamic>? fields = const {},
+}) {
+  //-----[Variable]
+  var items = null;
+  var model = modelType_order();
+
+  //-----[List]
+  if (fields != null) items = fields['list'];
+  if (data_base.isEmpty) return Center(child: Text('There is no Order'));
+  return SingleChildScrollView(
+    scrollDirection: Axis.horizontal,
+    child: IntrinsicWidth(
+      child: Card(
+        child: Column(
+          children: [
+            //----------header
+            DataTable(
+              columns: [
+                ...model.controllers.keys.where((String key) => (items == null || items.isEmpty || items.containsKey(key))).map((String key) {
+                  return DataColumn(label: build_text_1(title: items?[key] ?? key));
+                }).toList(),
+              ],
+              //----------rows
+              rows: data_base.map((value1) {
+                var value = (value1 as dynamic);
+                return DataRow(
+                  cells: [
+                    ...model.controllers.keys.where((String key) {
+                      bool hasKey = items?.containsKey(key) ?? false;
+                      return items == null || items.isEmpty || hasKey;
+                    }).map((String key) {
+                      return build_datacell_1(value: value.getValueByKey(key).toString());
+                    }).toList()
                   ],
                 );
               }).toList(),

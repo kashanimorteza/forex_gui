@@ -69,4 +69,9 @@ class models_fileds {
     'add': {'name': 'Name', 'description': 'Description'},
     'edit': {'name': 'Name', 'description': 'Description'},
   };
+  static Map<String, dynamic> live_order = {
+    'list': {},
+    'add': {},
+    'edit': {},
+  };
 }

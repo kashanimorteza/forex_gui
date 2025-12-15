@@ -1,5 +1,18 @@
-if value.status is empty or stop i need display :
-    DataCell(IconButton(icon: const Icon(Icons.play_arrow), onPressed: () => api("start", value))),
+look at on lib/models/model_strategy_item.dart
 
-if value.status is start :
-    DataCell(IconButton(icon: const Icon(Icons.stop), onPressed: () => api("stop", value))),
+i need to regenerate with this items for model_execute_order.dart:
+    id : int = 0
+    date : Optional[str] = ''
+    execute_id : int = 0
+    order_id : str = ''
+    symbol : str = ''
+    action : str = ''
+    amount : int = 0
+    bid : float = 0
+    ask : float = 0
+    tp : float = 0
+    sl : float = 0
+    profit : float = 0
+    status : str = ''
+    description : Optional[str] = ''
+    enable : bool = True
