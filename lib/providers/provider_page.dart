@@ -41,7 +41,7 @@ class Provider_Page with ChangeNotifier {
   set context(var value) {
     print('--- Provider : Page : set context');
     _context = value;
-    _prv = Provider.of<provider_strategy>(_context, listen: false);
+    _prv = Provider.of<provider_live_execute>(_context, listen: false);
     _prv.context = _context;
     _prv.drawer = _drawer;
     _prv.load();

@@ -61,7 +61,11 @@ class provider_live_execute with ChangeNotifier {
         _data_base = await _model_base.api('items', "?strategy_item_id=${_selected_strategy_item_id}");
       case 'strategy_item':
         _data_strategy_item = await _model_strategy_item.api('items', "?strategy_id=${_selected_strategy_id}");
-        _selected_strategy_item_id = _data_strategy_item.first.id;
+        if (_data_strategy_item.isNotEmpty)
+          _selected_strategy_item_id = _data_strategy_item.first.id;
+        else
+          _selected_strategy_item_id = 0;
+
         _data_base = await _model_base.api('items', "?strategy_item_id=${_selected_strategy_item_id}");
       default:
         //Account
@@ -71,7 +75,10 @@ class provider_live_execute with ChangeNotifier {
         if (_data_strategy.isNotEmpty) _selected_strategy_id = _data_strategy.first.id;
         //Strategy Item
         _data_strategy_item = await _model_strategy_item.api('items', "?strategy_id=${_selected_strategy_id}");
-        if (_data_strategy_item.isNotEmpty) _selected_strategy_item_id = _data_strategy_item.first.id;
+        if (_data_strategy_item.isNotEmpty)
+          _selected_strategy_item_id = _data_strategy_item.first.id;
+        else
+          _selected_strategy_item_id = 0;
         //Base
         _data_base = await _model_base.api('items', "?strategy_item_id=${_selected_strategy_item_id}");
         reload();
@@ -246,8 +253,8 @@ Widget widget_ui<T_base, T_related_1>({
 
   //-----[List]
   if (fields != null) items = fields['list'];
-  if (data_account.isEmpty) return Center(child: Text('Account : No data available'));
-  if (selected_strategy_item_id == 0) return Center(child: Text('Items : No data available'));
+  if (data_account.isEmpty) return Center(child: Text('There is no Account'));
+  if (selected_strategy_item_id == 0) return Center(child: Text('There is no strategy item'));
   return SingleChildScrollView(
     scrollDirection: Axis.horizontal,
     child: IntrinsicWidth(
