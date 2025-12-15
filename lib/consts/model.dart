@@ -28,8 +28,8 @@ class models_title {
   static const String instrument = 'Instrument';
   static const String strategy = 'Strategy';
   static const String strategy_item = 'Strategy Item';
-  static const String live_execute = 'Live Execute';
-  static const String live_order = 'Live Order';
+  static const String live_execute = 'Execute';
+  static const String live_order = 'Order';
 }
 
 class models_menu {
@@ -70,7 +70,7 @@ class models_fileds {
     'edit': {'name': 'Name', 'description': 'Description'},
   };
   static Map<String, dynamic> live_order = {
-    'list': {},
+    'list': {'id': 'Id', 'date': 'Date', 'symbol': 'Symbol', 'action': 'Action', 'amount': 'Amount', 'profit': 'Profit', 'ask': 'Ask', 'bid': 'Bid', 'tp': 'TP', 'sl': 'SL', 'status': 'Status'},
     'add': {},
     'edit': {},
   };
