@@ -69,6 +69,7 @@ class provider_live_execute with ChangeNotifier {
     switch (model) {
       case 'base':
         _data_execute = await _model_execute.api('items', "?strategy_item_id=${_selected_strategy_item_id}");
+         _selected_execute_id = _data_execute.isNotEmpty ? _data_execute.first.id : 0;
       case 'strategy_change':
         _data_strategy_item = await _model_strategy_item.api('items', "?strategy_id=${_selected_strategy_id}");
         _selected_strategy_item_id = _data_strategy_item.isNotEmpty ? _data_strategy_item.first.id : 0;
@@ -92,7 +93,7 @@ class provider_live_execute with ChangeNotifier {
         _selected_execute_id = _data_execute.isNotEmpty ? _data_execute.first.id : 0;
         //---Orders
         _data_order = await _model_order.api('items', "?execute_id=${_selected_execute_id}");
-        //---Order
+        //---Detaile
         _data_order_detaile = await _model_order.api('detaile', "?execute_id=${_selected_execute_id}");
         //---Reload
         reload();
@@ -338,7 +339,9 @@ Widget widget_ui_1<T_base>({
                     }).toList(),
                     build_datacell_1(value: account_name),
                     DataCell(
-                      value.status == 'start' ? IconButton(icon: const Icon(Icons.stop), onPressed: () => api("stop", value)) : IconButton(icon: const Icon(Icons.play_arrow), onPressed: () => api("start", value)),
+                      value.status == 'stop' || value.status == '' || value.status == null
+                        ? IconButton(icon: const Icon(Icons.play_arrow), onPressed: () => api("start", value))
+                        : IconButton(icon: const Icon(Icons.stop), onPressed: () => api("stop", value)),
                     ),
                     DataCell(build_action_2(status: (val) => api("status", value), edit: (val) => edit(value), delete: (val) => delete(value), value: value)),
                   ],
