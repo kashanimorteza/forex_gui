@@ -26,7 +26,7 @@ flutter pub get
 Release web
 ```bash
 flutter build web --base-href /
-rsync -avz /Volumes/data/projects/xray_gui/build/web/* root@91.99.220.194:/root/xray_gui/
+rsync -avz /Volumes/data/projects/forex_gui/build/web/* root@91.107.131.70:/var/www/forex_gui/
 ```
 
 Release macos
