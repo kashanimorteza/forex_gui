@@ -25,7 +25,7 @@ flutter pub get
 
 Release web
 ```bash
-flutter build web --base-href /
+flutter build web --base-href /c9db34f6-24ea-4468-9746-fe17efc3b77d/
 rsync -avz /Volumes/data/projects/forex_gui/build/web/* root@91.107.131.70:/var/www/forex_gui/
 ```
 
