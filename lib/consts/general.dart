@@ -7,7 +7,8 @@
 //--------------------------------------------------------------------------------- Import
 
 //--------------------------------------------------------------------------------- General
-const String const_api_url = "http://91.107.131.70:8001/57b3e8ae-4aca-4776-9aa1-9ccce396dc6f";
+//const String const_api_url = "http://91.107.131.70:8001/57b3e8ae-4aca-4776-9aa1-9ccce396dc6f";
+const String const_api_url = "http://127.0.0.1:8000/57b3e8ae-4aca-4776-9aa1-9ccce396dc6f";
 
 const double const_widget_padding = 10;
 

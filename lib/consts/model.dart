@@ -55,7 +55,7 @@ class models_fileds {
     'edit': {'name': 'Name', 'instrument': 'Instrument', 'category': 'Category', 'priority': 'Priority', 'description': 'Description'},
   };
   static Map<String, dynamic> strategy = {
-    'list': {'id': 'Id', 'name': 'Name'},
+    'list': {'id': 'Id', 'name': 'Name', 'description': 'Description'},
     'add': {'name': 'Name', 'description': 'Description'},
     'edit': {'name': 'Name', 'description': 'Description'},
   };
@@ -70,7 +70,7 @@ class models_fileds {
     'edit': {'name': 'Name', 'description': 'Description'},
   };
   static Map<String, dynamic> live_order = {
-    'list': {'id': 'Id', 'date': 'Date', 'symbol': 'Symbol', 'action': 'Action', 'amount': 'Amount', 'profit': 'Profit', 'ask': 'Ask', 'bid': 'Bid', 'tp': 'TP', 'sl': 'SL', 'status': 'Status'},
+    'list': {'id': 'Id', 'date': 'Date', 'trade_id': 'Trade', 'symbol': 'Symbol', 'action': 'Action', 'amount': 'Amount', 'profit': 'Profit', 'ask': 'Ask', 'bid': 'Bid', 'tp': 'TP', 'sl': 'SL', 'status': 'Status'},
     'add': {},
     'edit': {},
   };

@@ -22,6 +22,7 @@ class model_live_order {
   String date;
   int execute_id;
   String order_id;
+  String trade_id;
   String symbol;
   String action;
   double amount;
@@ -41,6 +42,7 @@ class model_live_order {
     this.date = '',
     this.execute_id = 0,
     this.order_id = '',
+    this.trade_id = '',
     this.symbol = '',
     this.action = '',
     this.amount = 0,
@@ -58,6 +60,7 @@ class model_live_order {
       'date': TextEditingController(text: date),
       'execute_id': ValueNotifier<int>(execute_id),
       'order_id': TextEditingController(text: order_id),
+      'trade_id': TextEditingController(text: trade_id),
       'symbol': TextEditingController(text: symbol),
       'action': TextEditingController(text: action),
       'amount': TextEditingController(text: amount.toString()),
@@ -78,6 +81,7 @@ class model_live_order {
         'date' => date,
         'execute_id' => execute_id,
         'order_id' => order_id,
+        'trade_id' => trade_id,
         'symbol' => symbol,
         'action' => action,
         'amount' => amount,
@@ -99,6 +103,7 @@ class model_live_order {
       date: json['date'] as String,
       execute_id: json['execute_id'] as int,
       order_id: json['order_id'] as String,
+      trade_id: json['trade_id'] as String,
       symbol: json['symbol'] as String,
       action: json['action'] as String,
       amount: (json['amount'] as num).toDouble(),
@@ -120,6 +125,7 @@ class model_live_order {
       'date': date,
       'execute_id': execute_id,
       'order_id': order_id,
+      'trade_id': trade_id,
       'symbol': symbol,
       'action': action,
       'amount': amount,
@@ -141,6 +147,7 @@ class model_live_order {
       date: controllers['date']?.text ?? '',
       execute_id: (controllers['execute_id'] as ValueNotifier<int>).value,
       order_id: controllers['order_id']?.text ?? '',
+      trade_id: controllers['trade_id']?.text ?? '',
       symbol: controllers['symbol']?.text ?? '',
       action: controllers['action']?.text ?? '',
       amount: double.tryParse(controllers['amount']?.text ?? '0') ?? 0,
@@ -161,6 +168,7 @@ class model_live_order {
     controllers['date']?.clear();
     (controllers['execute_id'] as ValueNotifier<int>).value = 0;
     controllers['order_id']?.clear();
+    controllers['trade_id']?.clear();
     controllers['symbol']?.clear();
     controllers['action']?.clear();
     controllers['amount']?.clear();
@@ -196,7 +204,7 @@ class model_live_order {
         return data3;
       case 'detaile':
         var data1 = json.decode(await api_mdl.get('${const_api_url}/${api_route}/detaile${value}'));
-      var data2 = data1['data'];
+        var data2 = data1['data'];
         return data2;
       case 'delete':
         return json.decode(await api_mdl.del('${const_api_url}/${api_route}/${get_model().id}'));
