@@ -46,6 +46,7 @@ class provider_back_execute with ChangeNotifier {
   var _selected_strategy_id;
   var _selected_strategy_item_id;
   var _selected_execute_id;
+  var _selected_count;
   //----model
   late modelType_account _model_account;
   late modelType_strategy _model_strategy;
@@ -82,8 +83,9 @@ class provider_back_execute with ChangeNotifier {
         _data_execute = await _model_execute.api('items', "?strategy_item_id=${_selected_strategy_item_id}");
         _selected_execute_id = _data_execute.isNotEmpty ? _data_execute.first.id : 0;
       case 'execute_change':
-        _data_order = await _model_order.api('items', "?execute_id=${_selected_execute_id}");
+        _data_order = await _model_order.api('items', "?execute_id=${_selected_execute_id}&count=${_selected_count}");
         _data_order_detaile = await _model_order_detaile.api('detaile', _selected_execute_id);
+        _count = await _model_order.api('count', _selected_execute_id);
       default:
         //---Account
         _data_account = await _model_account.api('items');
@@ -102,6 +104,7 @@ class provider_back_execute with ChangeNotifier {
         _data_order_detaile = await _model_order_detaile.api('detaile', _selected_execute_id);
         //---count
         _count = await _model_order.api('count', _selected_execute_id);
+        _selected_count = 1;
         //---Reload
         reload();
     }
@@ -147,6 +150,13 @@ class provider_back_execute with ChangeNotifier {
     reload();
   }
 
+  //----------[count_change]
+  count_change(value) async {
+    _selected_count = value;
+    await load('execute_change');
+    reload();
+  }
+
   //------------------------------[view]
   view() {
     //----------[drp_strategy]
@@ -155,8 +165,9 @@ class provider_back_execute with ChangeNotifier {
     var drp_strategy_item = IntrinsicWidth(child: SizedBox(child: build_dropdownlist_1<modelType_strategy_item>(lable: 'Item', data: _data_strategy_item, selected_id: _selected_strategy_item_id, onChange: strategy_item_change)), stepWidth: 110);
     //----------[drp_execute]
     var drp_execute = IntrinsicWidth(child: SizedBox(child: build_dropdownlist_1<modelType_execute>(lable: 'Execute', data: _data_execute, selected_id: _selected_execute_id, onChange: execute_change)), stepWidth: 110);
+    //----------[drp_count]
+    var drp_count = IntrinsicWidth(child: SizedBox(child: build_dropdownlist_4(lable: 'Count', count: _count, controller: ValueNotifier<int>(_count), selected_number: 1, onChange: count_change)), stepWidth: 110);
 
-    
     //----------[ui]
     var ui_1 = widget_ui_1<modelType_execute>(
       context: _context,
@@ -170,7 +181,7 @@ class provider_back_execute with ChangeNotifier {
     );
     var ui_2 = widget_ui_2<modelType_order_detaile>(
       context: _context,
-      title: models_title.back_order,
+      title: models_title.back_order_detaile,
       data_base: _data_order_detaile,
       fields: models_fileds.back_order_detaile,
       createModel: () => modelType_order_detaile(),
@@ -204,7 +215,13 @@ class provider_back_execute with ChangeNotifier {
               SizedBox(child: Padding(padding: EdgeInsets.only(bottom: const_widget_padding), child: ui_1)),
               //---ui_2
               SizedBox(height: 50),
-              SizedBox(child: Padding(padding: EdgeInsets.only(right: const_widget_padding), child: drp_execute)),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(child: Padding(padding: EdgeInsets.only(right: const_widget_padding), child: drp_execute)),
+                  SizedBox(child: Padding(padding: EdgeInsets.only(right: const_widget_padding), child: drp_count)),
+                ],
+              ),
               SizedBox(height: const_widget_padding),
               SizedBox(child: Padding(padding: EdgeInsets.only(bottom: const_widget_padding), child: ui_2)),
               SizedBox(height: const_widget_padding),

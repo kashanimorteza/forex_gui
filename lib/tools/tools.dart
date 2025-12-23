@@ -740,6 +740,39 @@ Widget build_dropdownlist_3<T>({
   );
 }
 
+//--------------------------------[build_dropdownlist_4] : number range
+Widget build_dropdownlist_4({
+  required String lable,
+  required int count,
+  required ValueNotifier<int> controller,
+  int? selected_number = 1,
+  void Function(int)? onChange,
+}) {
+  controller.value = selected_number!;
+  return DropdownButtonFormField<int>(
+    value: selected_number,
+    items: List.generate(count, (index) => index + 1).map<DropdownMenuItem<int>>((int number) {
+      return DropdownMenuItem<int>(value: number, child: Text(number.toString(), style: TextStyle(fontSize: 14)));
+    }).toList(),
+    onChanged: (int? newValue) {
+      if (newValue != null) {
+        controller.value = newValue;
+        if (onChange != null) onChange(newValue);
+      }
+    },
+    decoration: InputDecoration(
+      labelText: lable,
+      contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+      border: OutlineInputBorder(borderRadius: BorderRadius.circular(5), borderSide: BorderSide(color: Colors.grey.shade300)),
+      enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(5), borderSide: BorderSide(color: Colors.grey.shade300)),
+      focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(5), borderSide: BorderSide(color: Colors.grey.shade400)),
+      filled: true,
+      fillColor: Colors.white,
+    ),
+    isExpanded: true,
+  );
+}
+
 //--------------------------------------------------------------------------------- [Complete]
 //--------------------------------[build_base_a] :
 Scaffold build_base_1({

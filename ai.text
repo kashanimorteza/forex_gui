@@ -1,15 +1,2 @@
-look at model_strategy_item with items below:
-    id : int = 0
-    strategy_id : int = 0
-    name : str = ''
-    symbols : str = ''
-    actions : str = ''
-    amount : int = 0
-    tp_pips : float = 0.0
-    sl_pips : float = 0.0
-    limit_trade : int = 0
-    limit_profit : int = 0
-    limit_loss : int = 0
-    params : str = ''
-    description : Optional[str] = ''
-    enable : bool = True
+read toold.dart
+i need a build_dropdownlist_4 that get number and generate from 1 to number item

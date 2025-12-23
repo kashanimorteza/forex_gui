@@ -249,7 +249,7 @@ class model_back_order {
       case 'delete':
         return json.decode(await api_mdl.del('${const_api_url}/${api_route}/${get_model().id}'));
       default:
-        return json.decode(await api_mdl.get('${const_api_url}/${api_route}/${type}/${get_model().id}'));
+        return json.decode(await api_mdl.get('${const_api_url}/${api_route}/${type}/${value}'));
     }
   }
 }
