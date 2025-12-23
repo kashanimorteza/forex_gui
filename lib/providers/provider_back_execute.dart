@@ -85,7 +85,11 @@ class provider_back_execute with ChangeNotifier {
       case 'execute_change':
         _data_order = await _model_order.api('items', "?execute_id=${_selected_execute_id}&count=${_selected_count}");
         _data_order_detaile = await _model_order_detaile.api('detaile', _selected_execute_id);
-        _count = await _model_order.api('count', _selected_execute_id);
+        _count = await _model_order.api('order_count', _selected_execute_id);
+      case 'order_clear':
+        await _model_order.api('order_clear', _selected_execute_id);
+        _data_order = await _model_order.api('items', "?execute_id=${_selected_execute_id}&count=${_selected_count}");
+        _data_order_detaile = await _model_order_detaile.api('detaile', _selected_execute_id);
       default:
         //---Account
         _data_account = await _model_account.api('items');
@@ -103,7 +107,7 @@ class provider_back_execute with ChangeNotifier {
         //---Detaile
         _data_order_detaile = await _model_order_detaile.api('detaile', _selected_execute_id);
         //---count
-        _count = await _model_order.api('count', _selected_execute_id);
+        _count = await _model_order.api('order_count', _selected_execute_id);
         _selected_count = 1;
         //---Reload
         reload();
@@ -157,6 +161,12 @@ class provider_back_execute with ChangeNotifier {
     reload();
   }
 
+  //----------[order_clear]
+  order_clear() async {
+    await load('order_clear');
+    reload();
+  }
+
   //------------------------------[view]
   view() {
     //----------[drp_strategy]
@@ -174,6 +184,7 @@ class provider_back_execute with ChangeNotifier {
       title: title_base,
       data_base: _data_execute,
       api: api,
+      order_clear: order_clear,
       fields: models_fileds.back_execute,
       selected_strategy_item_id: _selected_strategy_item_id,
       data_account: _data_account,
@@ -243,6 +254,7 @@ Widget widget_ui_1<T_base>({
   required String title,
   required List<T_base> data_base,
   required Function(String, T_base) api,
+  required Function() order_clear,
   Map<String, dynamic>? fields = const {},
   required int selected_strategy_item_id,
   required List<model_account> data_account,
@@ -251,6 +263,9 @@ Widget widget_ui_1<T_base>({
   //-----[Variable]
   var items = null;
   var model = (createModel() as dynamic);
+
+  // //-----[Add]
+  // void order_clear() {}
 
   //-----[Add]
   void add() {
@@ -351,6 +366,7 @@ Widget widget_ui_1<T_base>({
                 }).toList(),
                 DataColumn(label: build_text_1(title: 'Account')),
                 DataColumn(label: build_text_1(title: 'Action')),
+                DataColumn(label: build_text_1(title: 'Clear')),
                 DataColumn(label: build_text_1(title: 'Edit')),
               ],
               //----------rows
@@ -369,6 +385,7 @@ Widget widget_ui_1<T_base>({
                     DataCell(
                       value.status == 'stop' || value.status == '' || value.status == null ? IconButton(icon: const Icon(Icons.play_arrow), onPressed: () => api("start", value)) : IconButton(icon: const Icon(Icons.stop), onPressed: () => api("stop", value)),
                     ),
+                    DataCell(IconButton(icon: const Icon(Icons.clear), onPressed: () => order_clear())),
                     DataCell(build_action_2(status: (val) => api("status", value), edit: (val) => edit(value), delete: (val) => delete(value), value: value)),
                   ],
                 );
