@@ -21,6 +21,14 @@ class model_strategy_item {
   int id;
   int strategy_id;
   String name;
+  String symbols;
+  String actions;
+  int amount;
+  int tp_pips;
+  int sl_pips;
+  int limit_trade;
+  int limit_profit;
+  int limit_loss;
   String params;
   String? description;
   bool enable;
@@ -31,6 +39,14 @@ class model_strategy_item {
     this.id = 0,
     this.strategy_id = 0,
     this.name = '',
+    this.symbols = '',
+    this.actions = '',
+    this.amount = 0,
+    this.tp_pips = 0,
+    this.sl_pips = 0,
+    this.limit_trade = 0,
+    this.limit_profit = 0,
+    this.limit_loss = 0,
     this.params = '',
     this.description = '',
     this.enable = true,
@@ -39,6 +55,14 @@ class model_strategy_item {
       'id': TextEditingController(text: id.toString()),
       'strategy_id': ValueNotifier<int>(strategy_id),
       'name': TextEditingController(text: name),
+      'symbols': TextEditingController(text: symbols),
+      'actions': TextEditingController(text: actions),
+      'amount': TextEditingController(text: amount.toString()),
+      'tp_pips': TextEditingController(text: tp_pips.toString()),
+      'sl_pips': TextEditingController(text: sl_pips.toString()),
+      'limit_trade': TextEditingController(text: limit_trade.toString()),
+      'limit_profit': TextEditingController(text: limit_profit.toString()),
+      'limit_loss': TextEditingController(text: limit_loss.toString()),
       'params': TextEditingController(text: params),
       'description': TextEditingController(text: description),
       'enable': ValueNotifier<bool>(enable),
@@ -50,6 +74,14 @@ class model_strategy_item {
         'id' => id,
         'strategy_id' => strategy_id,
         'name' => name,
+        'symbols' => symbols,
+        'actions' => actions,
+        'amount' => amount,
+        'tp_pips' => tp_pips,
+        'sl_pips' => sl_pips,
+        'limit_trade' => limit_trade,
+        'limit_profit' => limit_profit,
+        'limit_loss' => limit_loss,
         'params' => params,
         'description' => description,
         'enable' => enable,
@@ -62,6 +94,14 @@ class model_strategy_item {
       id: json['id'] as int,
       strategy_id: json['strategy_id'] as int,
       name: json['name'] as String,
+      symbols: json['symbols'] as String? ?? '',
+      actions: json['actions'] as String? ?? '',
+      amount: json['amount'] as int,
+      tp_pips: json['tp_pips'] as int,
+      sl_pips: json['sl_pips'] as int,
+      limit_trade: json['limit_trade'] as int,
+      limit_profit: json['limit_profit'] as int,
+      limit_loss: json['limit_loss'] as int,
       params: json['params'] as String? ?? '',
       description: json['description'] as String?,
       enable: json['enable'] as bool,
@@ -74,6 +114,14 @@ class model_strategy_item {
       'id': id,
       'strategy_id': strategy_id,
       'name': name,
+      'symbols': symbols,
+      'actions': actions,
+      'amount': amount,
+      'tp_pips': tp_pips,
+      'sl_pips': sl_pips,
+      'limit_trade': limit_trade,
+      'limit_profit': limit_profit,
+      'limit_loss': limit_loss,
       'params': params,
       'description': description,
       'enable': enable,
@@ -86,8 +134,16 @@ class model_strategy_item {
       id: int.tryParse(controllers['id']?.text ?? '0') ?? 0,
       strategy_id: (controllers['strategy_id'] as ValueNotifier<int>).value,
       name: controllers['name']?.text ?? '',
+      symbols: controllers['symbols']?.text ?? '',
+      actions: controllers['actions']?.text ?? '',
+      amount: int.tryParse(controllers['amount']?.text ?? '0') ?? 0,
+      tp_pips: int.tryParse(controllers['tp_pips']?.text ?? '0') ?? 0,
+      sl_pips: int.tryParse(controllers['sl_pips']?.text ?? '0') ?? 0,
+      limit_trade: int.tryParse(controllers['limit_trade']?.text ?? '0') ?? 0,
+      limit_profit: int.tryParse(controllers['limit_profit']?.text ?? '0') ?? 0,
+      limit_loss: int.tryParse(controllers['limit_loss']?.text ?? '0') ?? 0,
       params: controllers['params']?.text ?? '',
-      description: controllers['description']?.text ?? '',
+      description: controllers['description']?.text.isEmpty ?? true ? null : controllers['description']?.text,
       enable: (controllers['enable'] as ValueNotifier<bool>).value,
     );
   } //--------------------------------[controller_clear]
@@ -96,6 +152,14 @@ class model_strategy_item {
     controllers['id'] = TextEditingController(text: id.toString());
     controllers['strategy_id'] = ValueNotifier<int>(strategy_id);
     controllers['name'] = TextEditingController(text: name);
+    controllers['symbols'] = TextEditingController(text: symbols);
+    controllers['actions'] = TextEditingController(text: actions);
+    controllers['amount'] = TextEditingController(text: amount.toString());
+    controllers['tp_pips'] = TextEditingController(text: tp_pips.toString());
+    controllers['sl_pips'] = TextEditingController(text: sl_pips.toString());
+    controllers['limit_trade'] = TextEditingController(text: limit_trade.toString());
+    controllers['limit_profit'] = TextEditingController(text: limit_profit.toString());
+    controllers['limit_loss'] = TextEditingController(text: limit_loss.toString());
     controllers['params'] = TextEditingController(text: params);
     controllers['description'] = TextEditingController(text: description);
     controllers['enable'] = ValueNotifier<bool>(enable);
