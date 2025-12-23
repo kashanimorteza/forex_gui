@@ -1,8 +1,8 @@
 //--------------------------------------------------------------------------------- location
-// lib/models/model_instrument.dart
+// lib/models/model_back_execute.dart
 
 //--------------------------------------------------------------------------------- Description
-// This is model for instrument
+// This is model for back_execute
 
 //--------------------------------------------------------------------------------- Import
 import 'dart:convert';
@@ -12,44 +12,47 @@ import 'package:mkpanel_gui/consts/model.dart';
 import 'package:mkpanel_gui/tools/api.dart';
 
 //--------------------------------------------------------------------------------- Global
-typedef modelType = model_instrument;
-String api_route = models_api.instrument;
+typedef modelType = model_back_execute;
+String api_route = models_api.back_execute;
 
 //--------------------------------------------------------------------------------- Model
-class model_instrument {
+class model_back_execute {
   //--------------------------------[Field]
   int id;
   String name;
-  String instrument;
-  int category;
-  int priority;
-  double point_size;
-  int digits;
+  int strategy_item_id;
+  int account_id;
+  String? date_from;
+  String? date_to;
+  String status;
+  int count;
   String? description;
   bool enable;
   late Map<String, dynamic> controllers;
 
   //--------------------------------[Contractor]
-  model_instrument({
+  model_back_execute({
     this.id = 0,
     this.name = '',
-    this.instrument = '',
-    this.category = 0,
-    this.priority = 0,
-    this.point_size = 0.0,
-    this.digits = 0,
-    this.description = '',
+    this.strategy_item_id = 1,
+    this.account_id = 1,
+    this.date_from,
+    this.date_to,
+    this.status = '',
+    this.count = 1,
+    this.description,
     this.enable = true,
   }) {
     controllers = {
       'id': TextEditingController(text: id.toString()),
       'name': TextEditingController(text: name),
-      'instrument': TextEditingController(text: instrument),
-      'category': TextEditingController(text: category.toString()),
-      'priority': TextEditingController(text: priority.toString()),
-      'point_size': TextEditingController(text: point_size.toString()),
-      'digits': TextEditingController(text: digits.toString()),
-      'description': TextEditingController(text: description),
+      'strategy_item_id': ValueNotifier<int>(strategy_item_id),
+      'account_id': ValueNotifier<int>(account_id),
+      'date_from': TextEditingController(text: date_from ?? ''),
+      'date_to': TextEditingController(text: date_to ?? ''),
+      'status': TextEditingController(text: status),
+      'count': TextEditingController(text: count.toString()),
+      'description': TextEditingController(text: description ?? ''),
       'enable': ValueNotifier<bool>(enable),
     };
   }
@@ -58,26 +61,28 @@ class model_instrument {
   dynamic getValueByKey(String key) => switch (key) {
         'id' => id,
         'name' => name,
-        'instrument' => instrument,
-        'category' => category,
-        'priority' => priority,
-        'point_size' => point_size,
-        'digits' => digits,
+        'strategy_item_id' => strategy_item_id,
+        'account_id' => account_id,
+        'date_from' => date_from,
+        'date_to' => date_to,
+        'status' => status,
+        'count' => count,
         'description' => description,
         'enable' => enable,
         _ => null,
       };
 
   //--------------------------------[toModel]
-  factory model_instrument.toModel(Map<String, dynamic> json) {
+  factory model_back_execute.toModel(Map<String, dynamic> json) {
     return modelType(
       id: json['id'] as int,
       name: json['name'] as String,
-      instrument: json['instrument'] as String,
-      category: json['category'] as int,
-      priority: json['priority'] as int,
-      point_size: (json['point_size'] as num).toDouble(),
-      digits: json['digits'] as int,
+      strategy_item_id: json['strategy_item_id'] as int,
+      account_id: json['account_id'] as int,
+      date_from: json['date_from'] as String?,
+      date_to: json['date_to'] as String?,
+      status: json['status'] as String,
+      count: json['count'] as int,
       description: json['description'] as String?,
       enable: json['enable'] as bool,
     );
@@ -88,11 +93,12 @@ class model_instrument {
     return {
       'id': id,
       'name': name,
-      'instrument': instrument,
-      'category': category,
-      'priority': priority,
-      'point_size': point_size,
-      'digits': digits,
+      'strategy_item_id': strategy_item_id,
+      'account_id': account_id,
+      'date_from': date_from,
+      'date_to': date_to,
+      'status': status,
+      'count': count,
       'description': description,
       'enable': enable,
     };
@@ -103,27 +109,29 @@ class model_instrument {
     return modelType(
       id: int.tryParse(controllers['id']?.text ?? '0') ?? 0,
       name: controllers['name']?.text ?? '',
-      instrument: controllers['instrument']?.text ?? '',
-      category: int.tryParse(controllers['category']?.text ?? '0') ?? 0,
-      priority: int.tryParse(controllers['priority']?.text ?? '0') ?? 0,
-      point_size: double.tryParse(controllers['point_size']?.text ?? '0.0') ?? 0.0,
-      digits: int.tryParse(controllers['digits']?.text ?? '0') ?? 0,
-      description: controllers['description']?.text ?? '',
+      strategy_item_id: (controllers['strategy_item_id'] as ValueNotifier<int>).value,
+      account_id: (controllers['account_id'] as ValueNotifier<int>).value,
+      date_from: controllers['date_from']?.text.isEmpty ?? true ? null : controllers['date_from']?.text,
+      date_to: controllers['date_to']?.text.isEmpty ?? true ? null : controllers['date_to']?.text,
+      status: controllers['status']?.text ?? '',
+      count: int.tryParse(controllers['count']?.text ?? '1') ?? 1,
+      description: controllers['description']?.text.isEmpty ?? true ? null : controllers['description']?.text,
       enable: (controllers['enable'] as ValueNotifier<bool>).value,
     );
   }
 
   //--------------------------------[controller_clear]
   void controller_clear() {
-    controllers['id'] = TextEditingController(text: id.toString());
-    controllers['name'] = TextEditingController(text: name);
-    controllers['instrument'] = TextEditingController(text: instrument);
-    controllers['category'] = TextEditingController(text: category.toString());
-    controllers['priority'] = TextEditingController(text: priority.toString());
-    controllers['point_size'] = TextEditingController(text: point_size.toString());
-    controllers['digits'] = TextEditingController(text: digits.toString());
-    controllers['description'] = TextEditingController(text: description);
-    controllers['enable'] = ValueNotifier<bool>(enable);
+    controllers['id']?.clear();
+    controllers['name']?.clear();
+    (controllers['strategy_item_id'] as ValueNotifier<int>).value = 1;
+    (controllers['account_id'] as ValueNotifier<int>).value = 1;
+    controllers['date_from']?.clear();
+    controllers['date_to']?.clear();
+    controllers['status']?.clear();
+    controllers['count']?.text = '1';
+    controllers['description']?.clear();
+    controllers['enable']?.value = true;
   }
 
   //--------------------------------[model_list]

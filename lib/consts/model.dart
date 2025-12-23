@@ -9,7 +9,7 @@
 //--------------------------------------------------------------------------------- General
 enum const_model_mode { view, edit }
 
-enum const_model_list { dashboard, account, instrument, strategy, strategy_item, live_execute, live_order }
+enum const_model_list { dashboard, account, instrument, strategy, strategy_item, live_execute, live_order, back_execute, back_order }
 
 class models_api {
   static const String dashboard = 'dashboard';
@@ -19,6 +19,8 @@ class models_api {
   static const String strategy_item = 'strategy_item';
   static const String live_execute = 'live_execute';
   static const String live_order = 'live_order';
+  static const String back_execute = 'back_execute';
+  static const String back_order = 'back_order';
 }
 
 class models_title {
@@ -30,6 +32,8 @@ class models_title {
   static const String strategy_item = 'Strategy Item';
   static const String live_execute = 'Execute';
   static const String live_order = 'Order';
+  static const String back_execute = 'Back Execute';
+  static const String back_order = 'Back Order';
 }
 
 class models_menu {
@@ -41,6 +45,8 @@ class models_menu {
   static const String strategy_item = 'Item';
   static const String live_execute = 'Live';
   static const String live_order = 'Live Order';
+  static const String back_execute = 'Test';
+  static const String back_order = 'Test Order';
 }
 
 class models_fileds {
@@ -50,9 +56,9 @@ class models_fileds {
     'edit': {'name': 'Name', 'broker': 'Broker', 'type': 'Type', 'currency': 'Currency', 'server': 'Server', 'username': 'Username', 'password': 'Password', 'description': 'Description'},
   };
   static Map<String, dynamic> instrument = {
-    'list': {'id': 'Id', 'name': 'Name', 'instrument': 'Instrument', 'category': 'Category', 'priority': 'Priority'},
-    'add': {'name': 'Name', 'instrument': 'Instrument', 'category': 'Category', 'priority': 'Priority', 'description': 'Description'},
-    'edit': {'name': 'Name', 'instrument': 'Instrument', 'category': 'Category', 'priority': 'Priority', 'description': 'Description'},
+    'list': {'id': 'Id', 'name': 'Name', 'instrument': 'Instrument', 'category': 'Category', 'priority': 'Priority', 'point_size': 'Point Size', 'digits': 'Digits'},
+    'add': {'name': 'Name', 'instrument': 'Instrument', 'category': 'Category', 'priority': 'Priority', 'point_size': 'Point Size', 'digits': 'Digits', 'description': 'Description'},
+    'edit': {'name': 'Name', 'instrument': 'Instrument', 'category': 'Category', 'priority': 'Priority', 'point_size': 'Point Size', 'digits': 'Digits', 'description': 'Description'},
   };
   static Map<String, dynamic> strategy = {
     'list': {'id': 'Id', 'name': 'Name', 'description': 'Description'},
@@ -71,6 +77,16 @@ class models_fileds {
   };
   static Map<String, dynamic> live_order = {
     'list': {'id': 'Id', 'date': 'Date', 'trade_id': 'Trade', 'symbol': 'Symbol', 'action': 'Action', 'amount': 'Amount', 'profit': 'Profit', 'ask': 'Ask', 'bid': 'Bid', 'tp': 'TP', 'sl': 'SL', 'status': 'Status'},
+    'add': {},
+    'edit': {},
+  };
+  static Map<String, dynamic> back_execute = {
+    'list': {'id': 'Id', 'name': 'Name', 'date_from': 'From', 'date_to': 'To', 'status': 'Status', 'count': 'Count'},
+    'add': {'name': 'Name', 'date_from': 'From', 'date_to': 'To', 'count': 'Count', 'description': 'Description'},
+    'edit': {'name': 'Name', 'date_from': 'From', 'date_to': 'To', 'count': 'Count', 'description': 'Description'},
+  };
+  static Map<String, dynamic> back_order = {
+    'list': {'id': 'Id', 'count': 'Count', 'father_id': 'Father', 'date_open': 'Open', 'price_open': 'Price O', 'date_close': 'Close', 'price_close': 'Price C', 'profit': 'Profit', 'status': 'Status', 'symbol': 'Symbol', 'action': 'Action', 'amount': 'Amount'},
     'add': {},
     'edit': {},
   };
