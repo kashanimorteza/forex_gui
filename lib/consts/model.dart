@@ -70,8 +70,8 @@ class models_fileds {
   };
   static Map<String, dynamic> strategy_item = {
     'list': {'id': 'Id', 'name': 'Name', 'symbols': 'Symbols', 'actions': 'Actions', 'amount': 'Amount', 'tp_pips': 'TP Pips', 'sl_pips': 'SL Pips', 'limit_trade': 'Limit Trade', 'limit_profit': 'Limit Profit', 'limit_loss': 'Limit Loss'},
-    'add': {'name': 'Name', 'params': 'Params', 'description': 'Description'},
-    'edit': {'name': 'Name', 'params': 'Params', 'description': 'Description'},
+    'add': {'name': 'Name', 'symbols': 'Symbols', 'actions': 'Actions', 'amount': 'Amount', 'tp_pips': 'TP Pips', 'sl_pips': 'SL Pips', 'limit_trade': 'Limit Trade', 'limit_profit': 'Limit Profit', 'limit_loss': 'Limit Loss', 'enable': 'Enable', 'description': 'Description'},
+    'edit': {'name': 'Name', 'symbols': 'Symbols', 'actions': 'Actions', 'amount': 'Amount', 'tp_pips': 'TP Pips', 'sl_pips': 'SL Pips', 'limit_trade': 'Limit Trade', 'limit_profit': 'Limit Profit', 'limit_loss': 'Limit Loss', 'description': 'Description'},
   };
   static Map<String, dynamic> live_execute = {
     'list': {'id': 'Id', 'name': 'Name', 'status': 'Status'},
