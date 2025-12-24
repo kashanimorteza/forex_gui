@@ -25,7 +25,7 @@ class model_back_execute {
   String? date_from;
   String? date_to;
   String status;
-  int count;
+  int step;
   String? description;
   bool enable;
   late Map<String, dynamic> controllers;
@@ -39,7 +39,7 @@ class model_back_execute {
     this.date_from,
     this.date_to,
     this.status = '',
-    this.count = 1,
+    this.step = 1,
     this.description,
     this.enable = true,
   }) {
@@ -51,7 +51,7 @@ class model_back_execute {
       'date_from': TextEditingController(text: date_from ?? ''),
       'date_to': TextEditingController(text: date_to ?? ''),
       'status': TextEditingController(text: status),
-      'count': TextEditingController(text: count.toString()),
+      'step': TextEditingController(text: step.toString()),
       'description': TextEditingController(text: description ?? ''),
       'enable': ValueNotifier<bool>(enable),
     };
@@ -66,7 +66,7 @@ class model_back_execute {
         'date_from' => date_from,
         'date_to' => date_to,
         'status' => status,
-        'count' => count,
+        'step' => step,
         'description' => description,
         'enable' => enable,
         _ => null,
@@ -82,7 +82,7 @@ class model_back_execute {
       date_from: json['date_from'] as String?,
       date_to: json['date_to'] as String?,
       status: json['status'] as String,
-      count: json['count'] as int,
+      step: json['step'] as int,
       description: json['description'] as String?,
       enable: json['enable'] as bool,
     );
@@ -98,7 +98,7 @@ class model_back_execute {
       'date_from': date_from,
       'date_to': date_to,
       'status': status,
-      'count': count,
+      'step': step,
       'description': description,
       'enable': enable,
     };
@@ -114,7 +114,7 @@ class model_back_execute {
       date_from: controllers['date_from']?.text.isEmpty ?? true ? null : controllers['date_from']?.text,
       date_to: controllers['date_to']?.text.isEmpty ?? true ? null : controllers['date_to']?.text,
       status: controllers['status']?.text ?? '',
-      count: int.tryParse(controllers['count']?.text ?? '1') ?? 1,
+      step: int.tryParse(controllers['step']?.text ?? '1') ?? 1,
       description: controllers['description']?.text.isEmpty ?? true ? null : controllers['description']?.text,
       enable: (controllers['enable'] as ValueNotifier<bool>).value,
     );
@@ -129,7 +129,7 @@ class model_back_execute {
     controllers['date_from']?.clear();
     controllers['date_to']?.clear();
     controllers['status']?.clear();
-    controllers['count']?.text = '1';
+    controllers['step']?.text = '1';
     controllers['description']?.clear();
     controllers['enable']?.value = true;
   }

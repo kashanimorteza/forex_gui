@@ -74,22 +74,22 @@ class models_fileds {
     'edit': {'name': 'Name', 'symbols': 'Symbols', 'actions': 'Actions', 'amount': 'Amount', 'tp_pips': 'TP Pips', 'sl_pips': 'SL Pips', 'limit_trade': 'Limit Trade', 'limit_profit': 'Limit Profit', 'limit_loss': 'Limit Loss', 'description': 'Description'},
   };
   static Map<String, dynamic> live_execute = {
-    'list': {'id': 'Id', 'name': 'Name', 'status': 'Status'},
-    'add': {'name': 'Name', 'description': 'Description'},
-    'edit': {'name': 'Name', 'description': 'Description'},
+    'list': {'id': 'Id', 'name': 'Name', 'step': 'Step', 'status': 'Status'},
+    'add': {'name': 'Name', 'step': 'Step', 'description': 'Description'},
+    'edit': {'name': 'Name', 'step': 'Step', 'description': 'Description'},
   };
   static Map<String, dynamic> live_order = {
-    'list': {'id': 'Id', 'date': 'Date', 'trade_id': 'Trade', 'symbol': 'Symbol', 'action': 'Action', 'amount': 'Amount', 'profit': 'Profit', 'ask': 'Ask', 'bid': 'Bid', 'tp': 'TP', 'sl': 'SL', 'status': 'Status'},
+    'list': {'id': 'Id', 'step': 'Step', 'father_id': 'Father', 'date_open': 'Open', 'price_open': 'Open', 'date_close': 'Close', 'price_close': 'Close', 'profit': 'Profit', 'status': 'Status', 'symbol': 'Symbol', 'action': 'Action', 'amount': 'Amount'},
     'add': {},
     'edit': {},
   };
   static Map<String, dynamic> back_execute = {
-    'list': {'id': 'Id', 'name': 'Name', 'date_from': 'From', 'date_to': 'To', 'status': 'Status', 'count': 'Count'},
-    'add': {'name': 'Name', 'date_from': 'From', 'date_to': 'To', 'count': 'Count', 'description': 'Description'},
-    'edit': {'name': 'Name', 'date_from': 'From', 'date_to': 'To', 'count': 'Count', 'description': 'Description'},
+    'list': {'id': 'Id', 'name': 'Name', 'date_from': 'From', 'date_to': 'To', 'status': 'Status', 'step': 'Step'},
+    'add': {'name': 'Name', 'date_from': 'From', 'date_to': 'To', 'step': 'Step', 'description': 'Description'},
+    'edit': {'name': 'Name', 'date_from': 'From', 'date_to': 'To', 'step': 'Step', 'description': 'Description'},
   };
   static Map<String, dynamic> back_order = {
-    'list': {'id': 'Id', 'count': 'Count', 'father_id': 'Father', 'date_open': 'Open', 'price_open': 'Open', 'date_close': 'Close', 'price_close': 'Close', 'profit': 'Profit', 'status': 'Status', 'symbol': 'Symbol', 'action': 'Action', 'amount': 'Amount'},
+    'list': {'id': 'Id', 'step': 'Step', 'father_id': 'Father', 'date_open': 'Open', 'price_open': 'Open', 'date_close': 'Close', 'price_close': 'Close', 'profit': 'Profit', 'status': 'Status', 'symbol': 'Symbol', 'action': 'Action', 'amount': 'Amount'},
     'add': {},
     'edit': {},
   };

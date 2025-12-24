@@ -22,7 +22,7 @@ class model_live_execute {
   String name;
   int strategy_item_id;
   int account_id;
-  int count;
+  int step;
   String status;
   String? description;
   bool enable;
@@ -32,9 +32,9 @@ class model_live_execute {
   model_live_execute({
     this.id = 0,
     this.name = '',
-    this.strategy_item_id = 0,
-    this.account_id = 0,
-    this.count = 1,
+    this.strategy_item_id = 1,
+    this.account_id = 1,
+    this.step = 1,
     this.status = '',
     this.description = '',
     this.enable = true,
@@ -44,7 +44,7 @@ class model_live_execute {
       'name': TextEditingController(text: name),
       'strategy_item_id': ValueNotifier<int>(strategy_item_id),
       'account_id': ValueNotifier<int>(account_id),
-      'count': ValueNotifier<int>(count),
+      'step': ValueNotifier<int>(step),
       'status': TextEditingController(text: status),
       'description': TextEditingController(text: description),
       'enable': ValueNotifier<bool>(enable),
@@ -57,7 +57,7 @@ class model_live_execute {
         'name' => name,
         'strategy_item_id' => strategy_item_id,
         'account_id' => account_id,
-        'count' => count,
+        'step' => step,
         'status' => status,
         'description' => description,
         'enable' => enable,
@@ -71,7 +71,7 @@ class model_live_execute {
       name: json['name'] as String,
       strategy_item_id: json['strategy_item_id'] as int,
       account_id: json['account_id'] as int,
-      count: json['count'] as int? ?? 1,
+      step: json['step'] as int? ?? 1,
       status: json['status'] as String,
       description: json['description'] as String?,
       enable: json['enable'] as bool,
@@ -85,7 +85,7 @@ class model_live_execute {
       'name': name,
       'strategy_item_id': strategy_item_id,
       'account_id': account_id,
-      'count': count,
+      'step': step,
       'status': status,
       'description': description,
       'enable': enable,
@@ -99,7 +99,7 @@ class model_live_execute {
       name: controllers['name']?.text ?? '',
       strategy_item_id: (controllers['strategy_item_id'] as ValueNotifier<int>).value,
       account_id: (controllers['account_id'] as ValueNotifier<int>).value,
-      count: (controllers['count'] as ValueNotifier<int>).value,
+      step: (controllers['step'] as ValueNotifier<int>).value,
       status: controllers['status']?.text ?? '',
       description: controllers['description']?.text ?? '',
       enable: (controllers['enable'] as ValueNotifier<bool>).value,
@@ -110,9 +110,9 @@ class model_live_execute {
   void controller_clear() {
     controllers['id']?.clear();
     controllers['name']?.clear();
-    (controllers['strategy_item_id'] as ValueNotifier<int>).value = 0;
-    (controllers['account_id'] as ValueNotifier<int>).value = 0;
-    (controllers['count'] as ValueNotifier<int>).value = 1;
+    (controllers['strategy_item_id'] as ValueNotifier<int>).value = 1;
+    (controllers['account_id'] as ValueNotifier<int>).value = 1;
+    (controllers['step'] as ValueNotifier<int>).value = 1;
     controllers['status']?.clear();
     controllers['description']?.clear();
     controllers['enable']?.value = true;

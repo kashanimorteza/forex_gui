@@ -1,2 +1,10 @@
-read toold.dart
-i need a build_dropdownlist_4 that get number and generate from 1 to number item
+read model_live_execute.dart
+check again with parameters:
+    id : int = 0
+    name : str = ''
+    strategy_item_id : int = 1
+    account_id : int = 1
+    count : int = 1
+    status : str = ''
+    description : Optional[str] = ''
+    enable : bool = True
