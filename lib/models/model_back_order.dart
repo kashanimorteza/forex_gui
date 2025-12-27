@@ -20,7 +20,7 @@ class model_back_order {
   //--------------------------------[Field]
   int id;
   int execute_id;
-  int count;
+  int step;
   int father_id;
   String? date_open;
   double price_open;
@@ -33,8 +33,6 @@ class model_back_order {
   int amount;
   double tp;
   double sl;
-  double ask;
-  double bid;
   int order_id;
   int trade_id;
   String? description;
@@ -45,7 +43,7 @@ class model_back_order {
   model_back_order({
     this.id = 0,
     this.execute_id = 0,
-    this.count = 1,
+    this.step = 1,
     this.father_id = 0,
     this.date_open,
     this.price_open = 0,
@@ -58,8 +56,6 @@ class model_back_order {
     this.amount = 0,
     this.tp = 0,
     this.sl = 0,
-    this.ask = 0,
-    this.bid = 0,
     this.order_id = 0,
     this.trade_id = 0,
     this.description,
@@ -68,7 +64,7 @@ class model_back_order {
     controllers = {
       'id': TextEditingController(text: id.toString()),
       'execute_id': ValueNotifier<int>(execute_id),
-      'count': TextEditingController(text: count.toString()),
+      'step': TextEditingController(text: step.toString()),
       'father_id': TextEditingController(text: father_id.toString()),
       'date_open': TextEditingController(text: date_open ?? ''),
       'price_open': TextEditingController(text: price_open.toString()),
@@ -81,8 +77,6 @@ class model_back_order {
       'amount': TextEditingController(text: amount.toString()),
       'tp': TextEditingController(text: tp.toString()),
       'sl': TextEditingController(text: sl.toString()),
-      'ask': TextEditingController(text: ask.toString()),
-      'bid': TextEditingController(text: bid.toString()),
       'order_id': TextEditingController(text: order_id.toString()),
       'trade_id': TextEditingController(text: trade_id.toString()),
       'description': TextEditingController(text: description ?? ''),
@@ -94,7 +88,7 @@ class model_back_order {
   dynamic getValueByKey(String key) => switch (key) {
         'id' => id,
         'execute_id' => execute_id,
-        'count' => count,
+        'step' => step,
         'father_id' => father_id,
         'date_open' => date_open,
         'price_open' => price_open,
@@ -107,8 +101,6 @@ class model_back_order {
         'amount' => amount,
         'tp' => tp,
         'sl' => sl,
-        'ask' => ask,
-        'bid' => bid,
         'order_id' => order_id,
         'trade_id' => trade_id,
         'description' => description,
@@ -121,7 +113,7 @@ class model_back_order {
     return modelType(
       id: json['id'] as int,
       execute_id: json['execute_id'] as int,
-      count: json['count'] as int,
+      step: json['step'] as int,
       father_id: json['father_id'] as int,
       date_open: json['date_open'] as String?,
       price_open: (json['price_open'] as num).toDouble(),
@@ -134,8 +126,6 @@ class model_back_order {
       amount: json['amount'] as int,
       tp: (json['tp'] as num).toDouble(),
       sl: (json['sl'] as num).toDouble(),
-      ask: (json['ask'] as num).toDouble(),
-      bid: (json['bid'] as num).toDouble(),
       order_id: json['order_id'] as int,
       trade_id: json['trade_id'] as int,
       description: json['description'] as String?,
@@ -148,7 +138,7 @@ class model_back_order {
     return {
       'id': id,
       'execute_id': execute_id,
-      'count': count,
+      'step': step,
       'father_id': father_id,
       'date_open': date_open,
       'price_open': price_open,
@@ -161,8 +151,6 @@ class model_back_order {
       'amount': amount,
       'tp': tp,
       'sl': sl,
-      'ask': ask,
-      'bid': bid,
       'order_id': order_id,
       'trade_id': trade_id,
       'description': description,
@@ -175,7 +163,7 @@ class model_back_order {
     return modelType(
       id: int.tryParse(controllers['id']?.text ?? '0') ?? 0,
       execute_id: (controllers['execute_id'] as ValueNotifier<int>).value,
-      count: int.tryParse(controllers['count']?.text ?? '1') ?? 1,
+      step: int.tryParse(controllers['step']?.text ?? '1') ?? 1,
       father_id: int.tryParse(controllers['father_id']?.text ?? '0') ?? 0,
       date_open: controllers['date_open']?.text.isEmpty ?? true ? null : controllers['date_open']?.text,
       price_open: double.tryParse(controllers['price_open']?.text ?? '0') ?? 0,
@@ -188,8 +176,6 @@ class model_back_order {
       amount: int.tryParse(controllers['amount']?.text ?? '0') ?? 0,
       tp: double.tryParse(controllers['tp']?.text ?? '0') ?? 0,
       sl: double.tryParse(controllers['sl']?.text ?? '0') ?? 0,
-      ask: double.tryParse(controllers['ask']?.text ?? '0') ?? 0,
-      bid: double.tryParse(controllers['bid']?.text ?? '0') ?? 0,
       order_id: int.tryParse(controllers['order_id']?.text ?? '0') ?? 0,
       trade_id: int.tryParse(controllers['trade_id']?.text ?? '0') ?? 0,
       description: controllers['description']?.text.isEmpty ?? true ? null : controllers['description']?.text,
@@ -201,7 +187,7 @@ class model_back_order {
   void controller_clear() {
     controllers['id']?.clear();
     (controllers['execute_id'] as ValueNotifier<int>).value = 0;
-    controllers['count']?.text = '1';
+    controllers['step']?.text = '1';
     controllers['father_id']?.clear();
     controllers['date_open']?.clear();
     controllers['price_open']?.clear();
@@ -214,8 +200,6 @@ class model_back_order {
     controllers['amount']?.clear();
     controllers['tp']?.clear();
     controllers['sl']?.clear();
-    controllers['ask']?.clear();
-    controllers['bid']?.clear();
     controllers['order_id']?.clear();
     controllers['trade_id']?.clear();
     controllers['description']?.clear();
@@ -233,23 +217,11 @@ class model_back_order {
     value = value ?? '';
     MyApi api_mdl = new MyApi();
     switch (type) {
-      case 'add':
-        return json.decode(await api_mdl.post('${const_api_url}/${api_route}/add', get_model().toJson()));
-      case 'update':
-        return json.decode(await api_mdl.put('${const_api_url}/${api_route}', get_model().toJson()));
-      case 'items':
-        var data1 = json.decode(await api_mdl.get('${const_api_url}/${api_route}/items${value}'));
+      case 'order_items':
+        var data1 = json.decode(await api_mdl.get('${const_api_url}/${api_route}/${type}${value}'));
         List<dynamic> data2 = data1['data'];
         List<modelType> data3 = modelType.model_list(data2);
         return data3;
-      case 'detaile':
-        var data1 = json.decode(await api_mdl.get('${const_api_url}/${api_route}/detaile${value}'));
-        var data2 = data1['data'];
-        return data2;
-      case 'delete':
-        return json.decode(await api_mdl.del('${const_api_url}/${api_route}/${get_model().id}'));
-      default:
-        return json.decode(await api_mdl.get('${const_api_url}/${api_route}/${type}/${value}'));
     }
   }
 }

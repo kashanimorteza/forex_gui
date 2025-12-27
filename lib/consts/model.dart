@@ -19,9 +19,9 @@ class models_api {
   static const String strategy_item = 'strategy_item';
   static const String live_execute = 'live_execute';
   static const String live_order = 'live_order';
-  static const String back_execute = 'back_execute';
-  static const String back_order = 'back_order';
-  static const String back_order_detaile = 'back_order';
+  static const String back_execute = 'back';
+  static const String back_order = 'back';
+  static const String back_order_detaile = 'back';
 }
 
 class models_title {
@@ -33,9 +33,9 @@ class models_title {
   static const String strategy_item = 'Strategy Item';
   static const String live_execute = 'Execute';
   static const String live_order = 'Order';
-  static const String back_execute = 'Back Test';
-  static const String back_order = 'Back Order';
-  static const String back_order_detaile = 'Back Order Details';
+  static const String back_execute = 'Back';
+  static const String back_order = 'Order';
+  static const String back_order_detaile = 'Details';
 }
 
 class models_menu {
