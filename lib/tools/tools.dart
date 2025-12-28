@@ -744,20 +744,17 @@ Widget build_dropdownlist_3<T>({
 Widget build_dropdownlist_4({
   required String lable,
   required int count,
-  required ValueNotifier<int> controller,
   int? selected_number = 1,
   void Function(int)? onChange,
 }) {
-  controller.value = selected_number!;
   return DropdownButtonFormField<int>(
-    value: selected_number,
+    initialValue: selected_number,
     items: List.generate(count, (index) => index + 1).map<DropdownMenuItem<int>>((int number) {
       return DropdownMenuItem<int>(value: number, child: Text(number.toString(), style: TextStyle(fontSize: 14)));
     }).toList(),
     onChanged: (int? newValue) {
-      if (newValue != null) {
-        controller.value = newValue;
-        if (onChange != null) onChange(newValue);
+      if (newValue != null && onChange != null) {
+        onChange(newValue);
       }
     },
     decoration: InputDecoration(

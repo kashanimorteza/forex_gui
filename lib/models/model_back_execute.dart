@@ -156,6 +156,10 @@ class model_back_execute {
         return data3;
       case 'order_step':
         return json.decode(await api_mdl.get('${const_api_url}/${api_route}/${type}/${value}'));
+      case 'back_clear':
+        return json.decode(await api_mdl.get('${const_api_url}/${api_route}/${type}/${value}'));
+      case 'back_truncate':
+        return json.decode(await api_mdl.get('${const_api_url}/${api_route}/${type}'));
       case 'delete':
         return json.decode(await api_mdl.del('${const_api_url}/${api_route}/${get_model().id}'));
       default:

@@ -86,7 +86,7 @@ class provider_strategy_item with ChangeNotifier {
       data_base: _data_base,
       api: api,
       fields: models_fileds.strategy_item,
-      selected_strategy_id: _selected_strategy_id ?? 0,
+      selected_strategy_id: _selected_strategy_id,
     );
     //----------[app_bar]
     var app_bar = build_appbar_1(title: title_appbar);

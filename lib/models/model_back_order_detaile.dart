@@ -18,11 +18,11 @@ String api_route = models_api.back_order_detaile;
 //--------------------------------------------------------------------------------- Model
 class model_back_order_detaile {
   //--------------------------------[Field]
-  String count;
+  String step;
   String? date_from;
   String? date_to;
-  String all_count;
   String profit;
+  String count;
   String open_count;
   String close_count;
   String profit_min;
@@ -33,11 +33,11 @@ class model_back_order_detaile {
 
   //--------------------------------[Contractor]
   model_back_order_detaile({
-    this.count = '',
+    this.step = '',
     this.date_from = '',
     this.date_to = '',
-    this.all_count = '',
     this.profit = '',
+    this.count = '',
     this.open_count = '',
     this.close_count = '',
     this.profit_min = '',
@@ -46,11 +46,11 @@ class model_back_order_detaile {
     this.loss_max = '',
   }) {
     controllers = {
-      'count': TextEditingController(text: count),
+      'step': TextEditingController(text: step),
       'date_from': TextEditingController(text: date_from),
       'date_to': TextEditingController(text: date_to),
-      'all_count': TextEditingController(text: all_count),
       'profit': TextEditingController(text: profit),
+      'count': TextEditingController(text: count),
       'open_count': TextEditingController(text: open_count),
       'close_count': TextEditingController(text: close_count),
       'profit_min': TextEditingController(text: profit_min),
@@ -62,11 +62,11 @@ class model_back_order_detaile {
 
   //--------------------------------[getValueByKeys]
   dynamic getValueByKey(String key) => switch (key) {
-        'count' => count,
+        'step' => step,
         'date_from' => date_from,
         'date_to' => date_to,
-        'all_count' => all_count,
         'profit' => profit,
+        'count' => count,
         'open_count' => open_count,
         'close_count' => close_count,
         'profit_min' => profit_min,
@@ -79,11 +79,11 @@ class model_back_order_detaile {
   //--------------------------------[toModel]
   factory model_back_order_detaile.toModel(Map<String, dynamic> json) {
     return modelType(
-      count: json['count'].toString(),
+      step: json['step'].toString(),
       date_from: json['date_from'] as String?,
       date_to: json['date_to'] as String?,
-      all_count: json['all_count'].toString(),
       profit: json['profit'].toString(),
+      count: json['count'].toString(),
       open_count: json['open_count'].toString(),
       close_count: json['close_count'].toString(),
       profit_min: json['profit_min'].toString(),
@@ -96,11 +96,11 @@ class model_back_order_detaile {
   //--------------------------------[toJson]
   Map<String, dynamic> toJson() {
     return {
-      'count': count,
+      'step': step,
       'date_from': date_from,
       'date_to': date_to,
-      'all_count': all_count,
       'profit': profit,
+      'count': count,
       'open_count': open_count,
       'close_count': close_count,
       'profit_min': profit_min,

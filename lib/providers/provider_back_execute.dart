@@ -85,10 +85,10 @@ class provider_back_execute with ChangeNotifier {
         _data_order_detaile = await _model_order_detaile.api('action_detaile', _selected_execute_id);
       case 'load_order':
         _data_order = await _model_order.api('order_items', "?execute_id=${_selected_execute_id}&step=${_selected_step}");
-      case 'order_clear':
-        await _model_order.api('order_clear', _selected_execute_id);
-        _data_order = await _model_order.api('order_items', "?execute_id=${_selected_execute_id}&step=${_selected_execute_id}");
-        _data_order_detaile = await _model_order_detaile.api('action_detaile', _selected_execute_id);
+      case 'back_clear':
+        await _model_execute.api('back_clear', _selected_execute_id);
+      case 'back_truncate':
+        await _model_execute.api('back_truncate');
       default:
         //---Account
         _data_account = await _model_account.api('items');
@@ -120,7 +120,7 @@ class provider_back_execute with ChangeNotifier {
     var result = await model.api(type);
     build_notification_2(_context, result);
     if (type == "start" || type == "stop") {
-      await load('load_execute');
+      _selected_execute_id = model.id;
       await load('load_step');
       await load('load_order_detaile');
       await load('load_order');
@@ -169,7 +169,10 @@ class provider_back_execute with ChangeNotifier {
 
   //----------[order_clear]
   order_clear() async {
-    await load('order_clear');
+    await load('back_clear');
+    await load('load_step');
+    await load('load_order_detaile');
+    await load('load_order');
     reload();
   }
 
@@ -182,7 +185,7 @@ class provider_back_execute with ChangeNotifier {
     //----------[drp_execute]
     var drp_execute = IntrinsicWidth(child: SizedBox(child: build_dropdownlist_1<modelType_execute>(lable: 'Execute', data: _data_execute, selected_id: _selected_execute_id, onChange: execute_change)), stepWidth: 110);
     //----------[drp_step]
-    var drp_step = IntrinsicWidth(child: SizedBox(child: build_dropdownlist_4(lable: 'Step', count: _step, controller: ValueNotifier<int>(_step), selected_number: 1, onChange: step_change)), stepWidth: 110);
+    var drp_step = IntrinsicWidth(child: SizedBox(child: build_dropdownlist_4(lable: 'Step', count: _step, selected_number: _selected_step, onChange: step_change)), stepWidth: 110);
 
     //----------[ui]
     var ui_1 = widget_ui_1<modelType_execute>(

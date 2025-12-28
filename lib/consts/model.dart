@@ -89,12 +89,12 @@ class models_fileds {
     'edit': {'name': 'Name', 'date_from': 'From', 'date_to': 'To', 'step': 'Step', 'description': 'Description'},
   };
   static Map<String, dynamic> back_order = {
-    'list': {'id': 'Id', 'step': 'Step', 'father_id': 'Father', 'date_open': 'Open', 'price_open': 'Open', 'date_close': 'Close', 'price_close': 'Close', 'profit': 'Profit', 'status': 'Status', 'symbol': 'Symbol', 'action': 'Action', 'amount': 'Amount'},
+    'list': {'id': 'Id', 'father_id': 'Father', 'date_open': 'Open', 'price_open': 'Price', 'date_close': 'Close', 'price_close': 'Price', 'profit': 'Profit', 'status': 'Status', 'symbol': 'Symbol', 'action': 'Action', 'amount': 'Amount', 'tp': 'TP', 'sl': 'SL'},
     'add': {},
     'edit': {},
   };
   static Map<String, dynamic> back_order_detaile = {
-    'list': {'count': 'Count', 'date_from': 'From', 'date_to': 'To', 'all_count': 'Count', 'profit': 'Profit', 'open_count': 'Open', 'close_count': 'Close', 'profit_min': 'Profit(min)', 'profit_max': 'Profit(max)', 'loss_min': 'Loss(min)', 'loss_max': 'Loss(max)'},
+    'list': {'step': 'Step', 'date_from': 'From', 'date_to': 'To', 'count': 'Count', 'profit': 'Profit', 'open_count': 'Open', 'close_count': 'Close', 'profit_min': 'Profit(min)', 'profit_max': 'Profit(max)', 'loss_min': 'Loss(min)', 'loss_max': 'Loss(max)'},
     'add': {},
     'edit': {},
   };
