@@ -154,6 +154,12 @@ class model_live_execute {
         List<dynamic> data2 = data1['data'];
         List<modelType> data3 = modelType.model_list(data2);
         return data3;
+      case 'execute_step':
+        return json.decode(await api_mdl.get('${const_api_url}/${api_route}/${type}/${value}'));
+      case 'order_clear':
+        return json.decode(await api_mdl.get('${const_api_url}/${api_route}/${type}/${value}'));
+      case 'order_truncate':
+        return json.decode(await api_mdl.get('${const_api_url}/${api_route}/${type}'));
       case 'delete':
         return json.decode(await api_mdl.del('${const_api_url}/${api_route}/${get_model().id}'));
       default:

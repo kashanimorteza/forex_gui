@@ -17,8 +17,8 @@ class models_api {
   static const String instrument = 'instrument';
   static const String strategy = 'strategy';
   static const String strategy_item = 'strategy_item';
-  static const String live_execute = 'live_execute';
-  static const String live_order = 'live_order';
+  static const String live_execute = 'live';
+  static const String live_order = 'live';
   static const String back_execute = 'back';
   static const String back_order = 'back';
   static const String back_order_detaile = 'back';
@@ -79,7 +79,7 @@ class models_fileds {
     'edit': {'name': 'Name', 'date_from': 'From', 'date_to': 'To', 'step': 'Step', 'description': 'Description'},
   };
   static Map<String, dynamic> live_order = {
-    'list': {'id': 'Id', 'step': 'Step', 'father_id': 'Father', 'date_open': 'Open', 'price_open': 'Open', 'date_close': 'Close', 'price_close': 'Close', 'profit': 'Profit', 'status': 'Status', 'symbol': 'Symbol', 'action': 'Action', 'amount': 'Amount'},
+    'list': {'id': 'Id', 'father_id': 'Father', 'date_open': 'Open', 'price_open': 'Price', 'date_close': 'Close', 'price_close': 'Price', 'profit': 'Profit', 'status': 'Status', 'symbol': 'Symbol', 'action': 'Action', 'amount': 'Amount', 'tp': 'TP', 'sl': 'SL'},
     'add': {},
     'edit': {},
   };

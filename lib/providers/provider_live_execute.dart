@@ -32,6 +32,7 @@ class provider_live_execute with ChangeNotifier {
   var _context;
   var _drawer;
   var _prv;
+  var _step = 0;
   //----data
   var _data_account;
   var _data_strategy;
@@ -43,6 +44,7 @@ class provider_live_execute with ChangeNotifier {
   var _selected_strategy_id;
   var _selected_strategy_item_id;
   var _selected_execute_id;
+  var _selected_step;
   //----model
   late modelType_account _model_account;
   late modelType_strategy _model_strategy;
@@ -67,21 +69,21 @@ class provider_live_execute with ChangeNotifier {
   //----------[load]
   load([String model = 'all']) async {
     switch (model) {
-      case 'base':
-        _data_execute = await _model_execute.api('items', "?strategy_item_id=${_selected_strategy_item_id}");
-        _selected_execute_id = _data_execute.isNotEmpty ? _data_execute.first.id : 0;
-      case 'strategy_change':
+      case 'load_strategy_item':
         _data_strategy_item = await _model_strategy_item.api('items', "?strategy_id=${_selected_strategy_id}");
         _selected_strategy_item_id = _data_strategy_item.isNotEmpty ? _data_strategy_item.first.id : 0;
-      case 'strategy_item_change':
+      case 'load_execute':
         _data_execute = await _model_execute.api('items', "?strategy_item_id=${_selected_strategy_item_id}");
         _selected_execute_id = _data_execute.isNotEmpty ? _data_execute.first.id : 0;
-      case 'execute_change':
-        _data_order = await _model_order.api('items', "?execute_id=${_selected_execute_id}");
-        _data_order_detaile = await _model_order.api('detaile', "?execute_id=${_selected_execute_id}");
-      case 'live_clear':
+      case 'load_step':
+        _step = _selected_step = await _model_execute.api('execute_step', _selected_execute_id);
+      case 'load_order_detaile':
+      //_data_order_detaile = await _model_order_detaile.api('action_detaile', _selected_execute_id);
+      case 'load_order':
+        _data_order = await _model_order.api('order_items', "?execute_id=${_selected_execute_id}&step=${_selected_step}");
+      case 'order_clear':
         await _model_execute.api('back_clear', _selected_execute_id);
-      case 'back_truncate':
+      case 'order_truncate':
         await _model_execute.api('back_truncate');
       default:
         //---Account
@@ -95,10 +97,12 @@ class provider_live_execute with ChangeNotifier {
         //---Execute
         _data_execute = await _model_execute.api('items', "?strategy_item_id=${_selected_strategy_item_id}");
         _selected_execute_id = _data_execute.isNotEmpty ? _data_execute.first.id : 0;
+        //---step
+        _step = _selected_step = await _model_execute.api('execute_step', _selected_execute_id);
         //---Orders
-        _data_order = await _model_order.api('items', "?execute_id=${_selected_execute_id}");
+        _data_order = await _model_order.api('order_items', "?execute_id=${_selected_execute_id}&step=${_step}");
         //---Detaile
-        _data_order_detaile = await _model_order.api('detaile', "?execute_id=${_selected_execute_id}");
+        //_data_order_detaile = await _model_live_order_detaile.api('action_detaile', _selected_execute_id);
         //---Reload
         reload();
     }
@@ -112,10 +116,12 @@ class provider_live_execute with ChangeNotifier {
     var result = await model.api(type);
     build_notification_2(_context, result);
     if (type == "start" || type == "stop") {
-      await load('base');
-      await load('execute_change');
+      _selected_execute_id = model.id;
+      await load('load_step');
+      await load('load_order_detaile');
+      await load('load_order');
     } else {
-      await load('base');
+      await load('load_execute');
     }
     reload();
   }
@@ -123,30 +129,43 @@ class provider_live_execute with ChangeNotifier {
   //----------[strategy_change]
   strategy_change(value) async {
     _selected_strategy_id = value;
-    await load('strategy_change');
-    await load('strategy_item_change');
-    await load('execute_change');
+    await load('load_strategy_item');
+    await load('load_execute');
+    await load('load_step');
+    await load('load_order_detaile');
+    await load('load_order');
     reload();
   }
 
   //----------[strategy_item_change]
   strategy_item_change(value) async {
     _selected_strategy_item_id = value;
-    await load('strategy_item_change');
-    await load('execute_change');
+    await load('load_execute');
+    await load('load_step');
+    await load('load_order_detaile');
+    await load('load_order');
     reload();
   }
 
   //----------[execute_select]
   execute_change(value) async {
     _selected_execute_id = value;
-    await load('execute_change');
+    await load('load_step');
+    await load('load_order_detaile');
+    await load('load_order');
+    reload();
+  }
+
+  //----------[step_change]
+  step_change(value) async {
+    _selected_step = value;
+    await load('load_order');
     reload();
   }
 
   //----------[order_clear]
   order_clear() async {
-    await load('live_clear');
+    await load('order_clear');
     await load('load_step');
     await load('load_order_detaile');
     await load('load_order');
@@ -173,18 +192,18 @@ class provider_live_execute with ChangeNotifier {
       data_account: _data_account,
       createModel: () => modelType_execute(),
     );
-    var ui_2 = widget_ui_2(
-      context: _context,
-      title: 'Details',
-      data_stats: _data_order_detaile,
-    );
-    var ui_3 = widget_ui_3<modelType_order>(
-      context: _context,
-      title: models_title.live_order,
-      data_base: _data_order,
-      fields: models_fileds.live_order,
-      createModel: () => modelType_order(),
-    );
+    // var ui_2 = widget_ui_2(
+    //   context: _context,
+    //   title: 'Details',
+    //   data_stats: _data_order_detaile,
+    // );
+    // var ui_3 = widget_ui_3<modelType_order>(
+    //   context: _context,
+    //   title: models_title.live_order,
+    //   data_base: _data_order,
+    //   fields: models_fileds.live_order,
+    //   createModel: () => modelType_order(),
+    // );
     //----------[app_bar]
     var app_bar = build_appbar_1(title: title_appbar);
     //----------[body]
@@ -209,9 +228,9 @@ class provider_live_execute with ChangeNotifier {
               SizedBox(height: 50),
               SizedBox(child: Padding(padding: EdgeInsets.only(right: const_widget_padding), child: drp_execute)),
               SizedBox(height: const_widget_padding),
-              SizedBox(child: Padding(padding: EdgeInsets.only(bottom: const_widget_padding), child: ui_2)),
+              //SizedBox(child: Padding(padding: EdgeInsets.only(bottom: const_widget_padding), child: ui_2)),
               SizedBox(height: const_widget_padding),
-              SizedBox(child: Padding(padding: EdgeInsets.only(bottom: const_widget_padding), child: ui_3)),
+              //SizedBox(child: Padding(padding: EdgeInsets.only(bottom: const_widget_padding), child: ui_3)),
             ],
           ),
         ),

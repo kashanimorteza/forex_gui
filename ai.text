@@ -1,12 +1,1 @@
-i need these parameter for model_live_execute.dart:
-  int id;
-  String name;
-  int strategy_item_id;
-  int account_id;
-  String? date_from;
-  String? date_to;
-  String status;
-  int step;
-  String? description;
-  bool enable;
-  late Map<String, dynamic> controllers;
+change order_id and trade_id to string on model_live_order.dart 
