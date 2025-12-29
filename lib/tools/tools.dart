@@ -630,7 +630,7 @@ Widget build_dropdownlist_Const_Function<T>({
   double? height_size = 40,
 }) {
   return DropdownButtonFormField<T>(
-    value: (selected as dynamic),
+    initialValue: (selected as dynamic),
     items: data.map<DropdownMenuItem<T>>((T item) {
       return DropdownMenuItem<T>(value: item, child: Text(item.toString().split('.').last));
     }).toList(),
@@ -658,7 +658,7 @@ Widget build_dropdownlist_1<T>({
   double height_size = 5,
 }) {
   return DropdownButtonFormField<int>(
-    value: selected_id,
+    initialValue: selected_id,
     items: data.map<DropdownMenuItem<int>>((T item) {
       item = (item as dynamic);
       return DropdownMenuItem<int>(value: (item as dynamic).id, child: Text(item.name, style: TextStyle(fontSize: 14)));
@@ -687,7 +687,7 @@ Widget build_dropdownlist_2<T>({
   double? height_size = 40,
 }) {
   return DropdownButtonFormField<T>(
-    value: (selected_type as dynamic),
+    initialValue: (selected_type as dynamic),
     items: data.map<DropdownMenuItem<T>>((T item) {
       return DropdownMenuItem<T>(value: item, child: Text(item.toString().split('.').last));
     }).toList(),
@@ -716,7 +716,7 @@ Widget build_dropdownlist_3<T>({
 }) {
   controller.value = selected_id!;
   return DropdownButtonFormField<int>(
-    value: selected_id,
+    initialValue: selected_id,
     items: data.map<DropdownMenuItem<int>>((T item) {
       item = (item as dynamic);
       return DropdownMenuItem<int>(value: (item as dynamic).id, child: Text(item.name, style: TextStyle(fontSize: 14)));

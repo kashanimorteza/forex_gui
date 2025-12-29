@@ -1,8 +1,8 @@
 //--------------------------------------------------------------------------------- location
-// lib/models/model_back_order_detaile.dart
+// lib/models/model_live_order_detaile.dart
 
 //--------------------------------------------------------------------------------- Description
-// This is model for back_order_detaile
+// This is model for live_order_detaile
 
 //--------------------------------------------------------------------------------- Import
 import 'dart:convert';
@@ -12,11 +12,11 @@ import 'package:mkpanel_gui/consts/model.dart';
 import 'package:mkpanel_gui/tools/api.dart';
 
 //--------------------------------------------------------------------------------- Global
-typedef modelType = model_back_order_detaile;
-String api_route = models_api.back_order_detaile;
+typedef modelType = model_live_order_detaile;
+String api_route = models_api.live_order_detaile;
 
 //--------------------------------------------------------------------------------- Model
-class model_back_order_detaile {
+class model_live_order_detaile {
   //--------------------------------[Field]
   String step;
   String? date_from;
@@ -37,7 +37,7 @@ class model_back_order_detaile {
   late Map<String, dynamic> controllers;
 
   //--------------------------------[Contractor]
-  model_back_order_detaile({
+  model_live_order_detaile({
     this.step = '',
     this.date_from = '',
     this.date_to = '',
@@ -97,7 +97,7 @@ class model_back_order_detaile {
       };
 
   //--------------------------------[toModel]
-  factory model_back_order_detaile.toModel(Map<String, dynamic> json) {
+  factory model_live_order_detaile.toModel(Map<String, dynamic> json) {
     return modelType(
       step: json['step'].toString(),
       date_from: json['date_from'] as String?,

@@ -16,6 +16,7 @@ import 'package:mkpanel_gui/models/model_strategy.dart';
 import 'package:mkpanel_gui/models/model_strategy_item.dart';
 import 'package:mkpanel_gui/models/model_live_execute.dart';
 import 'package:mkpanel_gui/models/model_live_order.dart';
+import 'package:mkpanel_gui/models/model_live_order_detaile.dart';
 
 //--------------------------------------------------------------------------------- Global
 typedef modelType_account = model_account;
@@ -23,6 +24,7 @@ typedef modelType_strategy = model_strategy;
 typedef modelType_strategy_item = model_strategy_item;
 typedef modelType_execute = model_live_execute;
 typedef modelType_order = model_live_order;
+typedef modelType_order_detaile = model_live_order_detaile;
 String title_base = models_title.live_execute;
 String title_appbar = models_title.base;
 
@@ -51,6 +53,7 @@ class provider_live_execute with ChangeNotifier {
   late modelType_strategy_item _model_strategy_item;
   late modelType_execute _model_execute;
   late modelType_order _model_order;
+  late modelType_order_detaile _model_order_detaile;
 
   //--------------------------------[Contractor]
   provider_live_execute() {
@@ -59,6 +62,7 @@ class provider_live_execute with ChangeNotifier {
     _model_strategy_item = modelType_strategy_item();
     _model_execute = modelType_execute();
     _model_order = modelType_order();
+    _model_order_detaile = modelType_order_detaile();
   }
 
   //--------------------------------[Set]
@@ -78,7 +82,7 @@ class provider_live_execute with ChangeNotifier {
       case 'load_step':
         _step = _selected_step = await _model_execute.api('execute_step', _selected_execute_id);
       case 'load_order_detaile':
-      //_data_order_detaile = await _model_order_detaile.api('action_detaile', _selected_execute_id);
+        _data_order_detaile = await _model_order_detaile.api('action_detaile', _selected_execute_id);
       case 'load_order':
         _data_order = await _model_order.api('order_items', "?execute_id=${_selected_execute_id}&step=${_selected_step}");
       case 'order_clear':
@@ -102,7 +106,7 @@ class provider_live_execute with ChangeNotifier {
         //---Orders
         _data_order = await _model_order.api('order_items', "?execute_id=${_selected_execute_id}&step=${_step}");
         //---Detaile
-        //_data_order_detaile = await _model_live_order_detaile.api('action_detaile', _selected_execute_id);
+        _data_order_detaile = await _model_order_detaile.api('action_detaile', _selected_execute_id);
         //---Reload
         reload();
     }
@@ -180,6 +184,9 @@ class provider_live_execute with ChangeNotifier {
     var drp_strategy_item = IntrinsicWidth(child: SizedBox(child: build_dropdownlist_1<modelType_strategy_item>(lable: 'Item', data: _data_strategy_item, selected_id: _selected_strategy_item_id, onChange: strategy_item_change)), stepWidth: 110);
     //----------[drp_execute]
     var drp_execute = IntrinsicWidth(child: SizedBox(child: build_dropdownlist_1<modelType_execute>(lable: 'Execute', data: _data_execute, selected_id: _selected_execute_id, onChange: execute_change)), stepWidth: 110);
+    //----------[drp_step]
+    var drp_step = IntrinsicWidth(child: SizedBox(child: build_dropdownlist_4(lable: 'Step', count: _step, selected_number: _selected_step, onChange: step_change)), stepWidth: 110);
+
     //----------[ui]
     var ui_1 = widget_ui_1<modelType_execute>(
       context: _context,
@@ -187,23 +194,25 @@ class provider_live_execute with ChangeNotifier {
       data_base: _data_execute,
       api: api,
       order_clear: order_clear,
-      fields: models_fileds.live_execute,
+      fields: models_fileds.back_execute,
       selected_strategy_item_id: _selected_strategy_item_id,
       data_account: _data_account,
       createModel: () => modelType_execute(),
     );
-    // var ui_2 = widget_ui_2(
-    //   context: _context,
-    //   title: 'Details',
-    //   data_stats: _data_order_detaile,
-    // );
-    // var ui_3 = widget_ui_3<modelType_order>(
-    //   context: _context,
-    //   title: models_title.live_order,
-    //   data_base: _data_order,
-    //   fields: models_fileds.live_order,
-    //   createModel: () => modelType_order(),
-    // );
+    var ui_2 = widget_ui_2<modelType_order_detaile>(
+      context: _context,
+      title: models_title.back_order_detaile,
+      data_base: _data_order_detaile,
+      fields: models_fileds.back_order_detaile,
+      createModel: () => modelType_order_detaile(),
+    );
+    var ui_3 = widget_ui_3<modelType_order>(
+      context: _context,
+      title: models_title.back_order,
+      data_base: _data_order,
+      fields: models_fileds.back_order,
+      createModel: () => modelType_order(),
+    );
     //----------[app_bar]
     var app_bar = build_appbar_1(title: title_appbar);
     //----------[body]
@@ -227,10 +236,11 @@ class provider_live_execute with ChangeNotifier {
               //---ui_2
               SizedBox(height: 50),
               SizedBox(child: Padding(padding: EdgeInsets.only(right: const_widget_padding), child: drp_execute)),
-              SizedBox(height: const_widget_padding),
-              //SizedBox(child: Padding(padding: EdgeInsets.only(bottom: const_widget_padding), child: ui_2)),
-              SizedBox(height: const_widget_padding),
-              //SizedBox(child: Padding(padding: EdgeInsets.only(bottom: const_widget_padding), child: ui_3)),
+              SizedBox(child: Padding(padding: EdgeInsets.only(bottom: const_widget_padding), child: ui_2)),
+
+              SizedBox(height: 50),
+              SizedBox(child: Padding(padding: EdgeInsets.only(right: const_widget_padding), child: drp_step)),
+              SizedBox(child: Padding(padding: EdgeInsets.only(bottom: const_widget_padding), child: ui_3)),
             ],
           ),
         ),
@@ -389,14 +399,20 @@ Widget widget_ui_1<T_base>({
   );
 }
 
-//--------------------------------[widget_ui_2]
-Widget widget_ui_2({
+//--------------------------------[widget_ui_3]
+Widget widget_ui_2<T_base>({
   required BuildContext context,
   required String title,
-  required Map<String, dynamic> data_stats,
+  required List<T_base> data_base,
+  Map<String, dynamic>? fields = const {},
+  required T_base Function() createModel,
 }) {
-  if (data_stats.isEmpty) return Center(child: Text('No statistics available'));
+  //-----[Variable]
+  var items = null;
+  var model = (createModel() as dynamic);
 
+  //-----[List]
+  if (fields != null) items = fields['list'];
   return SingleChildScrollView(
     scrollDirection: Axis.horizontal,
     child: IntrinsicWidth(
@@ -408,25 +424,15 @@ Widget widget_ui_2({
             //----------header
             DataTable(
               columns: [
-                DataColumn(label: build_text_1(title: 'Type')),
-                DataColumn(label: build_text_1(title: 'Count')),
-                DataColumn(label: build_text_1(title: 'Amount')),
-                DataColumn(label: build_text_1(title: 'Profit')),
-                DataColumn(label: build_text_1(title: 'Buy')),
-                DataColumn(label: build_text_1(title: 'Sell')),
+                ...model.controllers.keys.where((String key) => (items == null || items.isEmpty || items.containsKey(key))).map((String key) {
+                  return DataColumn(label: build_text_1(title: items?[key] ?? key));
+                }).toList(),
               ],
               //----------rows
-              rows: data_stats.entries.map((entry) {
-                var stats = entry.value as Map<String, dynamic>;
+              rows: data_base.map((i) {
+                var item = (i as dynamic);
                 return DataRow(
-                  cells: [
-                    build_datacell_1(value: entry.key.toUpperCase()),
-                    build_datacell_1(value: stats['count'].toString()),
-                    build_datacell_1(value: stats['amount'].toString()),
-                    build_datacell_1(value: stats['profit'].toString()),
-                    build_datacell_1(value: stats['buy'].toString()),
-                    build_datacell_1(value: stats['sell'].toString()),
-                  ],
+                  cells: [...model.controllers.keys.where((String key) => items == null || items.isEmpty || items?.containsKey(key) == true).map((String key) => build_datacell_1(value: item.getValueByKey(key).toString())).toList()],
                 );
               }).toList(),
             ),

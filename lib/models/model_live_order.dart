@@ -33,8 +33,8 @@ class model_live_order {
   int amount;
   double tp;
   double sl;
-  int order_id;
-  int trade_id;
+  String order_id;
+  String trade_id;
   String? description;
   bool enable;
   late Map<String, dynamic> controllers;
@@ -56,8 +56,8 @@ class model_live_order {
     this.amount = 0,
     this.tp = 0,
     this.sl = 0,
-    this.order_id = 0,
-    this.trade_id = 0,
+    this.order_id = '',
+    this.trade_id = '',
     this.description,
     this.enable = true,
   }) {
@@ -77,8 +77,8 @@ class model_live_order {
       'amount': TextEditingController(text: amount.toString()),
       'tp': TextEditingController(text: tp.toString()),
       'sl': TextEditingController(text: sl.toString()),
-      'order_id': TextEditingController(text: order_id.toString()),
-      'trade_id': TextEditingController(text: trade_id.toString()),
+      'order_id': TextEditingController(text: order_id),
+      'trade_id': TextEditingController(text: trade_id),
       'description': TextEditingController(text: description ?? ''),
       'enable': ValueNotifier<bool>(enable),
     };
@@ -126,8 +126,8 @@ class model_live_order {
       amount: json['amount'] as int,
       tp: (json['tp'] as num).toDouble(),
       sl: (json['sl'] as num).toDouble(),
-      order_id: json['order_id'] as int,
-      trade_id: json['trade_id'] as int,
+      order_id: json['order_id'].toString(),
+      trade_id: json['trade_id'].toString(),
       description: json['description'] as String?,
       enable: json['enable'] as bool,
     );
@@ -176,8 +176,8 @@ class model_live_order {
       amount: int.tryParse(controllers['amount']?.text ?? '0') ?? 0,
       tp: double.tryParse(controllers['tp']?.text ?? '0') ?? 0,
       sl: double.tryParse(controllers['sl']?.text ?? '0') ?? 0,
-      order_id: int.tryParse(controllers['order_id']?.text ?? '0') ?? 0,
-      trade_id: int.tryParse(controllers['trade_id']?.text ?? '0') ?? 0,
+      order_id: controllers['order_id']?.text ?? '',
+      trade_id: controllers['trade_id']?.text ?? '',
       description: controllers['description']?.text.isEmpty ?? true ? null : controllers['description']?.text,
       enable: (controllers['enable'] as ValueNotifier<bool>).value,
     );

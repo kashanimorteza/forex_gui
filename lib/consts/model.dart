@@ -19,6 +19,7 @@ class models_api {
   static const String strategy_item = 'strategy_item';
   static const String live_execute = 'live';
   static const String live_order = 'live';
+  static const String live_order_detaile = 'live';
   static const String back_execute = 'back';
   static const String back_order = 'back';
   static const String back_order_detaile = 'back';
