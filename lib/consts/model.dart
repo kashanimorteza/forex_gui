@@ -31,7 +31,7 @@ class models_title {
   static const String instrument = 'Instrument';
   static const String strategy = 'Strategy';
   static const String strategy_item = 'Strategy Item';
-  static const String live_execute = 'Execute';
+  static const String live_execute = 'Live';
   static const String live_order = 'Order';
   static const String back_execute = 'Back';
   static const String back_order = 'Order';
@@ -74,9 +74,9 @@ class models_fileds {
     'edit': {'name': 'Name', 'symbols': 'Symbols', 'actions': 'Actions', 'amount': 'Amount', 'tp_pips': 'TP Pips', 'sl_pips': 'SL Pips', 'limit_trade': 'Limit Trade', 'limit_profit': 'Limit Profit', 'limit_loss': 'Limit Loss', 'description': 'Description'},
   };
   static Map<String, dynamic> live_execute = {
-    'list': {'id': 'Id', 'name': 'Name', 'step': 'Step', 'status': 'Status'},
-    'add': {'name': 'Name', 'step': 'Step', 'description': 'Description'},
-    'edit': {'name': 'Name', 'step': 'Step', 'description': 'Description'},
+    'list': {'id': 'Id', 'name': 'Name', 'date_from': 'From', 'date_to': 'To', 'status': 'Status', 'step': 'Step'},
+    'add': {'name': 'Name', 'date_from': 'From', 'date_to': 'To', 'step': 'Step', 'description': 'Description'},
+    'edit': {'name': 'Name', 'date_from': 'From', 'date_to': 'To', 'step': 'Step', 'description': 'Description'},
   };
   static Map<String, dynamic> live_order = {
     'list': {'id': 'Id', 'step': 'Step', 'father_id': 'Father', 'date_open': 'Open', 'price_open': 'Open', 'date_close': 'Close', 'price_close': 'Close', 'profit': 'Profit', 'status': 'Status', 'symbol': 'Symbol', 'action': 'Action', 'amount': 'Amount'},
@@ -94,7 +94,24 @@ class models_fileds {
     'edit': {},
   };
   static Map<String, dynamic> back_order_detaile = {
-    'list': {'step': 'Step', 'date_from': 'From', 'date_to': 'To', 'count': 'Count', 'profit': 'Profit', 'open_count': 'Open', 'close_count': 'Close', 'profit_min': 'Profit(min)', 'profit_max': 'Profit(max)', 'loss_min': 'Loss(min)', 'loss_max': 'Loss(max)'},
+    'list': {
+      'step': 'Step',
+      'date_from': 'From',
+      'date_to': 'To',
+      'trade_all': 'Trade',
+      'trade_open': 'Open',
+      'trade_close': 'Close',
+      'trade_buy': 'Buy',
+      'trade_sell': 'Sell',
+      'profit_all': 'Profit',
+      'profit_positive': 'Positive',
+      'profit_negative': 'Negative',
+      'profit_close_min': 'P-C(min)',
+      'profit_close_max': 'P-C(max)',
+      'profit_open_min': 'P-O(min)',
+      'profit_open_max': 'P-O(max)',
+      'param': 'Param'
+    },
     'add': {},
     'edit': {},
   };

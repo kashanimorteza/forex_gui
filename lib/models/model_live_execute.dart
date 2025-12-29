@@ -22,8 +22,10 @@ class model_live_execute {
   String name;
   int strategy_item_id;
   int account_id;
-  int step;
+  String? date_from;
+  String? date_to;
   String status;
+  int step;
   String? description;
   bool enable;
   late Map<String, dynamic> controllers;
@@ -34,8 +36,10 @@ class model_live_execute {
     this.name = '',
     this.strategy_item_id = 1,
     this.account_id = 1,
-    this.step = 1,
+    this.date_from,
+    this.date_to,
     this.status = '',
+    this.step = 1,
     this.description = '',
     this.enable = true,
   }) {
@@ -44,8 +48,10 @@ class model_live_execute {
       'name': TextEditingController(text: name),
       'strategy_item_id': ValueNotifier<int>(strategy_item_id),
       'account_id': ValueNotifier<int>(account_id),
-      'step': ValueNotifier<int>(step),
+      'date_from': TextEditingController(text: date_from ?? ''),
+      'date_to': TextEditingController(text: date_to ?? ''),
       'status': TextEditingController(text: status),
+      'step': ValueNotifier<int>(step),
       'description': TextEditingController(text: description),
       'enable': ValueNotifier<bool>(enable),
     };
@@ -57,8 +63,10 @@ class model_live_execute {
         'name' => name,
         'strategy_item_id' => strategy_item_id,
         'account_id' => account_id,
-        'step' => step,
+        'date_from' => date_from,
+        'date_to' => date_to,
         'status' => status,
+        'step' => step,
         'description' => description,
         'enable' => enable,
         _ => null,
@@ -71,8 +79,10 @@ class model_live_execute {
       name: json['name'] as String,
       strategy_item_id: json['strategy_item_id'] as int,
       account_id: json['account_id'] as int,
-      step: json['step'] as int? ?? 1,
+      date_from: json['date_from'] as String?,
+      date_to: json['date_to'] as String?,
       status: json['status'] as String,
+      step: json['step'] as int? ?? 1,
       description: json['description'] as String?,
       enable: json['enable'] as bool,
     );
@@ -85,8 +95,10 @@ class model_live_execute {
       'name': name,
       'strategy_item_id': strategy_item_id,
       'account_id': account_id,
-      'step': step,
+      'date_from': date_from,
+      'date_to': date_to,
       'status': status,
+      'step': step,
       'description': description,
       'enable': enable,
     };
@@ -99,8 +111,10 @@ class model_live_execute {
       name: controllers['name']?.text ?? '',
       strategy_item_id: (controllers['strategy_item_id'] as ValueNotifier<int>).value,
       account_id: (controllers['account_id'] as ValueNotifier<int>).value,
-      step: (controllers['step'] as ValueNotifier<int>).value,
+      date_from: controllers['date_from']?.text.isEmpty ?? true ? null : controllers['date_from']?.text,
+      date_to: controllers['date_to']?.text.isEmpty ?? true ? null : controllers['date_to']?.text,
       status: controllers['status']?.text ?? '',
+      step: (controllers['step'] as ValueNotifier<int>).value,
       description: controllers['description']?.text ?? '',
       enable: (controllers['enable'] as ValueNotifier<bool>).value,
     );
@@ -112,8 +126,10 @@ class model_live_execute {
     controllers['name']?.clear();
     (controllers['strategy_item_id'] as ValueNotifier<int>).value = 1;
     (controllers['account_id'] as ValueNotifier<int>).value = 1;
-    (controllers['step'] as ValueNotifier<int>).value = 1;
+    controllers['date_from']?.clear();
+    controllers['date_to']?.clear();
     controllers['status']?.clear();
+    (controllers['step'] as ValueNotifier<int>).value = 1;
     controllers['description']?.clear();
     controllers['enable']?.value = true;
   }

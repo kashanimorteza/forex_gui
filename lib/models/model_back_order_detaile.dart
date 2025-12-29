@@ -21,14 +21,19 @@ class model_back_order_detaile {
   String step;
   String? date_from;
   String? date_to;
-  String profit;
-  String count;
-  String open_count;
-  String close_count;
-  String profit_min;
-  String profit_max;
-  String loss_min;
-  String loss_max;
+  String trade_all;
+  String trade_open;
+  String trade_close;
+  String trade_buy;
+  String trade_sell;
+  String profit_all;
+  String profit_positive;
+  String profit_negative;
+  String profit_close_min;
+  String profit_close_max;
+  String profit_open_min;
+  String profit_open_max;
+  String param;
   late Map<String, dynamic> controllers;
 
   //--------------------------------[Contractor]
@@ -36,27 +41,37 @@ class model_back_order_detaile {
     this.step = '',
     this.date_from = '',
     this.date_to = '',
-    this.profit = '',
-    this.count = '',
-    this.open_count = '',
-    this.close_count = '',
-    this.profit_min = '',
-    this.profit_max = '',
-    this.loss_min = '',
-    this.loss_max = '',
+    this.trade_all = '',
+    this.trade_open = '',
+    this.trade_close = '',
+    this.trade_buy = '',
+    this.trade_sell = '',
+    this.profit_all = '',
+    this.profit_positive = '',
+    this.profit_negative = '',
+    this.profit_close_min = '',
+    this.profit_close_max = '',
+    this.profit_open_min = '',
+    this.profit_open_max = '',
+    this.param = '',
   }) {
     controllers = {
       'step': TextEditingController(text: step),
       'date_from': TextEditingController(text: date_from),
       'date_to': TextEditingController(text: date_to),
-      'profit': TextEditingController(text: profit),
-      'count': TextEditingController(text: count),
-      'open_count': TextEditingController(text: open_count),
-      'close_count': TextEditingController(text: close_count),
-      'profit_min': TextEditingController(text: profit_min),
-      'profit_max': TextEditingController(text: profit_max),
-      'loss_min': TextEditingController(text: loss_min),
-      'loss_max': TextEditingController(text: loss_max),
+      'trade_all': TextEditingController(text: trade_all),
+      'trade_open': TextEditingController(text: trade_open),
+      'trade_close': TextEditingController(text: trade_close),
+      'trade_buy': TextEditingController(text: trade_buy),
+      'trade_sell': TextEditingController(text: trade_sell),
+      'profit_all': TextEditingController(text: profit_all),
+      'profit_positive': TextEditingController(text: profit_positive),
+      'profit_negative': TextEditingController(text: profit_negative),
+      'profit_close_min': TextEditingController(text: profit_close_min),
+      'profit_close_max': TextEditingController(text: profit_close_max),
+      'profit_open_min': TextEditingController(text: profit_open_min),
+      'profit_open_max': TextEditingController(text: profit_open_max),
+      'param': TextEditingController(text: param),
     };
   }
 
@@ -65,14 +80,19 @@ class model_back_order_detaile {
         'step' => step,
         'date_from' => date_from,
         'date_to' => date_to,
-        'profit' => profit,
-        'count' => count,
-        'open_count' => open_count,
-        'close_count' => close_count,
-        'profit_min' => profit_min,
-        'profit_max' => profit_max,
-        'loss_min' => loss_min,
-        'loss_max' => loss_max,
+        'trade_all' => trade_all,
+        'trade_open' => trade_open,
+        'trade_close' => trade_close,
+        'trade_buy' => trade_buy,
+        'trade_sell' => trade_sell,
+        'profit_all' => profit_all,
+        'profit_positive' => profit_positive,
+        'profit_negative' => profit_negative,
+        'profit_close_min' => profit_close_min,
+        'profit_close_max' => profit_close_max,
+        'profit_open_min' => profit_open_min,
+        'profit_open_max' => profit_open_max,
+        'param' => param,
         _ => null,
       };
 
@@ -82,14 +102,19 @@ class model_back_order_detaile {
       step: json['step'].toString(),
       date_from: json['date_from'] as String?,
       date_to: json['date_to'] as String?,
-      profit: json['profit'].toString(),
-      count: json['count'].toString(),
-      open_count: json['open_count'].toString(),
-      close_count: json['close_count'].toString(),
-      profit_min: json['profit_min'].toString(),
-      profit_max: json['profit_max'].toString(),
-      loss_min: json['loss_min'].toString(),
-      loss_max: json['loss_max'].toString(),
+      trade_all: json['trade_all'].toString(),
+      trade_open: json['trade_open'].toString(),
+      trade_close: json['trade_close'].toString(),
+      trade_buy: json['trade_buy'].toString(),
+      trade_sell: json['trade_sell'].toString(),
+      profit_all: json['profit_all'].toString(),
+      profit_positive: json['profit_positive'].toString(),
+      profit_negative: json['profit_negative'].toString(),
+      profit_close_min: json['profit_close_min'].toString(),
+      profit_close_max: json['profit_close_max'].toString(),
+      profit_open_min: json['profit_open_min'].toString(),
+      profit_open_max: json['profit_open_max'].toString(),
+      param: json['param'].toString(),
     );
   }
 
@@ -99,14 +124,19 @@ class model_back_order_detaile {
       'step': step,
       'date_from': date_from,
       'date_to': date_to,
-      'profit': profit,
-      'count': count,
-      'open_count': open_count,
-      'close_count': close_count,
-      'profit_min': profit_min,
-      'profit_max': profit_max,
-      'loss_min': loss_min,
-      'loss_max': loss_max,
+      'trade_all': trade_all,
+      'trade_open': trade_open,
+      'trade_close': trade_close,
+      'trade_buy': trade_buy,
+      'trade_sell': trade_sell,
+      'profit_all': profit_all,
+      'profit_positive': profit_positive,
+      'profit_negative': profit_negative,
+      'profit_close_min': profit_close_min,
+      'profit_close_max': profit_close_max,
+      'profit_open_min': profit_open_min,
+      'profit_open_max': profit_open_max,
+      'param': param,
     };
   }
 

@@ -1,17 +1,12 @@
-read model_back_order_detaile.dart
-i need check all field with new fields and all fields must be string :
-                    "step":'All',
-                    "date_from":date_from,
-                    "date_to":date_to,
-                    "trade_all":f"{trade_all}",
-                    "trade_open":f"{trade_open}",
-                    "trade_close":f"{trade_close}",
-                    "trade_buy":f"{trade_buy}",
-                    "trade_sell":f"{trade_sell}",
-                    "profit_all":f"{profit_all:.{2}f}",
-                    "profit_positive":f"{profit_positive:.{2}f}",
-                    "profit_negative":f"{profit_negative:.{2}f}",
-                    "profit_close_min":f"{profit_close_min:.{2}f}",
-                    "profit_close_max":f"{profit_close_max:.{2}f}",
-                    "profit_open_min":f"{profit_open_min:.{2}f}",
-                    "profit_open_max":f"{profit_open_max:.{2}f}"
+i need these parameter for model_live_execute.dart:
+  int id;
+  String name;
+  int strategy_item_id;
+  int account_id;
+  String? date_from;
+  String? date_to;
+  String status;
+  int step;
+  String? description;
+  bool enable;
+  late Map<String, dynamic> controllers;
