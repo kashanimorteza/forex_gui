@@ -9,7 +9,7 @@
 //--------------------------------------------------------------------------------- General
 enum const_model_mode { view, edit }
 
-enum const_model_list { dashboard, account, instrument, strategy, strategy_item, live_execute, live_order, back_execute, back_order, back_order_detaile }
+enum const_model_list { dashboard, account, instrument, strategy, strategy_item, live_execute, live_order, live_order_detaile, back_execute, back_order, back_order_detaile }
 
 class models_api {
   static const String dashboard = 'dashboard';
@@ -34,6 +34,7 @@ class models_title {
   static const String strategy_item = 'Strategy Item';
   static const String live_execute = 'Live';
   static const String live_order = 'Order';
+  static const String live_order_detaile = 'Details';
   static const String back_execute = 'Back';
   static const String back_order = 'Order';
   static const String back_order_detaile = 'Details';
@@ -48,6 +49,7 @@ class models_menu {
   static const String strategy_item = 'Item';
   static const String live_execute = 'Live';
   static const String live_order = 'Live Order';
+  static const String live_order_detaile = 'Test Order Details';
   static const String back_execute = 'Test';
   static const String back_order = 'Test Order';
   static const String back_order_detaile = 'Test Order Details';
@@ -72,7 +74,7 @@ class models_fileds {
   static Map<String, dynamic> strategy_item = {
     'list': {'id': 'Id', 'name': 'Name', 'symbols': 'Symbols', 'actions': 'Actions', 'amount': 'Amount', 'tp_pips': 'TP Pips', 'sl_pips': 'SL Pips', 'limit_trade': 'Limit Trade', 'limit_profit': 'Limit Profit', 'limit_loss': 'Limit Loss'},
     'add': {'name': 'Name', 'symbols': 'Symbols', 'actions': 'Actions', 'amount': 'Amount', 'tp_pips': 'TP Pips', 'sl_pips': 'SL Pips', 'limit_trade': 'Limit Trade', 'limit_profit': 'Limit Profit', 'limit_loss': 'Limit Loss', 'enable': 'Enable', 'description': 'Description'},
-    'edit': {'name': 'Name', 'symbols': 'Symbols', 'actions': 'Actions', 'amount': 'Amount', 'tp_pips': 'TP Pips', 'sl_pips': 'SL Pips', 'limit_trade': 'Limit Trade', 'limit_profit': 'Limit Profit', 'limit_loss': 'Limit Loss', 'description': 'Description'},
+    'edit': {'name': 'Name', 'symbols': 'Symbols', 'actions': 'Actions', 'amount': 'Amount', 'tp_pips': 'TP Pips', 'sl_pips': 'SL Pips', 'limit_trade': 'Limit Trade', 'limit_profit': 'Limit Profit', 'limit_loss': 'Limit Loss', 'params': 'Param', 'description': 'Description'},
   };
   static Map<String, dynamic> live_execute = {
     'list': {'id': 'Id', 'name': 'Name', 'date_from': 'From', 'date_to': 'To', 'status': 'Status', 'step': 'Step'},
@@ -81,6 +83,28 @@ class models_fileds {
   };
   static Map<String, dynamic> live_order = {
     'list': {'id': 'Id', 'father_id': 'Father', 'date_open': 'Open', 'price_open': 'Price', 'date_close': 'Close', 'price_close': 'Price', 'profit': 'Profit', 'status': 'Status', 'symbol': 'Symbol', 'action': 'Action', 'amount': 'Amount', 'tp': 'TP', 'sl': 'SL'},
+    'add': {},
+    'edit': {},
+  };
+  static Map<String, dynamic> live_order_detaile = {
+    'list': {
+      'step': 'Step',
+      'date_from': 'From',
+      'date_to': 'To',
+      'trade_all': 'Trade',
+      'trade_open': 'Open',
+      'trade_close': 'Close',
+      'trade_buy': 'Buy',
+      'trade_sell': 'Sell',
+      'profit_all': 'Profit',
+      'profit_positive': 'Positive',
+      'profit_negative': 'Negative',
+      'profit_close_min': 'P-C(min)',
+      'profit_close_max': 'P-C(max)',
+      'profit_open_min': 'P-O(min)',
+      'profit_open_max': 'P-O(max)',
+      'param': 'Param'
+    },
     'add': {},
     'edit': {},
   };

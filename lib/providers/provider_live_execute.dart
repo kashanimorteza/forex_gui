@@ -84,9 +84,9 @@ class provider_live_execute with ChangeNotifier {
       case 'load_order_detaile':
         _data_order_detaile = await _model_order_detaile.api('action_detaile', _selected_execute_id);
       case 'load_order':
-        _data_order = await _model_order.api('order_items', "?execute_id=${_selected_execute_id}&step=${_selected_step}");
+        _data_order = await _model_order.api('order_item', "?execute_id=${_selected_execute_id}&step=${_selected_step}");
       case 'order_clear':
-        await _model_execute.api('back_clear', _selected_execute_id);
+        await _model_execute.api('order_clear', _selected_execute_id);
       case 'order_truncate':
         await _model_execute.api('back_truncate');
       default:
@@ -104,7 +104,7 @@ class provider_live_execute with ChangeNotifier {
         //---step
         _step = _selected_step = await _model_execute.api('execute_step', _selected_execute_id);
         //---Orders
-        _data_order = await _model_order.api('order_items', "?execute_id=${_selected_execute_id}&step=${_step}");
+        _data_order = await _model_order.api('order_item', "?execute_id=${_selected_execute_id}&step=${_step}");
         //---Detaile
         _data_order_detaile = await _model_order_detaile.api('action_detaile', _selected_execute_id);
         //---Reload
@@ -119,14 +119,17 @@ class provider_live_execute with ChangeNotifier {
   api(type, modelType_execute model) async {
     var result = await model.api(type);
     build_notification_2(_context, result);
-    if (type == "start" || type == "stop") {
-      _selected_execute_id = model.id;
-      await load('load_step');
-      await load('load_order_detaile');
-      await load('load_order');
-    } else {
-      await load('load_execute');
-    }
+    await load('load_execute');
+    reload();
+  }
+
+  //----------[strategy_change]
+  action(type, modelType_execute model) async {
+    api(type, model);
+    await load('load_execute');
+    await load('load_step');
+    await load('load_order_detaile');
+    await load('load_order');
     reload();
   }
 
@@ -193,22 +196,23 @@ class provider_live_execute with ChangeNotifier {
       title: title_base,
       data_base: _data_execute,
       api: api,
+      action: action,
       order_clear: order_clear,
-      fields: models_fileds.back_execute,
+      fields: models_fileds.live_execute,
       selected_strategy_item_id: _selected_strategy_item_id,
       data_account: _data_account,
       createModel: () => modelType_execute(),
     );
     var ui_2 = widget_ui_2<modelType_order_detaile>(
       context: _context,
-      title: models_title.back_order_detaile,
+      title: models_title.live_order_detaile,
       data_base: _data_order_detaile,
-      fields: models_fileds.back_order_detaile,
+      fields: models_fileds.live_order_detaile,
       createModel: () => modelType_order_detaile(),
     );
     var ui_3 = widget_ui_3<modelType_order>(
       context: _context,
-      title: models_title.back_order,
+      title: models_title.live_order,
       data_base: _data_order,
       fields: models_fileds.back_order,
       createModel: () => modelType_order(),
@@ -258,6 +262,7 @@ Widget widget_ui_1<T_base>({
   required String title,
   required List<T_base> data_base,
   required Function(String, T_base) api,
+  required Function(String, T_base) action,
   required Function() order_clear,
   Map<String, dynamic>? fields = const {},
   required int selected_strategy_item_id,
@@ -384,7 +389,7 @@ Widget widget_ui_1<T_base>({
                     }).toList(),
                     build_datacell_1(value: account_name),
                     DataCell(
-                      value.status == 'stop' || value.status == '' || value.status == null ? IconButton(icon: const Icon(Icons.play_arrow), onPressed: () => api("start", value)) : IconButton(icon: const Icon(Icons.stop), onPressed: () => api("stop", value)),
+                      value.status == 'stop' || value.status == '' || value.status == null ? IconButton(icon: const Icon(Icons.play_arrow), onPressed: () => action("start", value)) : IconButton(icon: const Icon(Icons.stop), onPressed: () => action("stop", value)),
                     ),
                     DataCell(IconButton(icon: const Icon(Icons.clear), onPressed: () => order_clear())),
                     DataCell(build_action_2(status: (val) => api("status", value), edit: (val) => edit(value), delete: (val) => delete(value), value: value)),

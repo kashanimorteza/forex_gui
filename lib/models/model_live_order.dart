@@ -217,7 +217,7 @@ class model_live_order {
     value = value ?? '';
     MyApi api_mdl = new MyApi();
     switch (type) {
-      case 'order_items':
+      case 'order_item':
         var data1 = json.decode(await api_mdl.get('${const_api_url}/${api_route}/${type}${value}'));
         List<dynamic> data2 = data1['data'];
         List<modelType> data3 = modelType.model_list(data2);
