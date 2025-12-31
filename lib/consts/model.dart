@@ -119,24 +119,7 @@ class models_fileds {
     'edit': {},
   };
   static Map<String, dynamic> back_order_detaile = {
-    'list': {
-      'step': 'Step',
-      'date_from': 'From',
-      'date_to': 'To',
-      'trade_all': 'Trade',
-      'trade_open': 'Open',
-      'trade_close': 'Close',
-      'trade_buy': 'Buy',
-      'trade_sell': 'Sell',
-      'profit_all': 'Profit',
-      'profit_positive': 'Positive',
-      'profit_negative': 'Negative',
-      'profit_close_min': 'P-C(min)',
-      'profit_close_max': 'P-C(max)',
-      'profit_open_min': 'P-O(min)',
-      'profit_open_max': 'P-O(max)',
-      'param': 'Param'
-    },
+    'list': {'step': 'Step', 'date_from': 'From', 'date_to': 'To', 'trade_all': 'Trade', 'trade_open': 'Open', 'trade_close': 'Close', 'trade_buy': 'Buy', 'trade_sell': 'Sell', 'profit_all': 'Profit', 'profit_positive': 'Positive', 'profit_negative': 'Negative', 'profit_open_min': 'AC(min)', 'profit_open_max': 'AC(max)', 'param': 'Param'},
     'add': {},
     'edit': {},
   };
