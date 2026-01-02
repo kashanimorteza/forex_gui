@@ -9,7 +9,7 @@
 //--------------------------------------------------------------------------------- General
 enum const_model_mode { view, edit }
 
-enum const_model_list { dashboard, account, instrument, strategy, strategy_item, live_execute, live_order, live_order_detaile, back_execute, back_order, back_order_detaile }
+enum const_model_list { dashboard, account, instrument, strategy, strategy_item, live_execute, live_order, live_order_detaile, back_execute, back_order, back_order_detaile, profit_manager }
 
 class models_api {
   static const String dashboard = 'dashboard';
@@ -55,6 +55,7 @@ class models_menu {
   static const String back_execute = 'Test';
   static const String back_order = 'Test Order';
   static const String back_order_detaile = 'Test Order Details';
+  static const String profit_manager = 'Profit Manager';
 }
 
 class models_fileds {
