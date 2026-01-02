@@ -23,6 +23,7 @@ class models_api {
   static const String back_execute = 'back';
   static const String back_order = 'back';
   static const String back_order_detaile = 'back';
+  static const String profit_manager = 'profit_manager';
 }
 
 class models_title {
@@ -38,6 +39,7 @@ class models_title {
   static const String back_execute = 'Back';
   static const String back_order = 'Order';
   static const String back_order_detaile = 'Details';
+  static const String profit_manager = 'Profit Manager';
 }
 
 class models_menu {
@@ -119,8 +121,30 @@ class models_fileds {
     'edit': {},
   };
   static Map<String, dynamic> back_order_detaile = {
-    'list': {'step': 'Step', 'date_from': 'From', 'date_to': 'To', 'trade_all': 'Trade', 'trade_open': 'Open', 'trade_close': 'Close', 'trade_buy': 'Buy', 'trade_sell': 'Sell', 'profit_all': 'Profit', 'profit_positive': 'Positive', 'profit_negative': 'Negative', 'profit_close_min': 'Close(min)', 'profit_close_max': 'Close(max)', 'profit_open_min': 'Open(min)', 'profit_open_max': 'Open(max)', 'param': 'Param'},
+    'list': {
+      'step': 'Step',
+      'date_from': 'From',
+      'date_to': 'To',
+      'trade_all': 'Trade',
+      'trade_open': 'Open',
+      'trade_close': 'Close',
+      'trade_buy': 'Buy',
+      'trade_sell': 'Sell',
+      'profit_all': 'Profit',
+      'profit_positive': 'Positive',
+      'profit_negative': 'Negative',
+      'profit_close_min': 'Close(min)',
+      'profit_close_max': 'Close(max)',
+      'profit_open_min': 'Open(min)',
+      'profit_open_max': 'Open(max)',
+      'param': 'Param'
+    },
     'add': {},
     'edit': {},
+  };
+  static Map<String, dynamic> profit_manager = {
+    'list': {'id': 'Id', 'name': 'Name', 'description': 'Description'},
+    'add': {'name': 'Name', 'description': 'Description'},
+    'edit': {'name': 'Name', 'description': 'Description'},
   };
 }
