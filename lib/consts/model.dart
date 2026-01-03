@@ -138,7 +138,7 @@ class models_fileds {
       'profit_close_max': 'Close(max)',
       'profit_open_min': 'Open(min)',
       'profit_open_max': 'Open(max)',
-      'param': 'Param'
+      'param': 'Param',
     },
     'add': {},
     'edit': {},

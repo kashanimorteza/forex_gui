@@ -1,1 +1,3 @@
-i need a provider for model_profit_manager
+i neet to add these two item ro model_back_order.dart:
+    spread : int = 0
+    profit_manager : int = 0
