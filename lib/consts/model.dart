@@ -34,10 +34,10 @@ class models_title {
   static const String instrument = 'Instrument';
   static const String strategy = 'Strategy';
   static const String strategy_item = 'Strategy Item';
-  static const String live_execute = 'Live';
+  static const String live_execute = 'Execute : Live';
   static const String live_order = 'Order';
   static const String live_order_detaile = 'Details';
-  static const String back_execute = 'Back';
+  static const String back_execute = 'Execute : Back';
   static const String back_order = 'Order';
   static const String back_order_detaile = 'Details';
   static const String profit_manager = 'Profit Manager : Strategy';
@@ -116,7 +116,7 @@ class models_fileds {
   };
   static Map<String, dynamic> back_execute = {
     'list': {'id': 'Id', 'name': 'Name', 'date_from': 'From', 'date_to': 'To', 'status': 'Status', 'step': 'Step'},
-    'add': {'name': 'Name', 'date_from': 'From', 'date_to': 'To', 'step': 'Step', 'description': 'Description'},
+    'add': {'name': 'Name', 'date_from': 'From', 'date_to': 'To', 'step': 'Step'},
     'edit': {'name': 'Name', 'date_from': 'From', 'date_to': 'To', 'step': 'Step', 'description': 'Description'},
   };
   static Map<String, dynamic> back_order = {
@@ -141,7 +141,7 @@ class models_fileds {
       'profit_close_max': 'Close(max)',
       'profit_open_min': 'Open(min)',
       'profit_open_max': 'Open(max)',
-      'param': 'Param',
+      'param': 'Param'
     },
     'add': {},
     'edit': {},

@@ -366,6 +366,8 @@ Widget widget_ui_1<T_base>({
             build_header_3(title: title, leftButton: build_icon_btn_1(onPressed: add, model: const_btn_models.add)),
             //----------header
             DataTable(
+              columnSpacing: 30,
+              horizontalMargin: 10,
               columns: [
                 ...model.controllers.keys.where((String key) => (items == null || items.isEmpty || items.containsKey(key))).map((String key) {
                   return DataColumn(label: build_text_1(title: items?[key] ?? key));
@@ -428,6 +430,8 @@ Widget widget_ui_2<T_base>({
             build_header_3(title: title),
             //----------header
             DataTable(
+              columnSpacing: 30,
+              horizontalMargin: 10,
               columns: [
                 ...model.controllers.keys.where((String key) => (items == null || items.isEmpty || items.containsKey(key))).map((String key) {
                   return DataColumn(label: build_text_1(title: items?[key] ?? key));
@@ -472,6 +476,8 @@ Widget widget_ui_3<T_base>({
             build_header_3(title: title),
             //----------header
             DataTable(
+              columnSpacing: 30,
+              horizontalMargin: 10,
               columns: [
                 ...model.controllers.keys.where((String key) => (items == null || items.isEmpty || items.containsKey(key))).map((String key) {
                   return DataColumn(label: build_text_1(title: items?[key] ?? key));

@@ -22,6 +22,7 @@ class model_back_execute {
   String name;
   int strategy_item_id;
   int account_id;
+  int profit_manager_id;
   String? date_from;
   String? date_to;
   String status;
@@ -36,6 +37,7 @@ class model_back_execute {
     this.name = '',
     this.strategy_item_id = 1,
     this.account_id = 1,
+    this.profit_manager_id = 1,
     this.date_from,
     this.date_to,
     this.status = '',
@@ -48,6 +50,7 @@ class model_back_execute {
       'name': TextEditingController(text: name),
       'strategy_item_id': ValueNotifier<int>(strategy_item_id),
       'account_id': ValueNotifier<int>(account_id),
+      'profit_manager_id': ValueNotifier<int>(profit_manager_id),
       'date_from': TextEditingController(text: date_from ?? ''),
       'date_to': TextEditingController(text: date_to ?? ''),
       'status': TextEditingController(text: status),
@@ -63,6 +66,7 @@ class model_back_execute {
         'name' => name,
         'strategy_item_id' => strategy_item_id,
         'account_id' => account_id,
+        'profit_manager_id' => profit_manager_id,
         'date_from' => date_from,
         'date_to' => date_to,
         'status' => status,
@@ -79,6 +83,7 @@ class model_back_execute {
       name: json['name'] as String,
       strategy_item_id: json['strategy_item_id'] as int,
       account_id: json['account_id'] as int,
+      profit_manager_id: json['profit_manager_id'] as int,
       date_from: json['date_from'] as String?,
       date_to: json['date_to'] as String?,
       status: json['status'] as String,
@@ -95,6 +100,7 @@ class model_back_execute {
       'name': name,
       'strategy_item_id': strategy_item_id,
       'account_id': account_id,
+      'profit_manager_id': profit_manager_id,
       'date_from': date_from,
       'date_to': date_to,
       'status': status,
@@ -111,6 +117,7 @@ class model_back_execute {
       name: controllers['name']?.text ?? '',
       strategy_item_id: (controllers['strategy_item_id'] as ValueNotifier<int>).value,
       account_id: (controllers['account_id'] as ValueNotifier<int>).value,
+      profit_manager_id: (controllers['profit_manager_id'] as ValueNotifier<int>).value,
       date_from: controllers['date_from']?.text.isEmpty ?? true ? null : controllers['date_from']?.text,
       date_to: controllers['date_to']?.text.isEmpty ?? true ? null : controllers['date_to']?.text,
       status: controllers['status']?.text ?? '',
@@ -126,6 +133,7 @@ class model_back_execute {
     controllers['name']?.clear();
     (controllers['strategy_item_id'] as ValueNotifier<int>).value = 1;
     (controllers['account_id'] as ValueNotifier<int>).value = 1;
+    (controllers['profit_manager_id'] as ValueNotifier<int>).value = 1;
     controllers['date_from']?.clear();
     controllers['date_to']?.clear();
     controllers['status']?.clear();
