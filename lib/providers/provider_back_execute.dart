@@ -124,6 +124,8 @@ class provider_back_execute with ChangeNotifier {
       await load('load_step');
       await load('load_order_detaile');
       await load('load_order');
+      await load('load_order');
+      await load('load_execute');
     } else {
       await load('load_execute');
     }

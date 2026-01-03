@@ -33,6 +33,13 @@ class DrawerDesktop extends StatelessWidget {
           ListTile(leading: Icon(Icons.person), title: Text(models_menu.account), onTap: () => {prv_page.page = const_model_list.account, Navigator.pop(context)}),
           ListTile(leading: Icon(Icons.person), title: Text(models_menu.profit_manager), onTap: () => {prv_page.page = const_model_list.profit_manager, Navigator.pop(context)}),
 
+          // Profit Manager
+          Divider(),
+          ListTile(leading: Icon(Icons.vpn_lock), title: Text("Profit Manager"), enabled: false),
+          Divider(),
+          ListTile(leading: Icon(Icons.person), title: Text(models_menu.profit_manager), onTap: () => {prv_page.page = const_model_list.profit_manager, Navigator.pop(context)}),
+           ListTile(leading: Icon(Icons.person), title: Text(models_menu.profit_manager_item), onTap: () => {prv_page.page = const_model_list.profit_manager_item, Navigator.pop(context)}),
+
           // Strategy
           Divider(),
           ListTile(leading: Icon(Icons.vpn_lock), title: Text("Strategy"), enabled: false),

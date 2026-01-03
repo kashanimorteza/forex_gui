@@ -9,7 +9,7 @@
 //--------------------------------------------------------------------------------- General
 enum const_model_mode { view, edit }
 
-enum const_model_list { dashboard, account, instrument, strategy, strategy_item, live_execute, live_order, live_order_detaile, back_execute, back_order, back_order_detaile, profit_manager }
+enum const_model_list { dashboard, account, instrument, strategy, strategy_item, live_execute, live_order, live_order_detaile, back_execute, back_order, back_order_detaile, profit_manager, profit_manager_item }
 
 class models_api {
   static const String dashboard = 'dashboard';
@@ -24,6 +24,7 @@ class models_api {
   static const String back_order = 'back';
   static const String back_order_detaile = 'back';
   static const String profit_manager = 'profit_manager';
+  static const String profit_manager_item = 'profit_manager_item';
 }
 
 class models_title {
@@ -39,7 +40,8 @@ class models_title {
   static const String back_execute = 'Back';
   static const String back_order = 'Order';
   static const String back_order_detaile = 'Details';
-  static const String profit_manager = 'Profit Manager';
+  static const String profit_manager = 'Profit Manager : Strategy';
+  static const String profit_manager_item = 'Profit Manager : Item';
 }
 
 class models_menu {
@@ -55,7 +57,8 @@ class models_menu {
   static const String back_execute = 'Test';
   static const String back_order = 'Test Order';
   static const String back_order_detaile = 'Test Order Details';
-  static const String profit_manager = 'Profit Manager';
+  static const String profit_manager = 'Strategy';
+  static const String profit_manager_item = 'Item';
 }
 
 class models_fileds {
@@ -117,7 +120,7 @@ class models_fileds {
     'edit': {'name': 'Name', 'date_from': 'From', 'date_to': 'To', 'step': 'Step', 'description': 'Description'},
   };
   static Map<String, dynamic> back_order = {
-    'list': {'id': 'Id', 'father_id': 'Father', 'date_open': 'Open', 'price_open': 'Price', 'date_close': 'Close', 'price_close': 'Price', 'profit': 'Profit', 'status': 'Status', 'symbol': 'Symbol', 'action': 'Action', 'amount': 'Amount', 'tp': 'TP', 'sl': 'SL'},
+    'list': {'id': 'Id', 'father_id': 'Father', 'date_open': 'Open', 'price_open': 'Price', 'date_close': 'Close', 'price_close': 'Price', 'profit': 'Profit', 'status': 'Status', 'symbol': 'Symbol', 'action': 'Action', 'amount': 'Amount', 'tp': 'TP', 'sl': 'SL', 'spread': 'SP', 'profit_manager': 'PM'},
     'add': {},
     'edit': {},
   };
@@ -145,7 +148,12 @@ class models_fileds {
   };
   static Map<String, dynamic> profit_manager = {
     'list': {'id': 'Id', 'name': 'Name', 'description': 'Description'},
-    'add': {'name': 'Name', 'description': 'Description'},
+    'add': {'name': 'Name'},
     'edit': {'name': 'Name', 'description': 'Description'},
+  };
+  static Map<String, dynamic> profit_manager_item = {
+    'list': {'id': 'Id', 'name': 'Name', 'value': 'Profit', 'tp_value': 'TP', 'sl_value': 'SL'},
+    'add': {'name': 'Name', 'value': 'Profit', 'tp_value': 'TP', 'sl_value': 'SL'},
+    'edit': {'name': 'Name', 'value': 'Profit', 'tp_value': 'TP', 'sl_value': 'SL', 'description': 'Description'},
   };
 }

@@ -35,6 +35,8 @@ class model_back_order {
   double sl;
   int order_id;
   int trade_id;
+  double spread;
+  int profit_manager;
   String? description;
   bool enable;
   late Map<String, dynamic> controllers;
@@ -58,6 +60,8 @@ class model_back_order {
     this.sl = 0,
     this.order_id = 0,
     this.trade_id = 0,
+    this.spread = 0,
+    this.profit_manager = 0,
     this.description,
     this.enable = true,
   }) {
@@ -79,6 +83,8 @@ class model_back_order {
       'sl': TextEditingController(text: sl.toString()),
       'order_id': TextEditingController(text: order_id.toString()),
       'trade_id': TextEditingController(text: trade_id.toString()),
+      'spread': TextEditingController(text: spread.toString()),
+      'profit_manager': TextEditingController(text: profit_manager.toString()),
       'description': TextEditingController(text: description ?? ''),
       'enable': ValueNotifier<bool>(enable),
     };
@@ -103,6 +109,8 @@ class model_back_order {
         'sl' => sl,
         'order_id' => order_id,
         'trade_id' => trade_id,
+        'spread' => spread,
+        'profit_manager' => profit_manager,
         'description' => description,
         'enable' => enable,
         _ => null,
@@ -128,6 +136,8 @@ class model_back_order {
       sl: (json['sl'] as num).toDouble(),
       order_id: json['order_id'] as int,
       trade_id: json['trade_id'] as int,
+      spread: (json['spread'] as num).toDouble(),
+      profit_manager: json['profit_manager'] as int,
       description: json['description'] as String?,
       enable: json['enable'] as bool,
     );
@@ -153,6 +163,8 @@ class model_back_order {
       'sl': sl,
       'order_id': order_id,
       'trade_id': trade_id,
+      'spread': spread,
+      'profit_manager': profit_manager,
       'description': description,
       'enable': enable,
     };
@@ -178,6 +190,8 @@ class model_back_order {
       sl: double.tryParse(controllers['sl']?.text ?? '0') ?? 0,
       order_id: int.tryParse(controllers['order_id']?.text ?? '0') ?? 0,
       trade_id: int.tryParse(controllers['trade_id']?.text ?? '0') ?? 0,
+      spread: double.tryParse(controllers['spread']?.text ?? '0') ?? 0,
+      profit_manager: int.tryParse(controllers['profit_manager']?.text ?? '0') ?? 0,
       description: controllers['description']?.text.isEmpty ?? true ? null : controllers['description']?.text,
       enable: (controllers['enable'] as ValueNotifier<bool>).value,
     );
@@ -202,6 +216,8 @@ class model_back_order {
     controllers['sl']?.clear();
     controllers['order_id']?.clear();
     controllers['trade_id']?.clear();
+    controllers['spread']?.clear();
+    controllers['profit_manager']?.clear();
     controllers['description']?.clear();
     controllers['enable']?.value = true;
   }

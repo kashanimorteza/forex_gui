@@ -19,6 +19,7 @@ import 'package:mkpanel_gui/providers/provider_strategy_item.dart';
 import 'package:mkpanel_gui/providers/provider_live_execute.dart';
 import 'package:mkpanel_gui/providers/provider_back_execute.dart';
 import 'package:mkpanel_gui/providers/provider_profit_manager.dart';
+import 'package:mkpanel_gui/providers/provider_profit_manager_item.dart';
 
 //--------------------------------------------------------------------------------- Main
 void main() {
@@ -42,6 +43,7 @@ void main() {
         ChangeNotifierProvider(create: (context) => provider_live_execute()),
         ChangeNotifierProvider(create: (context) => provider_back_execute()),
         ChangeNotifierProvider(create: (context) => provider_profit_manager()),
+        ChangeNotifierProvider(create: (context) => provider_profit_manager_item()),
       ],
       child: MyApp(),
     ),
