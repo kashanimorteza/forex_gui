@@ -1,1 +1,10 @@
-i need provider for model_profit_manager_item.dart
+i need a model like named model_money_management.dart that like model_profit_manager.dart qith this parameter
+    id : int = 0
+    name : str = ''
+    balance : float = 1000
+    risk : int = 1
+    limit_trade : int = -1
+    limit_profit : float = -1
+    limit_loss : float = -1
+    description : Optional[str] = ''
+    enable : bool = True

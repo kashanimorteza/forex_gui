@@ -9,7 +9,7 @@
 //--------------------------------------------------------------------------------- General
 enum const_model_mode { view, edit }
 
-enum const_model_list { dashboard, account, instrument, strategy, strategy_item, live_execute, live_order, live_order_detaile, back_execute, back_order, back_order_detaile, profit_manager, profit_manager_item }
+enum const_model_list { dashboard, account, instrument, strategy, strategy_item, live_execute, live_order, live_order_detaile, back_execute, back_order, back_order_detaile, profit_manager, profit_manager_item, money_management }
 
 class models_api {
   static const String dashboard = 'dashboard';
@@ -25,6 +25,7 @@ class models_api {
   static const String back_order_detaile = 'back';
   static const String profit_manager = 'profit_manager';
   static const String profit_manager_item = 'profit_manager_item';
+  static const String money_management = 'money_management';
 }
 
 class models_title {
@@ -42,6 +43,7 @@ class models_title {
   static const String back_order_detaile = 'Details';
   static const String profit_manager = 'Profit Manager : Strategy';
   static const String profit_manager_item = 'Profit Manager : Item';
+  static const String money_management = 'Money Management';
 }
 
 class models_menu {
@@ -59,6 +61,7 @@ class models_menu {
   static const String back_order_detaile = 'Test Order Details';
   static const String profit_manager = 'Strategy';
   static const String profit_manager_item = 'Item';
+  static const String money_management = 'Money Management';
 }
 
 class models_fileds {
@@ -155,5 +158,10 @@ class models_fileds {
     'list': {'id': 'Id', 'name': 'Name', 'value': 'Profit', 'tp_value': 'TP', 'sl_value': 'SL'},
     'add': {'name': 'Name', 'value': 'Profit', 'tp_value': 'TP', 'sl_value': 'SL'},
     'edit': {'name': 'Name', 'value': 'Profit', 'tp_value': 'TP', 'sl_value': 'SL', 'description': 'Description'},
+  };
+  static Map<String, dynamic> money_management = {
+    'list': {'id': 'Id', 'name': 'Name', 'balance': 'Balance', 'risk': 'Risk', 'limit_trade': 'Limit Trade', 'limit_profit': 'Limit Profit', 'limit_loss': 'Limit Loss'},
+    'add': {'name': 'Name', 'balance': 'Balance', 'risk': 'Risk', 'limit_trade': 'Limit Trade', 'limit_profit': 'Limit Profit', 'limit_loss': 'Limit Loss'},
+    'edit': {'name': 'Name', 'balance': 'Balance', 'risk': 'Risk', 'limit_trade': 'Limit Trade', 'limit_profit': 'Limit Profit', 'limit_loss': 'Limit Loss', 'description': 'Description'},
   };
 }
