@@ -36,7 +36,7 @@ class model_back_order {
   int order_id;
   int trade_id;
   double spread;
-  int profit_manager;
+  String profit_manager;
   String? description;
   bool enable;
   late Map<String, dynamic> controllers;
@@ -61,7 +61,7 @@ class model_back_order {
     this.order_id = 0,
     this.trade_id = 0,
     this.spread = 0,
-    this.profit_manager = 0,
+    this.profit_manager = '',
     this.description,
     this.enable = true,
   }) {
@@ -84,7 +84,7 @@ class model_back_order {
       'order_id': TextEditingController(text: order_id.toString()),
       'trade_id': TextEditingController(text: trade_id.toString()),
       'spread': TextEditingController(text: spread.toString()),
-      'profit_manager': TextEditingController(text: profit_manager.toString()),
+      'profit_manager': TextEditingController(text: profit_manager),
       'description': TextEditingController(text: description ?? ''),
       'enable': ValueNotifier<bool>(enable),
     };
@@ -137,7 +137,7 @@ class model_back_order {
       order_id: json['order_id'] as int,
       trade_id: json['trade_id'] as int,
       spread: (json['spread'] as num).toDouble(),
-      profit_manager: json['profit_manager'] as int,
+      profit_manager: json['profit_manager'].toString(),
       description: json['description'] as String?,
       enable: json['enable'] as bool,
     );
@@ -191,7 +191,7 @@ class model_back_order {
       order_id: int.tryParse(controllers['order_id']?.text ?? '0') ?? 0,
       trade_id: int.tryParse(controllers['trade_id']?.text ?? '0') ?? 0,
       spread: double.tryParse(controllers['spread']?.text ?? '0') ?? 0,
-      profit_manager: int.tryParse(controllers['profit_manager']?.text ?? '0') ?? 0,
+      profit_manager: controllers['profit_manager']?.text ?? '',
       description: controllers['description']?.text.isEmpty ?? true ? null : controllers['description']?.text,
       enable: (controllers['enable'] as ValueNotifier<bool>).value,
     );
