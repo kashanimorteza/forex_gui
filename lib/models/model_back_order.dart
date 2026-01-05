@@ -30,7 +30,7 @@ class model_back_order {
   String status;
   String symbol;
   String action;
-  int amount;
+  double amount;
   double tp;
   double sl;
   int order_id;
@@ -131,7 +131,7 @@ class model_back_order {
       status: json['status'] as String,
       symbol: json['symbol'] as String,
       action: json['action'] as String,
-      amount: json['amount'] as int,
+      amount: (json['amount'] as num).toDouble(),
       tp: (json['tp'] as num).toDouble(),
       sl: (json['sl'] as num).toDouble(),
       order_id: json['order_id'] as int,
@@ -185,7 +185,7 @@ class model_back_order {
       status: controllers['status']?.text ?? '',
       symbol: controllers['symbol']?.text ?? '',
       action: controllers['action']?.text ?? '',
-      amount: int.tryParse(controllers['amount']?.text ?? '0') ?? 0,
+      amount: double.tryParse(controllers['amount']?.text ?? '0') ?? 0,
       tp: double.tryParse(controllers['tp']?.text ?? '0') ?? 0,
       sl: double.tryParse(controllers['sl']?.text ?? '0') ?? 0,
       order_id: int.tryParse(controllers['order_id']?.text ?? '0') ?? 0,

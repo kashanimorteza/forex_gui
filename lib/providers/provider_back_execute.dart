@@ -18,6 +18,7 @@ import 'package:mkpanel_gui/models/model_back_execute.dart';
 import 'package:mkpanel_gui/models/model_back_order.dart';
 import 'package:mkpanel_gui/models/model_back_order_detaile.dart';
 import 'package:mkpanel_gui/models/model_profit_manager.dart';
+import 'package:mkpanel_gui/models/model_money_management.dart';
 
 //--------------------------------------------------------------------------------- Global
 typedef modelType_account = model_account;
@@ -27,6 +28,7 @@ typedef modelType_execute = model_back_execute;
 typedef modelType_order = model_back_order;
 typedef modelType_order_detaile = model_back_order_detaile;
 typedef modelType_profit = model_profit_manager;
+typedef modelType_money = model_money_management;
 String title_base = models_title.back_execute;
 String title_appbar = models_title.base;
 
@@ -45,12 +47,12 @@ class provider_back_execute with ChangeNotifier {
   var _data_order;
   var _data_order_detaile;
   var _data_profit_manager;
+  var _data_money_management;
   //----id
   var _selected_strategy_id;
   var _selected_strategy_item_id;
   var _selected_execute_id;
   var _selected_step;
-  var _selected_profit_manager;
   //----model
   late modelType_account _model_account;
   late modelType_strategy _model_strategy;
@@ -59,6 +61,7 @@ class provider_back_execute with ChangeNotifier {
   late modelType_order _model_order;
   late modelType_order_detaile _model_order_detaile;
   late modelType_profit _model_profit_manager;
+  late modelType_money _model_money_management;
 
   //--------------------------------[Contractor]
   provider_back_execute() {
@@ -69,6 +72,7 @@ class provider_back_execute with ChangeNotifier {
     _model_order = modelType_order();
     _model_order_detaile = modelType_order_detaile();
     _model_profit_manager = modelType_profit();
+    _model_money_management = modelType_money();
   }
 
   //--------------------------------[Set]
@@ -100,6 +104,8 @@ class provider_back_execute with ChangeNotifier {
         _data_account = await _model_account.api('items');
         //---Profit_Manager
         _data_profit_manager = await _model_profit_manager.api('items');
+        //---Money_Management
+        _data_money_management = await _model_money_management.api('items');
         //---Strategy
         _data_strategy = await _model_strategy.api('items');
         _selected_strategy_id = _data_strategy.isNotEmpty ? _data_strategy.first.id : 0;
@@ -198,7 +204,7 @@ class provider_back_execute with ChangeNotifier {
     var drp_step = IntrinsicWidth(child: SizedBox(child: build_dropdownlist_4(lable: 'Step', count: _step, selected_number: _selected_step, onChange: step_change)), stepWidth: 110);
 
     //----------[ui]
-    var ui_1 = widget_ui_1<modelType_execute, modelType_profit>(
+    var ui_1 = widget_ui_1<modelType_execute, modelType_profit, modelType_money>(
       context: _context,
       title: title_base,
       data_base: _data_execute,
@@ -208,6 +214,7 @@ class provider_back_execute with ChangeNotifier {
       selected_strategy_item_id: _selected_strategy_item_id,
       data_account: _data_account,
       data_profit_manager: _data_profit_manager,
+      data_money_management: _data_money_management,
       createModel: () => modelType_execute(),
     );
     var ui_2 = widget_ui_2<modelType_order_detaile>(
@@ -264,7 +271,7 @@ class provider_back_execute with ChangeNotifier {
 
 //--------------------------------------------------------------------------------- UI
 //--------------------------------[widget_ui_1]
-Widget widget_ui_1<T_base, T_profit>({
+Widget widget_ui_1<T_base, T_profit, T_money>({
   required BuildContext context,
   required String title,
   required List<T_base> data_base,
@@ -274,6 +281,7 @@ Widget widget_ui_1<T_base, T_profit>({
   required int selected_strategy_item_id,
   required List<model_account> data_account,
   required List<model_profit_manager> data_profit_manager,
+  required List<model_money_management> data_money_management,
   required T_base Function() createModel,
 }) {
   //-----[Variable]
@@ -299,6 +307,8 @@ Widget widget_ui_1<T_base, T_profit>({
                     build_dropdownlist_3<model_account>(lable: 'Account', data: data_account, controller: model.controller_get('account_id'), selected_id: data_account.first.id),
                     SizedBox(height: const_widget_padding),
                     build_dropdownlist_3<model_profit_manager>(lable: 'PM', data: data_profit_manager, controller: model.controller_get('profit_manager_id'), selected_id: data_profit_manager.first.id),
+                    SizedBox(height: const_widget_padding),
+                    build_dropdownlist_3<model_money_management>(lable: 'MM', data: data_money_management, controller: model.controller_get('money_management_id'), selected_id: data_money_management.first.id),
                     SizedBox(height: const_widget_padding),
                     ...model.controllers.entries.where((entry) => items == null || items.isEmpty || items.containsKey(entry.key)).map((entry) => build_Row_3(items?[entry.key] ?? entry.key, model.controller_get(entry.key))).toList(),
                   ],
@@ -332,6 +342,8 @@ Widget widget_ui_1<T_base, T_profit>({
                     build_dropdownlist_3<model_account>(lable: 'Account', data: data_account, controller: model.controller_get('account_id'), selected_id: model.account_id),
                     SizedBox(height: const_widget_padding),
                     build_dropdownlist_3<model_profit_manager>(lable: 'PM', data: data_profit_manager, controller: model.controller_get('profit_manager_id'), selected_id: model.profit_manager_id),
+                    SizedBox(height: const_widget_padding),
+                    build_dropdownlist_3<model_money_management>(lable: 'MM', data: data_money_management, controller: model.controller_get('money_management_id'), selected_id: model.money_management_id),
                     SizedBox(height: const_widget_padding),
                     ...model.controllers.entries.where((entry) => items == null || items.isEmpty || items.containsKey(entry.key)).map((entry) => build_Row_3(items?[entry.key] ?? entry.key, model.controller_get(entry.key))).toList(),
                   ],
@@ -385,6 +397,7 @@ Widget widget_ui_1<T_base, T_profit>({
                 }).toList(),
                 DataColumn(label: build_text_1(title: 'Account')),
                 DataColumn(label: build_text_1(title: 'PM')),
+                DataColumn(label: build_text_1(title: 'MM')),
                 DataColumn(label: build_text_1(title: 'Action')),
                 DataColumn(label: build_text_1(title: 'Clear')),
                 DataColumn(label: build_text_1(title: 'Edit')),
@@ -394,6 +407,7 @@ Widget widget_ui_1<T_base, T_profit>({
                 var value = (value1 as dynamic);
                 final account_name = (data_account as dynamic).firstWhere((i) => i.id == value.account_id).name;
                 final profit_name = (data_profit_manager as dynamic).firstWhere((i) => i.id == value.profit_manager_id).name;
+                final money_name = (data_money_management as dynamic).firstWhere((i) => i.id == value.money_management_id).name;
                 return DataRow(
                   cells: [
                     ...model.controllers.keys.where((String key) {
@@ -404,6 +418,7 @@ Widget widget_ui_1<T_base, T_profit>({
                     }).toList(),
                     build_datacell_1(value: account_name),
                     build_datacell_1(value: profit_name),
+                    build_datacell_1(value: money_name),
                     DataCell(
                       value.status == 'stop' || value.status == '' || value.status == null ? IconButton(icon: const Icon(Icons.play_arrow), onPressed: () => api("start", value)) : IconButton(icon: const Icon(Icons.stop), onPressed: () => api("stop", value)),
                     ),

@@ -20,11 +20,11 @@ class model_money_management {
   //--------------------------------[Field]
   int id;
   String name;
-  double balance;
+  int balance;
   int risk;
   int limit_trade;
-  double limit_profit;
-  double limit_loss;
+  int limit_profit;
+  int limit_loss;
   String? description;
   bool enable;
   late Map<String, dynamic> controllers;
@@ -73,11 +73,11 @@ class model_money_management {
     return modelType(
       id: json['id'] as int,
       name: json['name'] as String,
-      balance: (json['balance'] as num).toDouble(),
+      balance: json['balance'] as int,
       risk: json['risk'] as int,
       limit_trade: json['limit_trade'] as int,
-      limit_profit: (json['limit_profit'] as num).toDouble(),
-      limit_loss: (json['limit_loss'] as num).toDouble(),
+      limit_profit: json['limit_profit'] as int,
+      limit_loss: json['limit_loss'] as int,
       description: json['description'] as String?,
       enable: json['enable'] as bool,
     );
@@ -103,11 +103,11 @@ class model_money_management {
     return modelType(
       id: int.tryParse(controllers['id']?.text ?? '0') ?? 0,
       name: controllers['name']?.text ?? '',
-      balance: double.tryParse(controllers['balance']?.text ?? '1000') ?? 1000,
+      balance: int.tryParse(controllers['balance']?.text ?? '1000') ?? 1000,
       risk: int.tryParse(controllers['risk']?.text ?? '1') ?? 1,
       limit_trade: int.tryParse(controllers['limit_trade']?.text ?? '-1') ?? -1,
-      limit_profit: double.tryParse(controllers['limit_profit']?.text ?? '-1') ?? -1,
-      limit_loss: double.tryParse(controllers['limit_loss']?.text ?? '-1') ?? -1,
+      limit_profit: int.tryParse(controllers['limit_profit']?.text ?? '-1') ?? -1,
+      limit_loss: int.tryParse(controllers['limit_loss']?.text ?? '-1') ?? -1,
       description: controllers['description']?.text.isEmpty ?? true ? null : controllers['description']?.text,
       enable: (controllers['enable'] as ValueNotifier<bool>).value,
     );
