@@ -134,12 +134,11 @@ class provider_back_execute with ChangeNotifier {
     var result = await model.api(type);
     build_notification_2(_context, result);
     if (type == "start" || type == "stop") {
-      _selected_execute_id = model.id;
-      await load('load_step');
-      await load('load_order_detaile');
-      await load('load_order');
-      await load('load_order');
       await load('load_execute');
+      _selected_execute_id = model.id;
+      await load('load_order_detaile');
+      await load('load_step');
+      await load('load_order');
     } else {
       await load('load_execute');
     }
