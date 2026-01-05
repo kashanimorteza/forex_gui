@@ -33,6 +33,8 @@ class model_back_order_detaile {
   String profit_close_max;
   String profit_open_min;
   String profit_open_max;
+  String profit_min;
+  String profit_max;
   String param;
   late Map<String, dynamic> controllers;
 
@@ -53,6 +55,8 @@ class model_back_order_detaile {
     this.profit_close_max = '',
     this.profit_open_min = '',
     this.profit_open_max = '',
+    this.profit_min = '',
+    this.profit_max = '',
     this.param = '',
   }) {
     controllers = {
@@ -71,6 +75,8 @@ class model_back_order_detaile {
       'profit_close_max': TextEditingController(text: profit_close_max),
       'profit_open_min': TextEditingController(text: profit_open_min),
       'profit_open_max': TextEditingController(text: profit_open_max),
+      'profit_min': TextEditingController(text: profit_min),
+      'profit_max': TextEditingController(text: profit_max),
       'param': TextEditingController(text: param),
     };
   }
@@ -92,6 +98,8 @@ class model_back_order_detaile {
         'profit_close_max' => profit_close_max,
         'profit_open_min' => profit_open_min,
         'profit_open_max' => profit_open_max,
+        'profit_min' => profit_min,
+        'profit_max' => profit_max,
         'param' => param,
         _ => null,
       };
@@ -114,6 +122,8 @@ class model_back_order_detaile {
       profit_close_max: json['profit_close_max'].toString(),
       profit_open_min: json['profit_open_min'].toString(),
       profit_open_max: json['profit_open_max'].toString(),
+      profit_min: json['profit_min'].toString(),
+      profit_max: json['profit_max'].toString(),
       param: json['param'].toString(),
     );
   }
@@ -136,6 +146,8 @@ class model_back_order_detaile {
       'profit_close_max': profit_close_max,
       'profit_open_min': profit_open_min,
       'profit_open_max': profit_open_max,
+      'profit_min': profit_min,
+      'profit_max': profit_max,
       'param': param,
     };
   }

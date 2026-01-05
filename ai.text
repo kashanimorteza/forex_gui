@@ -1,4 +1,2 @@
-i need remove them from model_strategy_item.dart
-  int limit_trade;
-  int limit_profit;
-  int limit_loss;
+i need to add one field to model_money_management.dart:
+  int limit_stop;

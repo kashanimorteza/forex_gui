@@ -112,6 +112,8 @@ class models_fileds {
       'profit_close_max': 'P-C(max)',
       'profit_open_min': 'P-O(min)',
       'profit_open_max': 'P-O(max)',
+      'profit_min': 'P(min)',
+      'profit_max': 'P(max)',
       'param': 'Param'
     },
     'add': {},
@@ -144,6 +146,8 @@ class models_fileds {
       'profit_close_max': 'Close(max)',
       'profit_open_min': 'Open(min)',
       'profit_open_max': 'Open(max)',
+      'profit_min': 'P(min)',
+      'profit_max': 'P(max)',
       'param': 'Param'
     },
     'add': {},
@@ -160,8 +164,8 @@ class models_fileds {
     'edit': {'name': 'Name', 'value': 'Profit', 'tp_value': 'TP', 'sl_value': 'SL', 'description': 'Description'},
   };
   static Map<String, dynamic> money_management = {
-    'list': {'id': 'Id', 'name': 'Name', 'balance': 'Balance', 'risk': 'Risk', 'limit_trade': 'Limit Trade', 'limit_profit': 'Limit Profit', 'limit_loss': 'Limit Loss'},
-    'add': {'name': 'Name', 'balance': 'Balance', 'risk': 'Risk', 'limit_trade': 'Limit Trade', 'limit_profit': 'Limit Profit', 'limit_loss': 'Limit Loss'},
-    'edit': {'name': 'Name', 'balance': 'Balance', 'risk': 'Risk', 'limit_trade': 'Limit Trade', 'limit_profit': 'Limit Profit', 'limit_loss': 'Limit Loss', 'description': 'Description'},
+    'list': {'id': 'Id', 'name': 'Name', 'balance': 'Balance', 'risk': 'Risk', 'limit_trade': 'Limit Trade', 'limit_profit': 'Limit Profit', 'limit_loss': 'Limit Loss', 'limit_stop': 'Limit Stop'},
+    'add': {'name': 'Name', 'balance': 'Balance', 'risk': 'Risk', 'limit_trade': 'Limit Trade', 'limit_profit': 'Limit Profit', 'limit_loss': 'Limit Loss', 'limit_stop': 'Limit Stop'},
+    'edit': {'name': 'Name', 'balance': 'Balance', 'risk': 'Risk', 'limit_trade': 'Limit Trade', 'limit_profit': 'Limit Profit', 'limit_loss': 'Limit Loss', 'limit_stop': 'Limit Stop', 'description': 'Description'},
   };
 }

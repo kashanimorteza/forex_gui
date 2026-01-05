@@ -25,6 +25,7 @@ class model_money_management {
   int limit_trade;
   int limit_profit;
   int limit_loss;
+  int limit_stop;
   String? description;
   bool enable;
   late Map<String, dynamic> controllers;
@@ -38,6 +39,7 @@ class model_money_management {
     this.limit_trade = -1,
     this.limit_profit = -1,
     this.limit_loss = -1,
+    this.limit_stop = -1,
     this.description = '',
     this.enable = true,
   }) {
@@ -49,6 +51,7 @@ class model_money_management {
       'limit_trade': TextEditingController(text: limit_trade.toString()),
       'limit_profit': TextEditingController(text: limit_profit.toString()),
       'limit_loss': TextEditingController(text: limit_loss.toString()),
+      'limit_stop': TextEditingController(text: limit_stop.toString()),
       'description': TextEditingController(text: description ?? ''),
       'enable': ValueNotifier<bool>(enable),
     };
@@ -63,6 +66,7 @@ class model_money_management {
         'limit_trade' => limit_trade,
         'limit_profit' => limit_profit,
         'limit_loss' => limit_loss,
+        'limit_stop' => limit_stop,
         'description' => description,
         'enable' => enable,
         _ => null,
@@ -78,6 +82,7 @@ class model_money_management {
       limit_trade: json['limit_trade'] as int,
       limit_profit: json['limit_profit'] as int,
       limit_loss: json['limit_loss'] as int,
+      limit_stop: json['limit_stop'] as int,
       description: json['description'] as String?,
       enable: json['enable'] as bool,
     );
@@ -93,6 +98,7 @@ class model_money_management {
       'limit_trade': limit_trade,
       'limit_profit': limit_profit,
       'limit_loss': limit_loss,
+      'limit_stop': limit_stop,
       'description': description,
       'enable': enable,
     };
@@ -108,6 +114,7 @@ class model_money_management {
       limit_trade: int.tryParse(controllers['limit_trade']?.text ?? '-1') ?? -1,
       limit_profit: int.tryParse(controllers['limit_profit']?.text ?? '-1') ?? -1,
       limit_loss: int.tryParse(controllers['limit_loss']?.text ?? '-1') ?? -1,
+      limit_stop: int.tryParse(controllers['limit_stop']?.text ?? '-1') ?? -1,
       description: controllers['description']?.text.isEmpty ?? true ? null : controllers['description']?.text,
       enable: (controllers['enable'] as ValueNotifier<bool>).value,
     );
@@ -122,6 +129,7 @@ class model_money_management {
     controllers['limit_trade']?.text = '-1';
     controllers['limit_profit']?.text = '-1';
     controllers['limit_loss']?.text = '-1';
+    controllers['limit_stop']?.text = '-1';
     controllers['description']?.clear();
     (controllers['enable'] as ValueNotifier<bool>).value = true;
   }
