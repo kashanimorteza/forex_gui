@@ -26,6 +26,7 @@ class model_strategy_item {
   double amount;
   int tp_pips;
   int sl_pips;
+  double limit_profit;
   String params;
   String? description;
   bool enable;
@@ -41,6 +42,7 @@ class model_strategy_item {
     this.amount = 0,
     this.tp_pips = 0,
     this.sl_pips = 0,
+    this.limit_profit = 0,
     this.params = '',
     this.description = '',
     this.enable = true,
@@ -54,6 +56,7 @@ class model_strategy_item {
       'amount': TextEditingController(text: amount.toString()),
       'tp_pips': TextEditingController(text: tp_pips.toString()),
       'sl_pips': TextEditingController(text: sl_pips.toString()),
+      'limit_profit': TextEditingController(text: limit_profit.toString()),
       'params': TextEditingController(text: params),
       'description': TextEditingController(text: description),
       'enable': ValueNotifier<bool>(enable),
@@ -70,6 +73,7 @@ class model_strategy_item {
         'amount' => amount,
         'tp_pips' => tp_pips,
         'sl_pips' => sl_pips,
+        'limit_profit' => limit_profit,
         'params' => params,
         'description' => description,
         'enable' => enable,
@@ -87,6 +91,7 @@ class model_strategy_item {
       amount: (json['amount'] as num).toDouble(),
       tp_pips: json['tp_pips'] as int,
       sl_pips: json['sl_pips'] as int,
+      limit_profit: (json['limit_profit'] as num).toDouble(),
       params: json['params'] as String? ?? '',
       description: json['description'] as String?,
       enable: json['enable'] as bool,
@@ -104,6 +109,7 @@ class model_strategy_item {
       'amount': amount,
       'tp_pips': tp_pips,
       'sl_pips': sl_pips,
+      'limit_profit': limit_profit,
       'params': params,
       'description': description,
       'enable': enable,
@@ -121,6 +127,7 @@ class model_strategy_item {
       amount: double.tryParse(controllers['amount']?.text ?? '0') ?? 0,
       tp_pips: int.tryParse(controllers['tp_pips']?.text ?? '0') ?? 0,
       sl_pips: int.tryParse(controllers['sl_pips']?.text ?? '0') ?? 0,
+      limit_profit: double.tryParse(controllers['limit_profit']?.text ?? '0') ?? 0,
       params: controllers['params']?.text ?? '',
       description: controllers['description']?.text.isEmpty ?? true ? null : controllers['description']?.text,
       enable: (controllers['enable'] as ValueNotifier<bool>).value,
@@ -136,6 +143,7 @@ class model_strategy_item {
     controllers['amount'] = TextEditingController(text: amount.toString());
     controllers['tp_pips'] = TextEditingController(text: tp_pips.toString());
     controllers['sl_pips'] = TextEditingController(text: sl_pips.toString());
+    controllers['limit_profit'] = TextEditingController(text: limit_profit.toString());
     controllers['params'] = TextEditingController(text: params);
     controllers['description'] = TextEditingController(text: description);
     controllers['enable'] = ValueNotifier<bool>(enable);

@@ -81,9 +81,9 @@ class models_fileds {
     'edit': {'name': 'Name', 'description': 'Description'},
   };
   static Map<String, dynamic> strategy_item = {
-    'list': {'id': 'Id', 'name': 'Name', 'symbols': 'Symbols', 'actions': 'Actions', 'amount': 'Amount', 'tp_pips': 'TP Pips', 'sl_pips': 'SL Pips'},
-    'add': {'name': 'Name', 'symbols': 'Symbols', 'actions': 'Actions', 'amount': 'Amount', 'tp_pips': 'TP Pips', 'sl_pips': 'SL Pips', 'enable': 'Enable', 'description': 'Description'},
-    'edit': {'name': 'Name', 'symbols': 'Symbols', 'actions': 'Actions', 'amount': 'Amount', 'tp_pips': 'TP Pips', 'sl_pips': 'SL Pips', 'params': 'Param', 'description': 'Description'},
+    'list': {'id': 'Id', 'name': 'Name', 'symbols': 'Symbols', 'actions': 'Actions', 'amount': 'Amount', 'tp_pips': 'TP Pips', 'sl_pips': 'SL Pips', 'limit_profit': 'Limit Profit'},
+    'add': {'name': 'Name', 'symbols': 'Symbols', 'actions': 'Actions', 'amount': 'Amount', 'tp_pips': 'TP Pips', 'sl_pips': 'SL Pips', 'limit_profit': 'Limit Profit'},
+    'edit': {'name': 'Name', 'symbols': 'Symbols', 'actions': 'Actions', 'amount': 'Amount', 'tp_pips': 'TP Pips', 'sl_pips': 'SL Pips', 'limit_profit': 'Limit Profit', 'params': 'Param', 'description': 'Description'},
   };
   static Map<String, dynamic> live_execute = {
     'list': {'id': 'Id', 'name': 'Name', 'date_from': 'From', 'date_to': 'To', 'status': 'Status', 'step': 'Step'},
